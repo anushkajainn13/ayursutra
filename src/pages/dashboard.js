@@ -1,11 +1,14 @@
 import React from "react";
-import "./Dashboard.css";
+import { useNavigate } from 'react-router-dom'; // 1. useNavigate ko import karein
+import "./Stylesheet/Dashboard.css";
 import { FaHeartbeat, FaUserMd } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BsArrowRightShort } from "react-icons/bs";
 
 const Dashboard = () => {
+  const navigate = useNavigate(); // 2. navigate function ko initialize karein
+
   return (
     <div className="dashboard">
       {/* Welcome Section */}
@@ -81,12 +84,13 @@ const Dashboard = () => {
         {/* Quick Actions */}
         <section className="quick-actions">
           <h3>Quick Actions</h3>
-          <button className="primary">
+          {/* --- 3. BUTTONS ME ONCLICK ADD KIYA GAYA --- */}
+          <button className="primary" onClick={() => navigate('/patient/scheduling')}>
             Schedule New Therapy <BsArrowRightShort />
           </button>
-          <button>Consult Practitioner</button>
-          <button>Update Health Status</button>
-          <button>View Progress Report</button>
+          <button onClick={() => alert('Feature coming soon!')}>Consult Practitioner</button>
+          <button onClick={() => alert('Feature coming soon!')}>Update Health Status</button>
+          <button onClick={() => navigate('/patient/feedback')}>View Progress Report</button>
         </section>
       </div>
     </div>

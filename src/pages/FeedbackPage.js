@@ -1,4 +1,5 @@
-    import React, { useState, useEffect } from 'react';
+// patient
+import React, { useState, useEffect } from 'react';
 import StarRating from './StarRating';
 import ReviewCard from './ReviewCard';
 import './Stylesheet/FeedbackPage.css';
@@ -52,13 +53,11 @@ const FeedbackPage = () => {
   const [suggestion, setSuggestion] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  // ✅ Delete function
   const handleDelete = (index) => {
     const updatedReviews = reviews.filter((_, i) => i !== index);
     setReviews(updatedReviews);
   };
 
-  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -93,22 +92,23 @@ const FeedbackPage = () => {
     setTimeout(() => setSuccessMessage(''), 3000);
   };
 
-  // 🔹 Insights Data
+  // Insights Data
   const avgRating =
-    reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+    reviews.length > 0
+      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+      : 0;
 
   const chartData = reviews.map((r) => ({
     therapy: r.therapy,
     rating: r.rating,
   }));
 
-  // Pie chart data
   const pieData = [
     { name: 'Improved', value: avgRating * 20 },
     { name: 'Stable', value: (5 - avgRating) * 10 },
     {
       name: 'Remaining',
-      value: 100 - avgRating * 20 - (5 - avgRating) * 10,
+      value: Math.max(0, 100 - avgRating * 20 - (5 - avgRating) * 10),
     },
   ];
 
@@ -122,7 +122,7 @@ const FeedbackPage = () => {
           style={{
             fontSize: '2.5rem',
             fontWeight: '700',
-            borderBottom: '3px solid #4caf50',
+            borderBottom: '3px solid #2e7d32', // Matched color
             display: 'inline-block',
             paddingBottom: '6px',
             marginBottom: '15px',
@@ -149,20 +149,20 @@ const FeedbackPage = () => {
               width={420}
               height={280}
               data={chartData}
-              margin={{ top: 20, right: 20, left: 20, bottom: 70 }}
+              margin={{ top: 20, right: 20, left: -10, bottom: 70 }}
             >
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
               <XAxis
                 dataKey="therapy"
                 angle={-25}
                 textAnchor="end"
                 interval={0}
                 height={80}
-                tick={{ fontSize: 12 }}
+                tick={{ fill: '#ffffff', fontSize: 12 }} // White labels
               />
-              <YAxis />
+              <YAxis tick={{ fill: '#ffffff' }} /> {/* White labels */}
               <Tooltip />
-              <Bar dataKey="rating" fill="#4caf50" />
+              <Bar dataKey="rating" fill="#a5d6a7" /> {/* Lighter bar color */}
             </BarChart>
           </div>
 
@@ -176,14 +176,18 @@ const FeedbackPage = () => {
                 cy="50%"
                 outerRadius={100}
                 dataKey="value"
-                label={false} // ❌ No permanent labels
+                label={false}
               >
                 {pieData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index]} />
                 ))}
               </Pie>
-              <Tooltip /> {/* ✅ Hover par show hoga */}
-              <Legend verticalAlign="bottom" height={36} /> {/* ✅ Legend always visible */}
+              <Tooltip />
+              <Legend
+                verticalAlign="bottom"
+                height={36}
+                wrapperStyle={{ color: '#ffffff' }} // White legend text
+              />
             </PieChart>
           </div>
         </div>
@@ -194,22 +198,14 @@ const FeedbackPage = () => {
         {/* Left Section */}
         <div className="feedback-form">
           <h3>
-            <FaComments style={{ marginRight: '8px', color: '#4CAF50' }} />
+            {/* --- UPDATED ICON COLOR --- */}
+            <FaComments style={{ marginRight: '8px', color: '#a5d6a7' }} />
             Share Your Experience
           </h3>
           <p>Help us improve our services with your feedback.</p>
 
           {successMessage && (
-            <div
-              style={{
-                backgroundColor: '#d6f5d6',
-                color: '#2e7d32',
-                padding: '10px',
-                borderRadius: '8px',
-                marginBottom: '15px',
-                fontWeight: '500',
-              }}
-            >
+            <div className="success-message">
               {successMessage}
             </div>
           )}

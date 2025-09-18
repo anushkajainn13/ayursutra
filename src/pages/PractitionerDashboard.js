@@ -1,3 +1,4 @@
+//patient mgt pract ka
 import React, { useState, useEffect } from "react";
 import PatientCard from "./PatientCard";
 import "./Stylesheet/PractitionerDashboard.css";
