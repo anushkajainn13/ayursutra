@@ -1,0 +1,49 @@
+ .review-card {
+  background-color: #f9fff9; /* 👈 halka green box */
+  border: 1px solid #d6f5d6;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.review-card h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #2e7d32;
+  text-align: left; 
+}
+
+.review-card p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  color: #444;
+  text-align: left;
+}
+
+.review-rating {
+  margin: 8px 0;
+  font-size: 1.1em;
+  text-align: left;
+}
+.delete-button {
+  margin-top: 10px;
+  background-color: #ea7c7c;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #d75a5a;
+}

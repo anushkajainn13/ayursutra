@@ -1,0 +1,9 @@
+.star-rating {
+  font-size: 1.6em;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star-rating .on {
+  color: #FFC107;
+}

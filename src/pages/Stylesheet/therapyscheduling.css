@@ -1,0 +1,173 @@
+/* ========================================= */
+/* General Page Layout & Theme               */
+/* ========================================= */
+.therapy-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: "Segoe UI", "Roboto", sans-serif;
+    background-color: #f9fafb;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+/* ========================================= */
+/* Typography                                */
+/* ========================================= */
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.page-subtitle {
+    font-size: 16px;
+    color: #6b7280;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* ========================================= */
+/* Grid & Card Layout                        */
+/* ========================================= */
+.therapy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start; /* cards same baseline se start honge */
+}
+
+.appointments-card,
+.therapies-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* dono cards equal height maintain karenge */
+}
+
+/* ========================================= */
+/* List Items                                */
+/* ========================================= */
+.appointment-item,
+.therapy-item {
+    background-color: #f9fafb;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease-in-out;
+}
+
+.appointment-item:hover,
+.therapy-item:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+.appointment-item h4,
+.therapy-item h4 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* Therapy specific layout */
+.therapy-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* ========================================= */
+/* Status Badges                             */
+/* ========================================= */
+.status {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.status.confirmed {
+    background-color: #E0F2E9;
+    color: #256d34;
+}
+
+.status.pending {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+/* ========================================= */
+/* Buttons                                   */
+/* ========================================= */
+.btn-row {
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn.primary {
+    background: #2C5D63;
+    color: white;
+}
+.btn.primary:hover {
+    background: #24494e;
+}
+
+.btn.secondary {
+    background: #C2F970;
+    color: #1f2937;
+}
+.btn.secondary:hover {
+    background: #aee860;
+}
+
+.btn.danger {
+    background: #DC2626;
+    color: white;
+}
+.btn.danger:hover {
+    background: #b91c1c;
+}
+
+/* ========================================= */
+/* Responsive                                */
+/* ========================================= */
+@media (max-width: 900px) {
+    .therapy-grid {
+        grid-template-columns: 1fr;
+    }
+}
