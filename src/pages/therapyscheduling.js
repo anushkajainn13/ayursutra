@@ -91,8 +91,14 @@ export default function TherapyScheduling() {
                   <p>{appt.time}</p>
                   <p>{appt.room}</p>
                   <div className="btn-row">
+                    {/* --- YAHAN BADLAV KIYA GAYA HAI --- */}
                     <button
-                      className="btn secondary"
+                      className="btn" // Secondary class hata di
+                      style={{ // Style seedha yahan laga di hai
+                        backgroundColor: '#f1f5f9',
+                        color: '#475569',
+                        border: '1px solid #e2e8f0'
+                      }}
                       onClick={() =>
                         alert("Reschedule feature coming soon!")
                       }
