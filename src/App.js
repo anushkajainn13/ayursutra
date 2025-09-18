@@ -1,40 +1,30 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import IntroPage from "./pages/IntroPage";
-import AuthPage from "./pages/AuthPage";
-import Dashboard from "./pages/Dashboard";
-import Therapy from "./pages/Therapy";
-import Feedback from "./pages/Feedback";
-import Profile from "./pages/Profile";
-import Navbar from "./components/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import MainLayout from './pages/MainLayout';
+import PppractitionerDashboard from './pages/PppractitionerDashboard';
+import PractitionerDashboard from './pages/PractitionerDashboard'; // 1. Patient Management wala page yahan import karein
+import SessionScheduling from './pages/SessionScheduling';
+import FeedbackDashboard from './pages/FeedbackDashboard';
+import YourProfile from './pages/YourProfile';
+
+import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <Layout />
-    </Router>
-  );
-}
-
-function Layout() {
-  const location = useLocation();
-
-  // Hide navbar on these paths
-  const hideNavbarPaths = ["/", "/auth"];
-
-  return (
-    <>
-      { !hideNavbarPaths.includes(location.pathname) && <Navbar /> }
-
-      <Routes>
-        <Route path="/" element={<IntroPage />} />
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/therapy" element={<Therapy />} />
-        <Route path="/feedback" element={<Feedback />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<PppractitionerDashboard />} />
+            <Route path="/scheduling" element={<SessionScheduling />} />
+            <Route path="/patients" element={<PractitionerDashboard />} /> {/* 2. 'Patients' ke liye naya route yahan jodein */}
+            <Route path="/feedback" element={<FeedbackDashboard />} />
+            <Route path="/profile" element={<YourProfile />} />
+          </Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

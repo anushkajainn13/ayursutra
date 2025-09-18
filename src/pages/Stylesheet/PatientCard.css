@@ -1,0 +1,253 @@
+/* --- AYURCARE THEME: EMERALD PINE FOR PATIENT CARD --- */
+:root {
+  --card-bg-dark: #2C5D63;        /* Patient Card Background: Emerald Pine */
+  --card-bg-darker: #193438;      /* Slightly darker for some elements */
+  --card-text-light: #E0F2E9;     /* Light text on dark background */
+  --card-text-lighter: #C2F970;   /* Accent color for names/highlights */
+  --card-border-accent: #3A7C81;  /* Border color for inner elements */
+  --card-status-active-bg: #4CAF50; /* A pleasant green for active status */
+  --card-status-new-bg: #FFC107;   /* Amber for new status */
+  --card-status-text: #1A202C;     /* Dark text for status badges */
+  --card-remove-icon: #D32F2F;    /* Red for remove icon */
+  --card-input-bg: #3A7C81;       /* Input field background */
+  --card-input-text: #FFFFFF;     /* Input text color */
+  --card-progress-fill: linear-gradient(90deg, #97BC62, #C2F970); /* Progress bar fill */
+}
+
+.patient-card {
+  background: var(--card-bg-dark); /* Card ka background dark Emerald Pine */
+  border: 1px solid var(--card-border-accent);
+  border-radius: 14px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Darker shadow for dark theme */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--card-text-light); /* Default text color light */
+}
+
+.patient-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Add Patient Button (agar yahan hai to) */
+.add-patient-btn {
+  background: var(--accent-lime);
+  color: var(--card-bg-dark);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: flex-start;
+  transition: 0.2s;
+  font-weight: 600;
+}
+
+.add-patient-btn:hover {
+  filter: brightness(0.9);
+}
+
+/* Remove button top-right */
+.remove-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--card-remove-icon); /* Red for remove */
+  transition: transform 0.2s ease-in-out;
+}
+
+.remove-icon:hover {
+  transform: scale(1.2);
+  color: #FF5252;
+}
+
+.patient-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Header */
+.patient-header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.avatar {
+  background: var(--accent-lime); /* Avatar background light green */
+  color: var(--card-bg-dark); /* Avatar text dark */
+  font-weight: bold;
+  font-size: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--card-border-accent); /* Small border */
+}
+
+.patient-info {
+  flex: 1;
+  text-align: left;
+}
+
+.patient-info h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--card-text-lighter); /* Name color accent green */
+}
+
+.sub-info {
+  margin: 2px 0;
+  font-size: 14px;
+  color: var(--card-text-light); /* Sub-info text light */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sub-info .icon { /* Phone/Email icons */
+  color: var(--accent-lime);
+}
+
+/* Status badge */
+.status-badge {
+  font-size: 13px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--card-status-text); /* Status text dark */
+}
+
+.status-badge.active {
+  background: var(--card-status-active-bg); /* Active status background green */
+}
+
+.status-badge.new {
+  background: var(--card-status-new-bg); /* New status background amber */
+}
+
+/* Therapy section */
+.therapy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.location {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--card-text-light); /* Location text light */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-location {
+  color: var(--accent-lime); /* Location icon accent green */
+}
+
+.therapy-box {
+  background: var(--card-bg-darker); /* Therapy box slightly darker */
+  padding: 12px;
+  border-radius: 10px;
+  width: 100%;
+  border-left: 4px solid var(--accent-lime); /* Accent border */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  box-sizing: border-box; 
+  color: var(--card-text-light); /* Therapy text light */
+}
+
+.therapy-box p { /* Ensure paragraph color is inherited */
+  margin: 0;
+  color: inherit;
+}
+
+.therapy-desc {
+  font-size: 14px;
+  color: var(--card-text-light);
+  margin-top: 5px;
+  opacity: 0.8; /* Slightly less prominent */
+}
+
+.progress-section {
+  width: 100%;
+  margin: 16px 0 10px 0;
+  padding: 0 4px;
+}
+
+.progress-section p {
+  color: var(--card-text-light);
+  font-weight: 500;
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2); /* High-contrast white track */
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* NAYI WHITE OUTLINE ADD KI GAYI */
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--card-progress-fill); /* Lemon green wala fill */
+  transition: width 0.3s ease;
+}
+
+/* Next session container, for date and time pickers */
+.next-session-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--card-text-light); /* Text color light */
+  margin-top: 16px;
+  background-color: var(--card-bg-darker); /* Background darker */
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--card-border-accent); /* Border accent */
+}
+
+.calendar-icon {
+  color: var(--accent-lime); /* Calendar icon accent green */
+}
+
+.date-picker,
+.time-picker {
+  border: 1px solid var(--card-border-accent); /* Input borders */
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: var(--card-input-bg); /* Input background dark */
+  color: var(--card-input-text); /* Input text white */
+}
+
+.date-picker:focus,
+.time-picker:focus {
+  outline: none;
+  border-color: var(--accent-lime);
+  box-shadow: 0 0 0 2px rgba(194, 249, 112, 0.3);
+}
+
+/* Optional: Placeholder text color for inputs */
+.date-picker::placeholder,
+.time-picker::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}

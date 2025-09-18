@@ -1,0 +1,147 @@
+/* --- AYURCARE COLOR THEME: EMERALD PINE --- */
+:root {
+  --brand-primary: #2C5D63;      /* Emerald Pine: Deep, rich green for main elements */
+  --brand-secondary: #F0F4F0;     /* Green Tea: Soft, muted green for light backgrounds */
+  --accent-primary: #97BC62;      /* Lime Glow: Vibrant green for accents */
+  --bg-main: #FCFCFC;             /* Clean, very light gray for the main background */
+  --bg-card: #FFFFFF;             /* Pure white for cards and panels */
+  --text-primary: #212121;         /* Dark gray for primary text */
+  --text-secondary: #616161;       /* Lighter gray for secondary text */
+  --text-on-brand: #FFFFFF;        /* White text for use on dark backgrounds */
+  --border-color: #EEEEEE;        /* Light gray for borders */
+  --red-negative: #C62828;         /* Red for delete/remove actions */
+  --bg-light-gray: #f5f5f5;        /* For disabled or blocked elements */
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-main); /* Light background for the overall container */
+  min-height: 100vh;
+  padding: 40px;
+  font-family: 'Inter', sans-serif; /* Consistent font */
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--brand-primary); /* Heading in primary brand color */
+  margin-bottom: 30px;
+}
+
+.profile-card {
+  background: var(--brand-primary); /* Dark background for the card */
+  border-radius: 15px;
+  padding: 30px;
+  width: 450px;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: var(--text-on-brand); /* Light text on dark card background */
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 20px;
+  object-fit: cover;
+  border: 4px solid var(--accent-primary); /* Added a border for visual appeal */
+}
+
+.profile-info p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: var(--text-on-brand); /* Light text for info */
+  text-align: left;
+  padding: 0 15px;
+}
+
+.profile-info strong {
+  color: var(--accent-primary); /* Highlights labels with accent color */
+}
+
+.medical-history h3 {
+  margin-top: 20px;
+  color: var(--accent-primary); /* Heading in accent color */
+}
+
+.medical-history ul {
+  margin-top: 10px;
+  padding-left: 20px;
+  text-align: left; /* Ensure list items are left-aligned */
+}
+
+.medical-history li {
+  margin: 5px 0;
+  color: var(--text-on-brand); /* Light text for list items */
+}
+
+.profile-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: var(--accent-primary); /* Button in accent color */
+  color: var(--text-primary); /* Dark text on light button */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600; /* Added for prominence */
+  transition: background 0.3s ease;
+}
+
+.profile-btn:hover {
+  background: #7ca846; /* Slightly darker lime glow on hover */
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  /* width: 100%; <-- YEH LINE HATA DI GAYI HAI */
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+}
+
+.edit-form label {
+  margin-top: 10px;
+  font-weight: bold;
+  color: var(--text-primary); /* Dark text for labels */
+}
+
+.edit-form input {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color); /* Light border */
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+}
+.edit-form input:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(44, 95, 45, 0.15);
+}
+
+/* Specific styles for profile info grid layout */
+.profile-info p {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1em;
+    text-align: left;
+    margin-bottom: 12px;
+}
+
+.profile-info p strong {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.profile-info p span {
+    color: var(--text-on-brand); /* Value text color on dark background */
+    word-break: break-word;
+}
