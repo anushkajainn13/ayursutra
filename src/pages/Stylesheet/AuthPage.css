@@ -11,8 +11,7 @@
 
 /* =================== AUTH BOX =================== */
 .auth-box {
-  background: #ffffffcc; /* semi-transparent white */
-  backdrop-filter: blur(10px);
+  background-color: #2d6a4f; /* solid dark green */
   border-radius: 20px;
   padding: 3rem 2rem;
   max-width: 400px;
@@ -27,26 +26,12 @@
   box-shadow: 0 25px 50px rgba(0,0,0,0.2);
 }
 
-/* =================== LOGO =================== */
-.auth-logo {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-}
-
-/* =================== TITLE & SUBTITLE =================== */
+/* =================== TITLE =================== */
 .auth-title {
   font-size: 2rem;
   margin-bottom: 0.3rem;
-  color: #2d6a4f;
+  color: #ffffff;
   font-weight: 700;
-}
-
-.auth-subtitle {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 2rem;
 }
 
 /* =================== TABS =================== */
@@ -62,7 +47,7 @@
   padding: 0.6rem 1rem;
   border-radius: 30px;
   border: none;
-  background: #e0f2f1;
+  background-color: #e0f2f1; /* solid color */
   color: #2d6a4f;
   font-weight: 600;
   cursor: pointer;
@@ -71,8 +56,8 @@
 
 .auth-tabs button.active,
 .auth-tabs button:hover {
-  background: #2d6a4f;
-  color: #fff;
+  background-color: #cef17b; /* flat highlight color */
+  color: #2d6a4f;
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
@@ -90,7 +75,7 @@
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: #fff;
+  background-color: #fff; /* solid white */
 }
 
 .auth-form input:focus,
@@ -105,16 +90,16 @@
   padding: 0.8rem 1rem;
   border-radius: 10px;
   border: none;
-  background: #2d6a4f;
-  color: #fff;
+  background-color: rgb(190, 242, 2); /* flat color */
+  color: #2d6a4f;
   font-weight: 600;
   cursor: pointer;
+  isolation: isolate; /* prevents blending with backdrop */
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background: #1b4332;
-  transform: translateY(-2px);
+  background-color: #cef17b; /* stays flat on hover */
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
@@ -122,16 +107,16 @@
   margin-top: 1rem;
   padding: 0.6rem 1rem;
   border-radius: 10px;
-  border: 2px solid #2d6a4f;
-  background: transparent;
-  color: #2d6a4f;
+  border: 2px solid #cef17b;
+  background-color: transparent;
+  color: #cef17b;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background: #2d6a4f;
+  background-color: #cef17b;
   color: #fff;
   transform: translateY(-2px);
 }

@@ -1,8 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import useNavigate
+import { useNavigate } from "react-router-dom"; 
+import "./Stylesheet/NavbarApp.css";
 
 export default function NavbarApp() {
-  const navigate = useNavigate(); // ✅ move this to top
+  const navigate = useNavigate(); 
 
   // Scroll handler
   const scrollToSection = (id) => {

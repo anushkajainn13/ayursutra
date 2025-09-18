@@ -6,7 +6,7 @@ import IntroPage from "./pages/IntroPage";
 import AuthPage from "./pages/AuthPage";
 import PatientDashboard from "./pages/dashboard";
 import PppractitionerDashboard from "./pages/PppractitionerDashboard";
-import TherapyScheduling from "./pages/TherapyScheduling";
+import TherapyScheduling from "./pages/therapyscheduling";
 import FeedbackPage from "./pages/FeedbackPage";
 import SessionScheduling from "./pages/SessionScheduling";
 import YourProfile from "./pages/YourProfile";

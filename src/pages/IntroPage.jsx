@@ -8,7 +8,7 @@ function App() {
   // Handler for button clicks
   const handleButtonClick = (action) => {
     if (action === "Get Started") {
-      navigate("/signup");
+      navigate("/auth");
     } else if (action === "Learn More") {
       // You can navigate to a learn more page or scroll to a section
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
