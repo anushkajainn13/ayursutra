@@ -1,21 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+// Pages
 import IntroPage from "./pages/IntroPage";
 import AuthPage from "./pages/AuthPage";
-import Dashboard from "./pages/temp";
+import PatientDashboard from "./pages/dashboard";
+import PppractitionerDashboard from "./pages/PppractitionerDashboard";
+import TherapyScheduling from "./pages/TherapyScheduling";
 import FeedbackPage from "./pages/FeedbackPage";
+import SessionScheduling from "./pages/SessionScheduling";
 import YourProfile from "./pages/YourProfile";
-import TherapyScheduling from "./pages/therapyscheduling";
-import NavbarApp from "./pages/NavbarApp"; // Intro page navbar
-import Navbar from "./pages/Navbar"; // App pages navbar
+import PractitionerDashboard from "./pages/PractitionerDashboard";
+import FeedbackDashboard from "./pages/FeedbackDashboard";
+
+// Navbars
+import PatientNavbar from "./pages/PatientNavbar";
+import PractitionerNavbar from "./pages/Navbar"; // PractitionerNavbar
+import NavbarApp from "./pages/NavbarApp"; // Landing page navbar
+
+
 
 function App() {
+  const [role, setRole] = useState(localStorage.getItem("role") || null);
+
+  // Save role in localStorage whenever it changes
+  useEffect(() => {
+    if (role) localStorage.setItem("role", role);
+    else localStorage.removeItem("role");
+  }, [role]);
+
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        {/* Intro page with navbar */}
+        {/* Landing page */}
         <Route
           path="/"
           element={
@@ -26,48 +43,106 @@ function App() {
           }
         />
 
-        {/* Auth page: NO navbar */}
-        <Route path="/auth" element={<AuthPage />} />
+        {/* Auth Page */}
+        <Route path="/auth" element={<AuthPage setRole={setRole} />} />
 
-        {/* App pages with standard navbar */}
-        <Route
-          path="/dashboard"
-          element={
-            <>
-              <Navbar />
-              <Dashboard />
-            </>
-          }
-        />
-        <Route
-          path="/therapyscheduling"
-          element={
-            <>
-              <Navbar />
-              <TherapyScheduling />
-            </>
-          }
-        />
-        <Route
-          path="/feedback"
-          element={
-            <>
-              <Navbar />
-              <FeedbackPage />
-            </>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <>
-              <Navbar />
-              <YourProfile />
-            </>
-          }
-        />
+        {/* Patient Flow */}
+        {role === "patient" && (
+          <>
+            <Route
+              path="/patient/dashboard"
+              element={
+                <>
+                  <PatientNavbar />
+                  <PatientDashboard />
+                </>
+              }
+            />
+            <Route
+              path="/patient/scheduling"
+              element={
+                <>
+                  <PatientNavbar />
+                  <TherapyScheduling />
+                </>
+              }
+            />
+            <Route
+              path="/patient/feedback"
+              element={
+                <>
+                  <PatientNavbar />
+                  <FeedbackPage />
+                </>
+              }
+            />
+            <Route
+              path="/patient/profile"
+              element={
+                <>
+                  <PatientNavbar />
+                  <YourProfile />
+                </>
+              }
+            />
+          </>
+        )}
+
+        {/* Practitioner Flow */}
+        {role === "practitioner" && (
+          <>
+            <Route
+              path="/practitioner/dashboard"
+              element={
+                <>
+                  <PractitionerNavbar />
+                  <PppractitionerDashboard />
+                </>
+              }
+            />
+            <Route
+              path="/practitioner/scheduling"
+              element={
+                <>
+                  <PractitionerNavbar />
+                  <SessionScheduling/>
+                </>
+              }
+            />
+            <Route
+              path="/practitioner/patients"
+              element={
+                <>
+                  <PractitionerNavbar />
+                  <PractitionerDashboard /> {/* List of patients */}
+                </>
+              }
+            />
+            <Route
+              path="/practitioner/feedback"
+              element={
+                <>
+                  <PractitionerNavbar />
+                  <FeedbackDashboard  />
+                </>
+              }
+            />
+            <Route
+              path="/practitioner/profile"
+              element={
+                <>
+                  <PractitionerNavbar />
+                  <YourProfile />
+                </>
+              }
+            />
+          </>
+        )}
+
+        {/* Protect unknown routes */}
+        <Route path="*" element={role ? <Navigate to={`/${role}/dashboard`} /> : <Navigate to="/" />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 

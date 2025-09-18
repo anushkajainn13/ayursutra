@@ -65,15 +65,14 @@ export default function SessionScheduling() {
         </div>
 
         {/* This Week Stats */}
-        <div className="card stats">
-          <h2>This Week</h2>
-          <div className="stats">
-            <div className="stat">Total: {sessions.length}</div>
-            <div className="stat">Confirmed: {sessions.filter(s => s.status==="Confirmed").length}</div>
-            <div className="stat">Pending: {sessions.filter(s => s.status==="Pending").length}</div>
-            <div className="stat">Available: {availableSlots}</div>
-          </div>
-        </div>
+       <div className="card stats">
+  <h2>This Week</h2>
+  {/* Extra div ab nahi hai */}
+  <div className="stat"><span>Total:</span> <span>{sessions.length}</span></div>
+  <div className="stat"><span>Confirmed:</span> <span>{sessions.filter(s => s.status==="Confirmed").length}</span></div>
+  <div className="stat"><span>Pending:</span> <span>{sessions.filter(s => s.status==="Pending").length}</span></div>
+  <div className="stat"><span>Available:</span> <span>{availableSlots}</span></div>
+</div>
 
         {/* Quick Actions */}
         <div className="card quick-actions">

@@ -8,22 +8,6 @@ import { BsArrowRightShort } from "react-icons/bs";
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      {/* Header */}
-      <header className="header">
-        <div className="logo">🌿 AyurCare</div>
-        
-        <nav className="nav-links">
-          <button className="active">Dashboard</button>
-          <button>Therapy Scheduling</button>
-          <button>Feedback</button>
-        </nav>
-        
-        <div className="profile">
-          <button>Profile</button>
-          <button className="logout">Logout</button>
-        </div>
-      </header>
-
       {/* Welcome Section */}
       <section className="welcome">
         <h2>Welcome back to your healing journey</h2>
