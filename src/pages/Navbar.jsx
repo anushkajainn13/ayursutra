@@ -1,7 +1,6 @@
-//pract
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { FaLeaf, FaThLarge, FaCalendarAlt, FaUsers, FaCommentDots } from 'react-icons/fa';
+import { FaThLarge, FaCalendarAlt, FaUsers, FaCommentDots } from 'react-icons/fa'; // FaLeaf removed
 import './Stylesheet/PppractitionerDashboard.css'; // CSS file
 
 const navbarStyles = {
@@ -17,8 +16,8 @@ const navbarStyles = {
   zIndex: 1000,
 };
 
-const logoContainerStyles = { display: 'flex', alignItems: 'center' };
-const logoIconStyles = { fontSize: '28px', color: '#C2F970', marginRight: '10px' };
+const logoContainerStyles = { display: 'flex', alignItems: 'center', textDecoration: 'none' };
+// logoIconStyles is no longer needed
 const brandNameStyles = { fontSize: '24px', fontWeight: 'bold', color: '#FFFFFF' };
 const brandTaglineStyles = { fontSize: '12px', color: '#E0F2E9', opacity: 0.8 };
 
@@ -40,22 +39,21 @@ const navLinkStyles = {
 const activeNavLinkStyles = { backgroundColor: '#C2F970', color: '#2C5D63', fontWeight: 'bold' };
 
 const navbarRightStyles = { display: 'flex', alignItems: 'center' };
-const userInfoStyles = { textAlign: 'right', marginRight: '15px' };
-const userNameStyles = { fontWeight: 'bold', color: '#FFFFFF' };
-const userRoleStyles = { fontSize: '12px', color: '#E0F2E9', opacity: 0.9 };
 const userAvatarStyles = { width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#C2F970', color: '#2C5D63', display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: 'bold', fontSize: '18px' };
 
 export default function PractitionerNavbar() {
   return (
     <nav style={navbarStyles}>
-      {/* Logo */}
-      <div style={logoContainerStyles}>
-        <FaLeaf style={logoIconStyles} />
-        <div>
-          <span style={brandNameStyles}>AyurSutra</span>
-          <span style={brandTaglineStyles}>Panchakarma Therapy</span>
+      {/* Logo linked to homepage */}
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <div style={logoContainerStyles}>
+          {/* --- The FaLeaf icon has been removed --- */}
+          <div>
+            <span style={brandNameStyles}>AyurSutra</span>
+            <span style={brandTaglineStyles}>Panchakarma Therapy</span>
+          </div>
         </div>
-      </div>
+      </Link>
 
       {/* Nav links */}
       <div className="navbar-center">
@@ -80,20 +78,11 @@ export default function PractitionerNavbar() {
               <FaCommentDots /> Feedback
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/practitioner/profile" style={({ isActive }) => (isActive ? { ...navLinkStyles, ...activeNavLinkStyles } : navLinkStyles)}>
-              Profile
-            </NavLink>
-          </li>
         </ul>
       </div>
 
       {/* Right side */}
       <div style={navbarRightStyles}>
-        <div style={userInfoStyles}>
-          <span style={userNameStyles}>Dr. Priya Sharma</span>
-          <span style={userRoleStyles}>Ayurveda Specialist</span>
-        </div>
         <Link to="/practitioner/profile" style={{ textDecoration: 'none' }}>
           <div style={userAvatarStyles}>PS</div>
         </Link>

@@ -68,7 +68,6 @@ export default function SessionScheduling() {
         {/* This Week Stats */}
        <div className="card stats">
   <h2>This Week</h2>
-  {/* Extra div ab nahi hai */}
   <div className="stat"><span>Total:</span> <span>{sessions.length}</span></div>
   <div className="stat"><span>Confirmed:</span> <span>{sessions.filter(s => s.status==="Confirmed").length}</span></div>
   <div className="stat"><span>Pending:</span> <span>{sessions.filter(s => s.status==="Pending").length}</span></div>
@@ -77,7 +76,7 @@ export default function SessionScheduling() {
 
         {/* Quick Actions */}
         <div className="card quick-actions">
-          <h2>Quick Actions</h2>
+          <h2>Add your session</h2>
           <button onClick={() => setShowModal(true)}>+ Schedule Session</button>
         </div>
       </div>

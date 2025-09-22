@@ -1,20 +1,20 @@
-/* =================== AUTH PAGE WRAPPER =================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 .auth-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f0f9f4, #daf0d6);
+  background: linear-gradient(135deg, #F9FAF9, #F0F4F0);
   font-family: 'Poppins', sans-serif;
   padding: 2rem;
 }
 
-/* =================== AUTH BOX =================== */
 .auth-box {
-  background-color: #2d6a4f; /* solid dark green */
+  background-color: #2C5D63;
   border-radius: 20px;
-  padding: 3rem 2rem;
-  max-width: 400px;
+  padding: 3rem; 
+  max-width: 480px; 
   width: 100%;
   box-shadow: 0 15px 40px rgba(0,0,0,0.15);
   text-align: center;
@@ -26,15 +26,13 @@
   box-shadow: 0 25px 50px rgba(0,0,0,0.2);
 }
 
-/* =================== TITLE =================== */
 .auth-title {
   font-size: 2rem;
-  margin-bottom: 0.3rem;
-  color: #ffffff;
+  margin-bottom: 0.5rem;
+  color: #FFFFFF; /* White text */
   font-weight: 700;
 }
 
-/* =================== TABS =================== */
 .auth-tabs {
   display: flex;
   justify-content: center;
@@ -47,8 +45,8 @@
   padding: 0.6rem 1rem;
   border-radius: 30px;
   border: none;
-  background-color: #e0f2f1; /* solid color */
-  color: #2d6a4f;
+  background-color: rgba(255, 255, 255, 0.1); 
+  color: #FFFFFF;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -56,12 +54,12 @@
 
 .auth-tabs button.active,
 .auth-tabs button:hover {
-  background-color: #cef17b; /* flat highlight color */
-  color: #2d6a4f;
+  background-color: #C2F970; /* Lime Glow active/hover */
+  color: #2C5D63; /* Emerald Pine text */
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
-/* =================== FORM =================== */
+/* 5. Form Inputs = */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -72,56 +70,55 @@
 .auth-form select {
   padding: 0.8rem 1rem;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #E0E0E0;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background-color: #fff; /* solid white */
+  background-color: #FFFFFF;
+  color: #2C5D63;
 }
 
 .auth-form input:focus,
 .auth-form select:focus {
-  border-color: #2d6a4f;
-  box-shadow: 0 0 8px rgba(45, 106, 79, 0.3);
+  border-color: #2C5D63;
+  box-shadow: 0 0 8px rgba(44, 93, 99, 0.3);
   outline: none;
 }
 
-/* =================== BUTTONS =================== */
 .btn-primary {
   padding: 0.8rem 1rem;
   border-radius: 10px;
   border: none;
-  background-color: rgb(190, 242, 2); /* flat color */
-  color: #2d6a4f;
+  background-color: #C2F970; 
+  color: #2C5D63; 
   font-weight: 600;
   cursor: pointer;
-  isolation: isolate; /* prevents blending with backdrop */
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: #cef17b; /* stays flat on hover */
+  background-color: #b8ec60; 
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
+
 
 .btn-secondary {
   margin-top: 1rem;
   padding: 0.6rem 1rem;
   border-radius: 10px;
-  border: 2px solid #cef17b;
+  border: 2px solid #C2F970; 
   background-color: transparent;
-  color: #cef17b;
+  color: #C2F970; 
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: #cef17b;
-  color: #fff;
+  background-color: #C2F970;
+  color: #2C5D63;
   transform: translateY(-2px);
 }
 
-/* =================== RESPONSIVE =================== */
 @media (max-width: 500px) {
   .auth-box {
     padding: 2rem 1rem;

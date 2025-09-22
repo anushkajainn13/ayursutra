@@ -18,7 +18,7 @@ const PatientCard = ({
   email,
   therapy,
   onRemove,
-  onAddPatient, // Agar yeh button PatientCard ke andar nahi hai, to ise remove kar sakte hain
+  onAddPatient, 
 }) => {
   const [nextDate, setNextDate] = useState(
     therapy?.nextSessionDate || new Date().toISOString().split("T")[0]

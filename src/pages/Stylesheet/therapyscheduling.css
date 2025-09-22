@@ -1,6 +1,4 @@
-/* ========================================= */
-/* General Page Layout & Theme               */
-/* ========================================= */
+
 .therapy-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -11,40 +9,31 @@
     line-height: 1.6;
 }
 
-/* ========================================= */
-/* Typography                                */
-/* ========================================= */
-/* ========================================= */
-/* Typography (UPDATED)                      */
-/* ========================================= */
 .page-title {
     font-size: 32px;
     font-weight: 700;
-    color: #2C5D63; /* Changed to emerald color */
+    color: #2C5D63; 
     margin-bottom: 8px;
     text-align: center;
 }
 
 .page-subtitle {
     font-size: 16px;
-    color: #1f2937; /* Changed to black */
+    color: #1f2937; 
     margin-bottom: 40px;
     text-align: center;
 }
 
-/* Updated for dark cards */
 .section-title {
     font-size: 20px;
     font-weight: 600;
-    color: #ffffff; /* White text for dark background */
+    color: #ffffff; 
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #4a7c80; /* Lighter border for contrast */
+    border-bottom: 1px solid #4a7c80; 
 }
 
-/* ========================================= */
-/* Grid & Card Layout (UPDATED)              */
-/* ========================================= */
+
 .therapy-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -52,10 +41,10 @@
     align-items: start;
 }
 
-/* --- UPDATE: Dark background for cards --- */
+
 .appointments-card,
 .therapies-card {
-    background: #2C5D63; /* Dark background color */
+    background: #2C5D63; 
     border-radius: 14px;
     padding: 28px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -64,18 +53,14 @@
     flex-direction: column;
 }
 
-/* Text for when there are no appointments */
+
 .no-items-message {
     color: #cdd5d6;
 }
 
-
-/* ========================================= */
-/* List Items (Inner boxes)                  */
-/* ========================================= */
 .appointment-item,
 .therapy-item {
-    background-color: #f9fafb; /* Kept light color for contrast */
+    background-color: #f9fafb; 
     padding: 16px 18px;
     margin-bottom: 16px;
     border-radius: 10px;
@@ -94,25 +79,21 @@
     margin: 0 0 6px;
     font-size: 17px;
     font-weight: 600;
-    color: #1f2937; /* Text inside remains dark */
+    color: #1f2937; 
 }
 
-/* Therapy specific layout */
 .therapy-item {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Vertically center align content */
+    align-items: center; 
 }
 
 .therapy-item p,
 .therapy-item .duration {
-    color: #475569; /* Ensure text color is dark */
+    color: #475569;
     font-size: 14px;
 }
 
-/* ========================================= */
-/* Status Badges                             */
-/* ========================================= */
 .status {
     display: inline-block;
     padding: 4px 12px;
@@ -132,9 +113,7 @@
     color: #475569;
 }
 
-/* ========================================= */
-/* Buttons                                   */
-/* ========================================= */
+
 .btn-row {
     margin-top: 14px;
     display: flex;
@@ -156,17 +135,17 @@
 }
 
 .btn.primary {
-    background: #478e96; /* Lighter shade for better visibility on dark bg */
+    background: #478e96; 
     color: white;
 }
 .btn.primary:hover {
     background: #59a6af;
 }
 
-/* --- SECONDARY BUTTON (RESCHEDULE) --- */
+
 .btn.secondary {
-    background: #f1f5f9; /* Neutral gray background */
-    color: #475569; /* Dark gray text */
+    background: #f1f5f9; 
+    color: #475569; 
     border: 1px solid #e2e8f0;
 }
 .btn.secondary:hover {
@@ -181,9 +160,7 @@
     background: #b91c1c;
 }
 
-/* ========================================= */
-/* Responsive                                */
-/* ========================================= */
+
 @media (max-width: 900px) {
     .therapy-grid {
         grid-template-columns: 1fr;

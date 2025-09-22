@@ -1,27 +1,12 @@
-/* --- AYURCARE THEME: EMERALD PINE --- */
-:root {
-  --brand-primary: #2C5D63;      /* Your Emerald Pine */
-  --brand-primary-light: #3A7C81; 
-  --accent-lime: #97BC62;        
-  --accent-gradient: linear-gradient(to right, #97BC62, #C2F970);
-  --bg-main: #F9FAF9;
-  --bg-card: #FFFFFF;
-  --text-dark: #1A202C;
-  --text-light: #5A6A7B;
-  --text-on-brand: #FFFFFF;
-  --border-color: #E2E8F0;
-  --red-negative: #D32F2F;
-}
 
 .schedule-container {
   padding: 2rem;
   font-family: 'Inter', sans-serif;
-  background-color: var(--bg-main);
+  background-color: #F9FAF9; 
 }
 
-/* --- Calendar Section --- */
 .calendar {
-  background: var(--bg-card);
+  background: #FFFFFF; 
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -29,10 +14,10 @@
 }
 
 .calendar h2 {
-  color: var(--brand-primary);
+  color: #2C5D63; 
   margin-top: 0;
   font-size: 1.8rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid #E2E8F0; 
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 }
@@ -40,29 +25,31 @@
 .grid {
   display: grid;
   grid-template-columns: 100px repeat(7, 1fr);
-  border: 1px solid var(--border-color);
+  border: 1px solid #E2E8F0;
   border-radius: 8px;
   overflow: hidden;
 }
 
+
 .header-cell {
-  background: var(--brand-primary);
-  color: var(--text-on-brand);
+  background: #2C5D63; 
+  color: #FFFFFF;    
   padding: 12px 8px;
   text-align: center;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
+
 .time-cell {
-  background: var(--bg-form);
+  background: #2C5D63; 
+  color: #FFFFFF;     
   text-align: center;
-  border-right: 1px solid var(--border-color);
-  border-top: 1px solid var(--border-color);
+  border-right: 1px solid #3A7C81; 
+  border-top: 1px solid #3A7C81;
   padding: 6px;
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,8 +57,8 @@
 
 .slot {
   min-height: 80px;
-  border-right: 1px solid var(--border-color);
-  border-top: 1px solid var(--border-color);
+  border-right: 1px solid #E2E8F0;
+  border-top: 1px solid #E2E8F0;
   padding: 8px;
   font-size: 0.8rem;
   cursor: pointer;
@@ -80,8 +67,9 @@
 }
 .slot:last-child { border-right: none; }
 
+
 .slot.empty {
-  color: var(--text-light);
+  color: #5A6A7B;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
@@ -89,29 +77,32 @@
   opacity: 0.5;
 }
 .slot.empty:hover {
-  background: var(--bg-form);
+  background: #F0F9E8; 
   opacity: 1;
-  color: var(--brand-primary);
+  color: #2C5D63;
 }
 
+
 .slot.session {
-  background: var(--bg-form);
-  color: var(--text-dark);
+  background: #F0F9E8; 
+  color: #1A202C;    
   font-weight: 500;
   text-align: left;
-  border-left: 4px solid var(--brand-primary);
+  border-left: 4px solid #2C5D63; 
 }
+
 
 .slot.blocked {
   background-color: #f7f7f7;
   background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(0,0,0,0.05) 5px, rgba(0,0,0,0.05) 10px);
   cursor: not-allowed;
-  color: var(--text-light);
+  color: #5A6A7B;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
 }
+
 
 .remove-btn {
   position: absolute;
@@ -121,7 +112,7 @@
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  color: var(--red-negative);
+  color: #D32F2F; /* Lal rang */
   opacity: 0.5;
   transition: opacity 0.2s;
 }
@@ -129,17 +120,15 @@
   opacity: 1;
 }
 
-/* --- CARDS ROW (FINAL DARK THEME UPDATE) --- */
 .cards-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
-/* Rule jo teeno cards ko dark karega */
 .cards-row .card {
-  background: var(--brand-primary);
-  color: var(--text-on-brand);
+  background: #2C5D63; 
+  color: #FFFFFF;     
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -148,80 +137,61 @@
   gap: 12px;
 }
 
-/* Rule jo teeno cards ke heading ko style karega */
 .cards-row .card h2 {
-  color: var(--accent-lime);
+  color: #FFFFFF; 
   margin-top: 0;
   margin-bottom: 4px;
-  border-bottom: 1px solid var(--brand-primary-light);
+  border-bottom: 1px solid #3A7C81; 
   padding-bottom: 0.75rem;
   font-size: 1.5rem;
 }
 
-/* Today's Sessions - White box style */
-.card p {
-  background-color: var(--bg-card);
-  color: var(--text-light);
-  padding: 10px 12px;
-  border-radius: 8px;
-  margin: 0;
-  font-weight: 500;
-}
-.card > div {
-  background-color: var(--bg-card);
-  color: var(--text-dark);
+
+.card p, .card > div {
+  background-color: #FFFFFF; 
+  color: #1A202C;          
   padding: 10px 12px;
   border-radius: 8px;
 }
 
-/* --- "THIS WEEK" CARD LAYOUT (2x2 GRID UPDATE) --- */
 .stats {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2x2 Grid Layout */
+  grid-template-columns: 1fr 1fr; 
   gap: 12px;
 }
-
 .stats .stat {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--bg-card);
-  color: var(--text-dark);
+  background: #FFFFFF; 
+  color: #1A202C;     
   padding: 10px 12px;
   border-radius: 8px;
 }
-.stats .stat span:first-child {
-  color: var(--text-light);
-  font-size: 0.9rem;
-}
+.stats .stat span:first-child { color: #5A6A7B; } 
 .stats .stat span:last-child {
   font-weight: bold;
-  color: var(--text-dark);
-  background-color: var(--bg-form);
+  background-color: #F0F4F0; 
   padding: 2px 8px;
   border-radius: 6px;
 }
 
-/* Quick Actions Card - Button style */
 .quick-actions button {
   width: 100%;
   padding: 12px;
   border: none;
   border-radius: 8px;
-  background: var(--accent-gradient);
-  color: var(--text-dark);
+  background: linear-gradient(to right, #97BC62, #C2F970); 
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
   transition: transform 0.2s, box-shadow 0.2s;
-  margin-top: auto;
 }
 .quick-actions button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(151, 188, 98, 0.3);
 }
 
-/* --- Dark Theme Modal --- */
 .modal {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -230,27 +200,26 @@
   z-index: 1000;
 }
 .modal-content {
-  background: #193438;
+  background: #193438; 
   color: #E0E0E0;
-  padding: 25px 30px; border-radius: 12px;
-  width: 400px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-  display: flex; flex-direction: column; gap: 15px;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 400px;
   border: 1px solid #2C5D63;
 }
 .modal-content h2 {
-  color: var(--accent-lime);
-  margin: 0 0 10px 0; padding-bottom: 10px;
+  color: #97BC62; 
   border-bottom: 1px solid #2C5D63;
-  font-size: 1.5rem;
 }
 .modal-content input, .modal-content select {
   padding: 12px; border-radius: 8px; font-size: 1rem;
-  background-color: #2C5D63;
-  border: 1px solid var(--brand-primary-light);
-  color: var(--text-on-brand);
+  background-color: #2C5D63; 
+  border: 1px solid #3A7C81;
+  color: #FFFFFF;
 }
 .modal-content input:focus, .modal-content select:focus {
-  outline: none; border-color: var(--accent-lime);
+  outline: none;
+  border-color: #97BC62; 
   box-shadow: 0 0 0 3px rgba(151, 188, 98, 0.25);
 }
 .modal-actions {
@@ -258,13 +227,14 @@
 }
 .modal-actions button {
   padding: 10px 20px; border: none; border-radius: 8px;
-  font-weight: bold; cursor: pointer; transition: filter 0.2s, background-color 0.2s;
+  font-weight: bold; cursor: pointer;
 }
-.modal-actions button:first-child { /* Save Button */
-  background-color: var(--accent-lime); color: #193438;
+.modal-actions button:first-child { 
+  background-color: #97BC62; color: #193438;
 }
-.modal-actions button:first-child:hover { filter: brightness(0.9); }
-.modal-actions button:last-child { /* Cancel Button */
+.modal-actions button:last-child { 
   background-color: #2C5D63; color: #E0E0E0;
 }
-.modal-actions button:last-child:hover { background-color: var(--brand-primary-light); }
+.modal-actions button:last-child:hover { background-color: #3A7C81; }
+
+
