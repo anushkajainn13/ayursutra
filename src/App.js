@@ -6,11 +6,9 @@ import IntroPage from "./pages/IntroPage";
 import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/dashboard"; // Patient ka naya dashboard
 import PppractitionerDashboard from "./pages/PppractitionerDashboard";
-<<<<<<< HEAD
+
 import TherapyScheduling from "./pages/therapyscheduling";
-=======
-import TherapyScheduling from "./pages/TherapyScheduling"; // Patient ke liye
->>>>>>> f75c12b658640cab72d8c4a7b1e4c7ab6bd48a55
+
 import FeedbackPage from "./pages/FeedbackPage";
 import SessionScheduling from "./pages/SessionScheduling";
 import YourProfile from "./pages/YourProfile";

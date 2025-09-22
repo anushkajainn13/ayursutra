@@ -32,10 +32,6 @@
   transition: color 0.2s ease;
 }
 
-.app-navbar .nav-links button:hover {
-  color: #2d6a4f;
-}
-
 .app-navbar .nav-buttons {
   display: flex;
   gap: 1rem;
@@ -58,7 +54,7 @@
 
 .app-navbar .nav-buttons button:first-child:hover {
   background-color: #2d6a4f;
-  color: #2d6a4f;
+  color:#cef17b ;
    border: 2px solid #2d6a4f;
 }
 
@@ -70,5 +66,6 @@
 
 .app-navbar .nav-buttons button:last-child:hover {
   background-color: #2d6a4f;
+  color:#cef17b ;
    border: 2px solid #2d6a4f;
 }

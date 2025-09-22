@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f0f9f4, #daf0d6);
+
   font-family: 'Poppins', sans-serif;
   padding: 2rem;
 }
@@ -90,12 +90,10 @@
   padding: 0.8rem 1rem;
   border-radius: 10px;
   border: none;
-  background-color: rgb(190, 242, 2); /* flat color */
-  color: #2d6a4f;
+  background-color: rgb(190, 242, 2) !important ;/* flat color */
+  color: #2d6a4f !important;
   font-weight: 600;
   cursor: pointer;
-  isolation: isolate; /* prevents blending with backdrop */
-  transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
