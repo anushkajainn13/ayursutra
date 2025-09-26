@@ -1,17 +1,20 @@
+/* ================================================= */
+/* ============== AYURSUTRA DASHBOARD FINAL CSS ============== */
+/* ================================================= */
 
-.dashboard-container, .dashboard {
+.dashboard {
   padding: 30px;
   font-family: 'Inter', sans-serif;
   background-color: #f5f7fa;
 }
 
-
+/* --- Welcome Section --- */
 .welcome {
   margin: 20px 0 30px;
   text-align: center;
 }
 .welcome h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 600;
   color: #2C5D63; 
   margin-bottom: 8px;
@@ -21,18 +24,19 @@
   font-size: 1.1rem;
 }
 
-
+/* --- Stats Section --- */
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
+  margin-bottom: 30px;
 }
-
 .stat-card {
-  background: #2C5D63; 
+  background: #FFFFFF; 
+  border: 1px solid #e2e8f0;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   display: flex;
   align-items: center;
   gap: 15px;
@@ -40,138 +44,220 @@
 }
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(44, 93, 99, 0.2);
+  box-shadow: 0 10px 20px rgba(44, 93, 99, 0.1);
 }
 .stat-card .icon {
   font-size: 2.5rem;
-  color: #97BC62; 
+  color: #2C5D63; 
 }
 .stat-card h3 {
   margin: 0;
   font-size: 1.8rem;
-  color: #FFFFFF; 
+  color: #1A202C; 
 }
 .stat-card p {
   margin: 2px 0 0;
-  color: rgba(255, 255, 255, 0.8); 
+  color: #5A6A7B;
 }
 
-
-
-.main-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 25px;
-  margin-top: 30px;
-}
-
-
-.activities {
-  background: #FFFFFF;
-  padding: 25px;
+/* --- Clinics & Doctors Section --- */
+.clinics-section {
+  background-color: #FFFFFF;
+  padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.05);
 }
-.activities h3 {
-  margin-top: 0;
-  margin-bottom: 25px;
-  font-size: 1.5rem;
-  color: #1A202C;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 1rem;
+.clinics-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #2C5D63;
+  margin-bottom: 2rem;
 }
-.timeline {
-  position: relative;
-  padding-left: 25px;
-  border-left: 2px solid #e0e0e0;
+
+/* --- Detailed Clinic Card --- */
+.clinics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
 }
-.activity {
-  position: relative;
-  margin-bottom: 25px;
+.clinic-card {
+  background-color: #fdfdfd;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.activity:last-child { margin-bottom: 0; }
-.dot {
-  position: absolute;
-  left: -40px;
-  top: 0;
-  width: 32px;
-  height: 32px;
-  background: #97BC62;
-  border-radius: 50%;
+.clinic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+.clinic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.clinic-header h3 {
+  color: #2C5D63;
+  margin: 0;
+  font-size: 1.3rem;
+}
+.clinic-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  background-color: #e9f5e9;
+  color: #2C5D63;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
-  font-size: 16px;
-}
-.details h4 { margin: 0; font-size: 1rem; font-weight: 600; color: #1A202C; }
-.details p { margin: 5px 0; font-size: 0.9rem; color: #5A6A7B; }
-.details span { font-size: 0.8rem; color: #97BC62; font-weight: 500; }
-
-
-
-.quick-actions {
-  background: #2C5D63; 
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-}
-
-
-.quick-actions h3 {
-  margin-top: 0;
-  margin-bottom: 15px;
+  font-weight: bold;
   font-size: 1.5rem;
-  color: #FFFFFF; 
-  border-bottom: 1px solid #3A7C81;
-  padding-bottom: 1rem;
 }
-
-
-.quick-actions button {
+.clinic-details p {
+  margin: 4px 0;
+  color: #5A6A7B;
+  font-size: 0.95rem;
+}
+.clinic-rating {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 14px 16px;
-  border-radius: 10px;
+  gap: 0.5rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+.clinic-card button {
+  margin-top: auto; /* Pushes button to the bottom */
+  padding-top: 1rem;
+  background-color: #2C5D63;
+  color: #FFFFFF;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.clinic-card button:hover {
+  background-color: #1e4246;
+}
+
+/* --- Doctor Details View --- */
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.2s ease-in-out;
-  background: #3A7C81; 
-  color: #FFFFFF; 
-  border: 1px solid #3A7C81;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s;
 }
-
-.quick-actions button:hover {
-  background-color: #193438; 
-  border-color: #193438;
+.back-button:hover {
+  background: #f0f0f0;
+  border-color: #aaa;
 }
-
-.quick-actions button.primary {
-  background: #97BC62; 
-  color: #1A202C; 
-  border: none;
+.doctors-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.doctor-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.doctor-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e9f5e9;
+}
+.doctor-details {
+  width: 100%;
+}
+.doctor-details h3 {
+  margin: 0 0 5px 0;
+  color: #1A202C;
+  font-size: 1.4rem;
+}
+.doctor-details .specialty {
+  color: #2C5D63;
   font-weight: 600;
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+}
+.doctor-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 10px 0;
+}
+.doctor-rating .stars {
+  color: #f5b942;
+}
+.doctor-rating .reviews-count {
+  color: #5A6A7B;
+  font-size: 0.9rem;
+}
+.feedback-section {
+  margin-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1rem;
+}
+.feedback-quote {
+  background-color: #f8f9fa;
+  border-left: 3px solid #97BC62;
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+.feedback-quote p { margin: 0; font-style: italic; color: #333; }
+.feedback-quote span {
+  display: block;
+  text-align: right;
+  font-style: normal;
+  font-weight: bold;
+  margin-top: 5px;
+  color: #2C5D63;
+}
+/* ======================================= */
+/* ====== CSS FOR AVATAR FALLBACK ====== */
+/* ======================================= */
+
+.doctor-photo-container {
+  width: 120px;
+  height: 120px;
+  min-width: 120px; /* Prevents shrinking */
 }
 
-.quick-actions button.primary:hover {
-  filter: brightness(0.9);
+.doctor-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e9f5e9;
 }
 
-
-
-@media (max-width: 1024px) {
-  .main-grid {
-    grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 600px) {
-  .stats {
-    grid-template-columns: 1fr;
-  }
+.doctor-initials-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #2C5D63;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
 }

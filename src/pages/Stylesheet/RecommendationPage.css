@@ -1,0 +1,299 @@
+/* General Container and Layout */
+.recommendation-page-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f9fc; 
+    font-family: Arial, sans-serif;
+}
+
+.page-header h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 25px;
+    padding: 0 10px;
+}
+
+/* Card Styling */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.section-title-green {
+    font-size: 1.4em;
+    color: #2C5D63; 
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* Symptoms Section */
+.symptoms-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0 25px 0;
+}
+
+.symptom-tag {
+    background: #e9f5f5; 
+    color:#2C5D63;
+    border: 1px solid #c2d9d9;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    pointer-events: auto !important; 
+    z-index: 10;
+}
+
+.symptom-tag.selected {
+    background: #2C5D63; /* Selected background color changed to NEW */
+    color: white;
+    border-color: #2C5D63;
+}
+
+.additional-details-title {
+    margin-top: 20px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.additional-details-textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* Get Recommendation Button */
+.btn-get-recommendation {
+    width: 100%;
+    background: #2C5D63; /* Main action button color changed to NEW */
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-get-recommendation:hover {
+    background: #1f4347;
+}
+
+/* Recommended Therapies Section */
+.therapy-list {
+    margin: 20px 0;
+}
+
+.therapy-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.therapy-item:last-child {
+    border-bottom: none;
+}
+
+.therapy-details h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.therapy-details p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.duration {
+    display: block;
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 3px;
+}
+
+.arrow-btn {
+    background: #e9f5f5;
+    color: #2C5D63;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.btn-consult-doctor {
+    width: 100%;
+    background: #2C5D63; /* Consult Doctor button color changed to NEW */
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Bottom Action Bar Styling */
+
+.action-bar-full-width {
+    /* Use padding to create space from the edges if needed */
+    padding: 15px 0;
+    /* Ensure the container stretches to accommodate the inner content */
+}
+
+.action-bar-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto; /* Center it */
+}
+
+.action-btn {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 15px 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex; /* For icon and text alignment */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.action-btn span {
+    margin-right: 5px;
+}
+
+.action-btn:hover {
+    background: #f0f0f0;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #666;
+}
+
+.doctor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.doctor-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.doc-info h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.doc-spec {
+    font-size: 0.9em;
+    color: #777;
+    margin: 5px 0 0 0;
+}
+
+.doc-actions {
+    text-align: right;
+}
+
+.doc-fee {
+    font-weight: bold;
+    color: #2C5D63;
+    margin: 5px 0;
+}
+
+.doc-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.doc-status.available {
+    background: #d1fae5;
+    color: #2C5D63;
+}
+
+.doc-status.busy {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.btn-book-slot {
+    background: #f4a261;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-book-slot:hover {
+    background: #e07b39;
+}
