@@ -21,9 +21,9 @@ const ReviewCard = ({ therapy, practitioner, rating, comment, onDelete }) => {
       <div className="review-rating">{renderStars(Math.round(rating))}</div>
       <p className="review-comment">"{comment}"</p>
 
-      {/* ✅ Delete button */}
+      
       <button className="delete-button" onClick={onDelete}>
-        ❌ Delete
+         Delete
       </button>
     </div>
   );

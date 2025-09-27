@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom'; // 1. useNavigate ko import karein
+import { useNavigate } from 'react-router-dom'; 
 import "./Stylesheet/Dashboard.css";
 import { FaHeartbeat, FaUserMd } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -7,17 +7,13 @@ import { AiOutlineBarChart } from "react-icons/ai";
 import { BsArrowRightShort } from "react-icons/bs";
 
 const Dashboard = () => {
-  const navigate = useNavigate(); // 2. navigate function ko initialize karein
-
+  const navigate = useNavigate();
   return (
     <div className="dashboard">
-      {/* Welcome Section */}
       <section className="welcome">
         <h2>Welcome back to your healing journey</h2>
         <p>Continue your path to wellness with personalized Ayurvedic care</p>
       </section>
-
-      {/* Stats Section */}
       <section className="stats">
         <div className="stat-card">
           <FaHeartbeat className="icon" />
@@ -50,7 +46,6 @@ const Dashboard = () => {
       </section>
 
       <div className="main-grid">
-        {/* Recent Activities */}
         <section className="activities">
           <h3>Recent Activities</h3>
           <div className="timeline">
@@ -80,11 +75,8 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
-
-        {/* Quick Actions */}
         <section className="quick-actions">
-          <h3>Quick Actions</h3>
-          {/* --- 3. BUTTONS ME ONCLICK ADD KIYA GAYA --- */}
+          <h3>Shortcuts</h3>
           <button className="primary" onClick={() => navigate('/patient/scheduling')}>
             Schedule New Therapy <BsArrowRightShort />
           </button>

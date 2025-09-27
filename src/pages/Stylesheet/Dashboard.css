@@ -1,11 +1,11 @@
-/* ====== GLOBAL STYLES ====== */
+
 .dashboard-container, .dashboard {
   padding: 30px;
   font-family: 'Inter', sans-serif;
   background-color: #f5f7fa;
 }
 
-/* ====== WELCOME ====== */
+
 .welcome {
   margin: 20px 0 30px;
   text-align: center;
@@ -21,7 +21,7 @@
   font-size: 1.1rem;
 }
 
-/* ====== STATS CARDS ====== */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -57,7 +57,7 @@
 }
 
 
-/* ====== MAIN GRID ====== */
+
 .main-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -65,7 +65,7 @@
   margin-top: 30px;
 }
 
-/* ====== ACTIVITIES / TIMELINE ====== */
+
 .activities {
   background: #FFFFFF;
   padding: 25px;
@@ -108,7 +108,8 @@
 .details p { margin: 5px 0; font-size: 0.9rem; color: #5A6A7B; }
 .details span { font-size: 0.8rem; color: #97BC62; font-weight: 500; }
 
-/* ====== QUICK ACTIONS ====== */
+
+
 .quick-actions {
   background: #2C5D63; 
   padding: 25px;
@@ -117,14 +118,18 @@
   display: flex;
   flex-direction: column;
 }
+
+
 .quick-actions h3 {
   margin-top: 0;
   margin-bottom: 15px;
   font-size: 1.5rem;
-  color: #97BC62; 
+  color: #FFFFFF; 
   border-bottom: 1px solid #3A7C81;
   padding-bottom: 1rem;
 }
+
+
 .quick-actions button {
   display: flex;
   align-items: center;
@@ -141,21 +146,25 @@
   color: #FFFFFF; 
   border: 1px solid #3A7C81;
 }
+
 .quick-actions button:hover {
   background-color: #193438; 
   border-color: #193438;
 }
+
 .quick-actions button.primary {
   background: #97BC62; 
   color: #1A202C; 
   border: none;
   font-weight: 600;
 }
+
 .quick-actions button.primary:hover {
   filter: brightness(0.9);
 }
 
-/* ====== RESPONSIVENESS ====== */
+
+
 @media (max-width: 1024px) {
   .main-grid {
     grid-template-columns: 1fr;

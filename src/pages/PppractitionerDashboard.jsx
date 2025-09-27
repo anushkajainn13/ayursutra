@@ -180,7 +180,7 @@ function PppractitionerDashboard() {
           </div>
 
           <div className="sidebar">
-            <h3>Quick Actions</h3>
+            <h3>Appointments</h3>
             <button className="btn-primary" onClick={handleAddAppointment}>+ Add Appointment</button>
             <button className="btn-secondary" onClick={() => { if (appointments.length > 0) { handleReschedule(appointments[0].id); } else { alert("No appointments to reschedule!"); } }}>Reschedule First</button>
             <button className="btn-secondary" onClick={() => navigate("/patients")}>View Patient History</button>

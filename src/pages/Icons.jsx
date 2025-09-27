@@ -1,10 +1,5 @@
-//feedback dashboard ki h ye
-// src/pages/Icons.jsx
-
+//feedback dashboard ki h 
 import React from 'react';
-
-// Yeh sabhi components SVG code se banaye gaye hain.
-// props isliye pass kiya hai taaki hum CSS se inka color/size badal sakein.
 
 export const FaStar = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" {...props}>

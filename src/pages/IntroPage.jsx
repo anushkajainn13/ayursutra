@@ -4,13 +4,10 @@ import "./Stylesheet/IntroPage.css";
 import healingImage from "./images/image.png";
 function App() {
   const navigate = useNavigate();
-
-  // Handler for button clicks
   const handleButtonClick = (action) => {
     if (action === "Get Started") {
       navigate("/auth");
     } else if (action === "Learn More") {
-      // You can navigate to a learn more page or scroll to a section
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }
   };
@@ -80,7 +77,7 @@ function App() {
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* How It Works*/}
       <section id="how-it-works" className="how-it-works">
         <h2>How AyurSutra Works</h2>
         <p className="subheading">A simple 4-step process to manage your Panchakarma journey digitally</p>
@@ -121,9 +118,8 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
-        <p>&copy; 2024 AyurSutra. All rights reserved.</p>
+        <p>&copy; 2025 AyurSutra. Powered by team VERTEX.</p>
       </footer>
     </div>
   );

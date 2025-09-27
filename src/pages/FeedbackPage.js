@@ -18,7 +18,6 @@ import {
 } from 'recharts';
 
 const FeedbackPage = () => {
-  // Load reviews from localStorage
   const [reviews, setReviews] = useState(() => {
     const saved = localStorage.getItem('reviews');
     return saved
@@ -45,7 +44,6 @@ const FeedbackPage = () => {
     localStorage.setItem('reviews', JSON.stringify(reviews));
   }, [reviews]);
 
-  // Form states
   const [therapy, setTherapy] = useState('');
   const [practitioner, setPractitioner] = useState('');
   const [rating, setRating] = useState(0);
@@ -122,7 +120,7 @@ const FeedbackPage = () => {
           style={{
             fontSize: '2.5rem',
             fontWeight: '700',
-            borderBottom: '3px solid #2e7d32', // Matched color
+            borderBottom: '3px solid #2e7d32',
             display: 'inline-block',
             paddingBottom: '6px',
             marginBottom: '15px',
@@ -130,7 +128,7 @@ const FeedbackPage = () => {
         >
           Feedback & Reviews
         </h1>
-        <p>Share your experience and help improve our services</p>
+        
       </div>
 
       {/* Insights Section */}
@@ -158,11 +156,11 @@ const FeedbackPage = () => {
                 textAnchor="end"
                 interval={0}
                 height={80}
-                tick={{ fill: '#ffffff', fontSize: 12 }} // White labels
+                tick={{ fill: '#ffffff', fontSize: 12 }} 
               />
-              <YAxis tick={{ fill: '#ffffff' }} /> {/* White labels */}
+              <YAxis tick={{ fill: '#ffffff' }} /> 
               <Tooltip />
-              <Bar dataKey="rating" fill="#a5d6a7" /> {/* Lighter bar color */}
+              <Bar dataKey="rating" fill="#a5d6a7" /> 
             </BarChart>
           </div>
 
@@ -186,19 +184,17 @@ const FeedbackPage = () => {
               <Legend
                 verticalAlign="bottom"
                 height={36}
-                wrapperStyle={{ color: '#ffffff' }} // White legend text
+                wrapperStyle={{ color: '#ffffff' }} 
               />
             </PieChart>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
+ 
       <div className="feedback-content">
-        {/* Left Section */}
         <div className="feedback-form">
           <h3>
-            {/* --- UPDATED ICON COLOR --- */}
             <FaComments style={{ marginRight: '8px', color: '#a5d6a7' }} />
             Share Your Experience
           </h3>

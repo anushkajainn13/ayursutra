@@ -1,77 +1,64 @@
-/* --- AYURCARE THEME: EMERALD PINE --- */
-:root {
-  --brand-primary: #2C5D63;      /* Your Emerald Pine */
-  --brand-primary-light: #3A7C81; /* Lighter shade for gradients/hovers */
-  --accent-lime: #97BC62;        /* Lime Glow for highlights */
-  --bg-main: #F9FAF9;             /* Main page background */
-  --bg-form: #F4F7F6;             /* Form background (subtle green) */
-  --text-dark: #1A202C;           /* For main headings */
-  --text-light: #5A6A7B;          /* For sub-headings and lighter text */
-  --border-color: #E2E8F0;        /* Default border color */
-  --text-on-brand: #FFFFFF;        /* White text for buttons */
-}
 
 .dashboard {
-  max-width: 1100px;
-  margin: auto;
-  padding: 2rem;
-  font-family: 'Inter', sans-serif; /* Modern font */
-  background-color: var(--bg-main);
+  padding: 2rem 4rem; 
+  font-family: 'Inter', sans-serif;
+  background-color: #F9FAF9; 
+  min-height: 100vh;
 }
+
 
 .heading {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--brand-primary); 
-  text-align: center;         
+  color: #2C5D63; 
+  text-align: center; 
 }
 
+
 .sub-heading {
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  color: var(--text-dark); 
-  text-align: center;         
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  color: #5A6A7B; 
+  text-align: center; 
 }
 
 .search-bar {
   width: 100%;
   padding: 1rem;
   margin-bottom: 2rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid #E2E8F0;
   background-color: #FFFFFF;
   border-radius: 12px;
   font-size: 1rem;
   outline: none;
   font-weight: 500;
-  color: var(--text-dark);
+  color: #1A202C; 
   transition: all 0.2s ease-in-out;
   box-sizing: border-box;
 }
 
 .search-bar::placeholder {
-  color: var(--text-light);
+  color: #5A6A7B; 
 }
 
 .search-bar:focus {
-  border-color: var(--brand-primary);
+  border-color: #2C5D63; 
   box-shadow: 0 0 0 4px rgba(44, 93, 99, 0.1);
 }
 
 .patients-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem; /* 24px */
+  gap: 1.5rem;
 }
 
-/* ✅ Add Patient Form (HIGH-CONTRAST UPDATE) */
 .add-patient-form {
-  margin-top: 3rem; /* 48px */
-  background: var(--brand-primary); /* Dark Emerald Pine background */
-  border: 1px solid var(--brand-primary-light);
+  margin-top: 3rem;
+  background: #FFFFFF; 
   border-radius: 16px;
-  padding: 1.5rem 2rem; /* 24px 32px */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .add-patient-form h3 {
@@ -79,53 +66,51 @@
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--accent-lime); /* Lime Green heading on dark bg */
-  border-bottom: 1px solid var(--brand-primary-light);
+  color: #2C5D63; 
+  border-bottom: 1px solid #E2E8F0;
   padding-bottom: 1rem;
-  text-align: center; 
-  text-shadow: 0px 2px 8px rgba(151, 188, 98, 0.2); /* HEADING ME GLOW EFFECT */
+  text-align: center;
 }
 
-/* ✅ Form Layout */
+
 .add-patient-form form {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
-  gap: 1rem 1.5rem; /* 16px 24px */
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
 }
 
-/* ✅ Form Inputs (WHITE BOX UPDATE) */
+
 .add-patient-form input {
-  padding: 0.75rem; /* 12px */
+  padding: 0.75rem;
   font-size: 0.9rem;
   border-radius: 8px;
-  border: 1px solid var(--border-color); /* Halka border */
+  border: 1px solid #E2E8F0;
   outline: none;
   width: 100%;
   box-sizing: border-box;
   transition: all 0.2s;
-  background-color: #FFFFFF; /* INPUT BOX KO WHITE KIYA GAYA */
-  color: var(--text-dark); /* ANDAR KA TEXT DARK KIYA GAYA */
+  background-color: #F4F7F6; 
+  color: #1A202C;
 }
 
 .add-patient-form input::placeholder {
-  color: var(--text-light); /* Placeholder text light gray */
+  color: #5A6A7B;
 }
 
 .add-patient-form input:focus {
-  border-color: var(--brand-primary); /* Focus par border Emerald Pine */
-  box-shadow: 0 0 0 4px rgba(44, 93, 99, 0.1); /* Focus par halka glow */
+  border-color: #2C5D63;
+  box-shadow: 0 0 0 4px rgba(44, 93, 99, 0.1);
 }
 
-/* ✅ Button */
 .add-patient-form button {
-  grid-column: 1 / -1; /* Make button span full width */
-  padding: 0.8rem; /* 13px */
+  grid-column: 1 / -1; 
+  padding: 0.8rem;
   font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 10px;
-  background: var(--accent-lime); /* Lime Green button */
-  color: var(--text-dark); /* Dark text on button */
+  background: #97BC62; 
+  color: #1A202C; 
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
 }
