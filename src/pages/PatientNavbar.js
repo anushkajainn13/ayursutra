@@ -176,7 +176,7 @@ export default function PatientNavbar() {
         )}
 
         {/* ✅ Consultation Button */}
-        <Link to="/patient/consultation" style={ctaButtonStyles}>
+        <Link to="/patient/recommendations" style={ctaButtonStyles}>
           <ConsultationIcon />
           Get Consultation
         </Link>

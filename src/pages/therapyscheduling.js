@@ -48,9 +48,8 @@ export default function TherapyScheduling() {
 
   // Filter therapies based on search
   const filteredTherapies = THERAPIES.filter(therapy => 
-    therapy.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    therapy.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    therapy.keywords.toLowerCase().includes(searchTerm.toLowerCase())
+    therapy.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    therapy.description.toLowerCase().includes(searchTerm.toLowerCase())          
   );
 
   return (

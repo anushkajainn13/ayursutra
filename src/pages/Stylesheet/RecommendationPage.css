@@ -53,6 +53,42 @@ body {
     margin: 0 auto;
     padding: var(--spacing-xl) var(--spacing-lg);
 }
+/* --- Page Header Container --- */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This centers the badge perfectly */
+    gap: 16px; /* Adds perfect spacing between badge and title */
+}
+
+/* --- The Prakriti Badge --- */
+.prakriti-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E8EDE1; /* Light sage green */
+    color: #1C3026; /* Deep forest green text */
+    border: 1px solid #C1D1A9; /* Subtle earthy border */
+    padding: 6px 20px;
+    border-radius: 50px; 
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(28, 48, 38, 0.05);
+}
+
+/* --- The Main Heading Below the Badge --- */
+.page-header h2 {
+    color: #2D3748; /* Dark slate text for readability */
+    font-size: 1.8rem;
+    line-height: 1.4;
+    max-width: 800px; /* Prevents the text from stretching too wide on big screens */
+    margin: 0 auto;
+    font-weight: 600;
+}
 
 /* ============================================
    HEADERS & TITLES

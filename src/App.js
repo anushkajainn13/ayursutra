@@ -12,6 +12,7 @@ import SessionScheduling from "./pages/SessionScheduling";
 import YourProfile from "./pages/YourProfile";
 import PractitionerDashboard from "./pages/PractitionerDashboard";
 import FeedbackDashboard from "./pages/FeedbackDashboard";
+import PrakritiQuiz from "./pages/PrakritiQuiz";
 
 // ✅ 1. RecommendationPage को यहाँ इम्पोर्ट करें
 import RecommendationPage from "./pages/RecommendationPage";
@@ -60,10 +61,11 @@ function App() {
               path="/patient/profile"
               element={<><PatientNavbar /><YourProfile /></>}
             />
+            <Route path="/patient/consultation" element={<><PatientNavbar /><PrakritiQuiz /> </>}/>
             
             {/* ✅ 2. 'Get Consultation' के लिए यहाँ नया रूट जोड़ें */}
             <Route
-              path="/patient/consultation"
+              path="/patient/recommendations"
               element={<><PatientNavbar /><RecommendationPage /></>}
             />
           </>
@@ -92,6 +94,7 @@ function App() {
               path="/practitioner/profile"
               element={<><PractitionerNavbar /><YourProfile /></>}
             />
+            
           </>
         )}
 

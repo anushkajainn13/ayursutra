@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-// Make sure this CSS file is in the same folder or the path is correct
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Stylesheet/RecommendationPage.css'; 
 
 // --- Therapy Detail Modal Component ---
@@ -26,7 +26,6 @@ const TherapyDetailModal = ({ therapy, onClose }) => {
                 <p className="therapy-description-text">
                     {therapy.details}. This is a comprehensive Ayurvedic treatment designed to flush out toxins, promoting revitalization and well-being. It is highly effective for managing {therapy.tags[0]} and {therapy.tags[1]}.
                 </p>
-                {/* ✅ FIXED CLASSNAME */}
                 <button className="btn-primary" style={{width: '100%'}} onClick={onClose}>Schedule this Therapy</button>
             </div>
         </div>
@@ -45,7 +44,6 @@ const DoctorConsultationModal = ({ onClose }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <span className="close-btn" onClick={onClose}>×</span>
-                {/* ✅ FIXED CLASSNAME */}
                 <h3 className="section-title">Consultation with Experts</h3>
                 <p>Book an instant slot with one of our specialized Ayurvedic practitioners.</p>
                 <div className="doctor-list">
@@ -59,7 +57,6 @@ const DoctorConsultationModal = ({ onClose }) => {
                             <div className="doc-actions">
                                 <span className={`doc-status ${doc.status.includes('Available') ? 'available' : 'busy'}`}>{doc.status}</span>
                                 <p className="doc-fee">{doc.fee}</p>
-                                {/* ✅ FIXED CLASSNAME */}
                                 <button className="btn-primary consult-btn">Book Slot</button>
                             </div>
                         </div>
@@ -70,10 +67,20 @@ const DoctorConsultationModal = ({ onClose }) => {
     );
 };
 
-
 // --- Main Page Component ---
 const RecommendationPage = () => {
+    const navigate = useNavigate();
+    const [userPrakriti, setUserPrakriti] = useState('Ayurvedic');
+
+    useEffect(() => {
+        const storedPrakriti = localStorage.getItem("userPrakriti");
+        if (storedPrakriti) {
+            setUserPrakriti(storedPrakriti);
+        }
+    }, []);
+
     const commonSymptoms = [ "Digestive Issues", "Stress & Anxiety", "Joint Pain", "Insomnia", "Skin problems", "Fatigue", "Weight management", "Headaches" ];
+    
     const allTherapies = [
         { name: "Panchakarma Detox", details: "Complete body purification", duration: "21 days", tags: ["Digestive Issues", "Skin problems", "Fatigue", "Weight management"] },
         { name: "Abhyanga Massage", details: "Full body oil massage therapy", duration: "60 min", tags: ["Stress & Anxiety", "Fatigue", "Joint Pain", "Headaches"] },
@@ -102,9 +109,16 @@ const RecommendationPage = () => {
         }
     };
 
+    const handleUnlockDashboard = () => {
+        // Marks the onboarding as complete
+        localStorage.setItem("hasConsulted", "true");
+        navigate("/patient/dashboard");
+    };
+
     const getRecommendedTherapies = () => {
         if (!showRecommendations) return [];
         if (selectedSymptoms.length === 0) return allTherapies.slice(0, 3);
+        
         const recommendations = new Set();
         allTherapies.forEach(therapy => {
             if (therapy.tags.some(tag => selectedSymptoms.includes(tag))) {
@@ -113,34 +127,24 @@ const RecommendationPage = () => {
         });
         return Array.from(recommendations);
     };
+
     const currentRecommendations = getRecommendedTherapies();
 
     return (
         <div className="recommendation-page-container">
             <div className="page-header">
-                <h2>Describe your health concerns and get personalized Ayurveda recommendations from our expert practitioners.</h2>
+                <div className="prakriti-badge">Your Prakriti: {userPrakriti.toUpperCase()}</div>
             </div>
 
             <div className="card">
-               <h3 className="section-title">
-    {/* 👇 Replace the old span with this SVG 👇 */}
-    <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        width="28" 
-        height="28" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
-        strokeLinejoin="round"
-    >
-        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-    </svg>
-    Describe Your Health Concerns
-</h3>
-                  <p className="page-subtitle">Share your symptoms or health goals to get personalized Ayurveda recommendations</p>
+                <h3 className="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    Describe Your Health Concerns
+                </h3>
+                <p className="page-subtitle">Share your symptoms or health goals to get personalized Ayurveda recommendations</p>
                 <div className="symptoms-list">
                     {commonSymptoms.map(symptom => (
                         <button key={symptom} className={`symptom-tag ${selectedSymptoms.includes(symptom) ? 'selected' : ''}`} onClick={() => handleSymptomClick(symptom)}>
@@ -179,6 +183,7 @@ const RecommendationPage = () => {
                 </div>
             )}
 
+            {/* Modals */}
             {showDoctorConsultation && <DoctorConsultationModal onClose={() => setShowDoctorConsultation(false)} />}
             {selectedTherapy && <TherapyDetailModal therapy={selectedTherapy} onClose={() => setSelectedTherapy(null)} />}
         </div>
