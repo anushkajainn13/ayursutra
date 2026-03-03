@@ -26,7 +26,6 @@ function YourProfile() {
 
   return (
     <div className="profile-container">
-      <h1>YOUR PROFILE</h1>
 
       <div className="profile-card">
         <img src={profilePic} alt="User" className="profile-img" />

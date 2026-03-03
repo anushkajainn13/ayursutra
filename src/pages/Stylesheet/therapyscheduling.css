@@ -65,6 +65,8 @@
 
 /* SLEEKER APPOINTMENT CARD */
 .appointment-card {
+    width: 467px;
+    height:271px;
   background-color: #fefffe !important; /* Deep Forest Green */
   border-radius: 16px;
   padding: 25px;

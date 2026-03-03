@@ -10,7 +10,7 @@
     --text-dark: #1b3a3d;
     --text-medium: #555;
     --text-light: #fff;
-    --accent-success: #10b981;
+    --accent-success: #1C3026;
     --accent-error: #ef4444;
     --background-gradient-start: #fdf6f0;
     --background-gradient-end: #f7f9fc;
@@ -107,7 +107,7 @@ body {
 
 .section-title {
     font-size: 1.5em;
-    color: var(--primary-color);
+    color: #1C3026 !important;
     font-weight: 700;
     margin: 0 0 var(--spacing-md) 0;
     display: flex;
@@ -163,7 +163,7 @@ body {
 }
 .symptom-tag:hover { transform: translateY(-2px); border-color: var(--primary-color); }
 .symptom-tag:focus { outline: 2px solid var(--primary-color); outline-offset: 2px; }
-.symptom-tag.selected { background: var(--primary-color); color: var(--text-light); border-color: var(--primary-color); transform: scale(1.05); }
+.symptom-tag.selected { background: #1C3026 !important; color: #fff !important; border-color: var(--primary-color); transform: scale(1.05); }
 
 .additional-details-textarea {
     width: 100%;
@@ -184,8 +184,8 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary-color);
-    color: var(--text-light);
+    background: #1C3026 !important;
+    color: #fff     !important;
     border: none;
     border-radius: var(--border-radius-sm);
     padding: 15px var(--spacing-lg);
