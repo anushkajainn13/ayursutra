@@ -1,198 +1,129 @@
-//pract dashboard
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Stylesheet/PppractitionerDashboard.css";
 
-function PppractitionerDashboard() {
-  const navigate = useNavigate();
+import React from 'react';
+// Assuming the CSS is imported in App.js or similar
+// import './PppractionerDashboard.css'; 
 
-  const [appointments, setAppointments] = useState([
-    { id: 1, name: "Anil Kapoor", therapy: "Physio Therapy", time: "09:00 AM", duration: "60 min", status: "Upcoming" },
-    { id: 2, name: "Sneha Sharma", therapy: "Counseling", time: "10:30 AM", duration: "45 min", status: "In Progress" },
-    { id: 3, name: "Ravi Singh", therapy: "Rehab Exercise", time: "01:00 PM", duration: "40 min", status: "Upcoming" },
-    { id: 4, name: "Asha Verma", therapy: "Chiropractic", time: "03:30 PM", duration: "50 min", status: "Upcoming" },
-  ]);
+const PractitionerDashboard = () => {
+    return (
+        <div className="dashboard-container">
+            <header className="dashboard-header">
+                <h1>Welcome, DOCTOR 👋</h1>
+                <p>Saturday, September 27, 2025</p>
+            </header>
 
-  // --- MODAL KE LIYE STATE VARIABLES ---
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMode, setModalMode] = useState('add');
-  const [selectedAppt, setSelectedAppt] = useState(null);
-  
-  // --- FORM INPUTS KE LIYE STATE ---
-  const [patientName, setPatientName] = useState('');
-  const [therapy, setTherapy] = useState('');
-  const [time, setTime] = useState('');
-
-  const handleAddAppointment = () => {
-    setModalMode('add');
-    setPatientName('');
-    setTherapy('');
-    setTime('');
-    setIsModalOpen(true);
-  };
-
-  const handleReschedule = (id) => {
-    const apptToReschedule = appointments.find(appt => appt.id === id);
-    if (apptToReschedule) {
-      setModalMode('reschedule');
-      setSelectedAppt(apptToReschedule);
-      setTime(apptToReschedule.time);
-      setIsModalOpen(true);
-    }
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedAppt(null);
-  };
-  
-  const handleSaveAppointment = () => {
-    if (modalMode === 'add') {
-      if (!patientName || !therapy || !time) {
-        alert('Please fill all the fields.');
-        return;
-      }
-      const newAppointment = {
-        id: appointments.length + 1, name: patientName, therapy, time,
-        duration: "45 min", status: "Upcoming",
-      };
-      setAppointments([...appointments, newAppointment]);
-    } else { 
-      if (!time) {
-        alert('Please enter a new time.');
-        return;
-      }
-      setAppointments(prev =>
-        prev.map(appt =>
-          appt.id === selectedAppt.id ? { ...appt, time: time, status: "Rescheduled" } : appt
-        )
-      );
-    }
-    handleModalClose();
-  };
-
-  const today = new Date().toLocaleDateString('en-GB', {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
-
-  // --- POPUP/MODAL CSS (LABEL COLOR CHANGED) ---
-  const modalStyles = `
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.7); display: flex;
-      justify-content: center; align-items: center; z-index: 1000;
-    }
-    .modal-content {
-      background: #193438; /* Darker shade of new Emerald Pine */
-      color: #E0E0E0; /* Off-white text */
-      padding: 25px 30px; border-radius: 12px;
-      width: 400px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      display: flex; flex-direction: column; gap: 15px;
-      border: 1px solid #2C5D63;
-    }
-    .modal-content h2 {
-      color: #97BC62; /* Lime Glow heading */
-      margin: 0 0 10px 0; padding-bottom: 10px;
-      border-bottom: 1px solid #2C5D63; 
-      font-size: 1.5rem;
-    }
-    .modal-content label {
-      font-size: 0.9rem; font-weight: 500;
-      color: #E0E0E0; /* Muted color se BRIGHTER WHITE kiya gaya */
-    }
-    .modal-content input {
-      padding: 10px; border-radius: 6px; font-size: 1rem;
-      background-color: #2C5D63; /* New Emerald Pine color for input background */
-      border: 1px solid #3A7C81; /* Lighter shade for border */
-      color: #FFFFFF; 
-    }
-    .modal-content input:focus {
-      outline: none; border-color: #97BC62;
-      box-shadow: 0 0 0 3px rgba(151, 188, 98, 0.25);
-    }
-    .modal-actions {
-      display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;
-    }
-    .modal-actions button {
-      padding: 10px 20px; border: none; border-radius: 6px;
-      font-weight: bold; cursor: pointer; transition: filter 0.2s, background-color 0.2s;
-    }
-    .btn-save { background-color: #97BC62; color: #193438; }
-    .btn-save:hover { filter: brightness(0.9); }
-    .btn-cancel { background-color: #2C5D63; color: #E0E0E0; }
-    .btn-cancel:hover { background-color: #3A7C81; }
-  `;
-
-  return (
-    <div className="dashboard">
-      <style>{modalStyles}</style>
-
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>{modalMode === 'add' ? 'Add New Appointment' : `Reschedule for ${selectedAppt.name}`}</h2>
-            
-            {modalMode === 'add' && (
-              <>
-                <label>Patient Name</label>
-                <input type="text" value={patientName} onChange={(e) => setPatientName(e.target.value)} placeholder="e.g., Anil Kapoor" />
-                <label>Therapy Type</label>
-                <input type="text" value={therapy} onChange={(e) => setTherapy(e.target.value)} placeholder="e.g., Physio Therapy" />
-              </>
-            )}
-            
-            <label>{modalMode === 'reschedule' ? 'New Time' : 'Time'}</label>
-            <input type="text" value={time} onChange={(e) => setTime(e.target.value)} placeholder="e.g., 09:30 AM" />
-
-            <div className="modal-actions">
-              <button className="btn-cancel" onClick={handleModalClose}>Cancel</button>
-              <button className="btn-save" onClick={handleSaveAppointment}>Save</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Main Content */}
-      <main className="main-content">
-        <h2>Welcome, DOCTOR👋</h2>
-        <p>Today is {today}</p>
-
-        <div className="stats">
-          <div className="stat-box"><p>Today's Appointments</p><h3>{appointments.length}</h3></div>
-          <div className="stat-box"><p>Active Patients</p><h3>30</h3></div>
-          <div className="stat-box"><p>Completed Today</p><h3>2</h3></div>
-          <div className="stat-box"><p>Patient Rating</p><h3>4.9 ⭐</h3></div>
-        </div>
-
-        <div className="content-row">
-          <div className="schedule">
-            <h3>Today's Schedule</h3>
-            {appointments.map((appt) => (
-              <div key={appt.id} className={`session ${appt.status.toLowerCase()}`}>
-                <div><strong>{appt.name}</strong><p>{appt.therapy}</p></div>
-                <div>
-                  <span>{appt.time}</span><small>{appt.duration}</small>
-                  <span className={`status ${appt.status.toLowerCase()}`}>{appt.status}</span>
-                  <button className="btn-reschedule" onClick={() => handleReschedule(appt.id)}>Reschedule</button>
+            {/* Dashboard Stats Section */}
+            <section className="dashboard-stats">
+                <div className="stat-card">
+                    <p className="stat-label">Today's Appointments</p>
+                    <p className="stat-value">12 📅</p>
                 </div>
-              </div>
-            ))}
-          </div>
+                <div className="stat-card">
+                    <p className="stat-label">Active Patients</p>
+                    <p className="stat-value">248</p>
+                </div>
+                <div className="stat-card">
+                    <p className="stat-label">Completed Today</p>
+                    <p className="stat-value">8 ✅</p>
+                </div>
+                <div className="stat-card">
+                    <p className="stat-label">Patient Rating</p>
+                    <p className="stat-value">4.9 ⭐</p>
+                </div>
+            </section>
 
-          <div className="sidebar">
-            <h3>Appointments</h3>
-            <button className="btn-primary" onClick={handleAddAppointment}>+ Add Appointment</button>
-            <button className="btn-secondary" onClick={() => { if (appointments.length > 0) { handleReschedule(appointments[0].id); } else { alert("No appointments to reschedule!"); } }}>Reschedule First</button>
-            <button className="btn-secondary" onClick={() => navigate("/patients")}>View Patient History</button>
-            <h3>Notifications</h3>
-            <div className="notification" onClick={() => alert("Opening report...")}>Anil Kapoor reported reduced back pain <small>1 hour ago</small></div>
-            <div className="notification" onClick={() => alert("Opening session details...")}>Sneha Sharma’s counseling session extended by 10 minutes <small>20 min ago</small></div>
-            <div className="notification" onClick={() => navigate("/patients")}>New patient consultation request from Rajeev Nair <small>30 min ago</small></div>
-          </div>
+            {/* Main Content: Schedule & Requests */}
+            <main className="dashboard-content">
+                
+                {/* Today's Schedule Panel */}
+                <div className="panel schedule-panel">
+                    <h2>Today's Schedule</h2>
+                    <ul>
+                        <li className="schedule-item">
+                            <span className="dot"></span>
+                            <div className="details">
+                                <p className="name">Sarah Johnson</p>
+                                <p className="type">Consultation</p>
+                            </div>
+                            <span className="time">09:00 AM</span>
+                            <span className="status confirmed">confirmed</span>
+                        </li>
+                        <li className="schedule-item">
+                            <span className="dot"></span>
+                            <div className="details">
+                                <p className="name">Michael Chen</p>
+                                <p className="type">Follow-up</p>
+                            </div>
+                            <span className="time">10:30 AM</span>
+                            <span className="status confirmed">confirmed</span>
+                        </li>
+                        <li className="schedule-item">
+                            <span className="dot"></span>
+                            <div className="details">
+                                <p className="name">Emma Wilson</p>
+                                <p className="type">Initial Assessment</p>
+                            </div>
+                            <span className="time">11:45 AM</span>
+                            <span className="status pending">pending</span>
+                        </li>
+                        <li className="schedule-item">
+                            <span className="dot"></span>
+                            <div className="details">
+                                <p className="name">David Kumar</p>
+                                <p className="type">Consultation</p>
+                            </div>
+                            <span className="time">02:00 PM</span>
+                            <span className="status confirmed">confirmed</span>
+                        </li>
+                        <li className="schedule-item">
+                            <span className="dot"></span>
+                            <div className="details">
+                                <p className="name">Lisa Anderson</p>
+                                <p className="type">Therapy Review</p>
+                            </div>
+                            <span className="time">03:30 PM</span>
+                            <span className="status confirmed">confirmed</span>
+                        </li>
+                    </ul>
+                </div>
+
+                {/* Incoming Consultation Requests Panel */}
+                <div className="panel requests-panel">
+                    <h2>Incoming Consultation Requests</h2>
+                    
+                    {/* Priya Sharma Request */}
+                    <div className="request-card">
+                        <div className="request-header">
+                            <p className="patient-name">Priya Sharma</p>
+                            <span className="payment confirmed-payment">✅ Payment Confirmed</span>
+                        </div>
+                        <p className="complaint">Experiencing chronic fatigue and digestive issues for the past 2 weeks</p>
+                        <p className="preferred-time">Preferred Time: <strong>4:00 PM Today</strong></p>
+                        <div className="request-actions">
+                            <button className="btn btn-accept">Accept</button>
+                            <button className="btn btn-decline">Decline</button>
+                        </div>
+                    </div>
+
+                    {/* Raj Patel Request */}
+                    <div className="request-card">
+                        <div className="request-header">
+                            <p className="patient-name">Raj Patel</p>
+                            <span className="payment confirmed-payment">✅ Payment Confirmed</span>
+                        </div>
+                        <p className="complaint">Joint pain and stiffness, especially in the morning</p>
+                        <p className="preferred-time">Preferred Time: <strong>5:30 PM Today</strong></p>
+                        <div className="request-actions">
+                            <button className="btn btn-scheduled">🗓️ Scheduled</button>
+                            <button className="btn btn-join">🔗 Join Meet</button>
+                        </div>
+                    </div>
+
+                    {/* Anita Desai Request is removed as requested */}
+
+                </div>
+            </main>
         </div>
-      </main>
-    </div>
-  );
-}
+    );
+};
 
-export default PppractitionerDashboard;
+export default PractitionerDashboard;

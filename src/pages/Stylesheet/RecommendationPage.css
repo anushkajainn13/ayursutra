@@ -1,0 +1,297 @@
+/* ============================================
+   STYLE GUIDE & VARIABLES
+   ============================================ */
+:root {
+    /* Colors */
+    --primary-color: #2C5D63;
+    --primary-dark: #1f4347;
+    --primary-light: #e8f6f3;
+    --secondary-color: #f0f8f8;
+    --text-dark: #1b3a3d;
+    --text-medium: #555;
+    --text-light: #fff;
+    --accent-success: #10b981;
+    --accent-error: #ef4444;
+    --background-gradient-start: #fdf6f0;
+    --background-gradient-end: #f7f9fc;
+
+    /* Typography */
+    --font-primary: 'Poppins', sans-serif;
+
+    /* Spacing */
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* Border radius */
+    --border-radius-sm: 12px;
+    --border-radius-md: 20px;
+    --border-radius-pill: 50px;
+
+    /* Shadows */
+    --shadow-sm: 0 4px 12px rgba(44, 93, 99, 0.06);
+    --shadow-md: 0 10px 25px rgba(44, 93, 99, 0.1);
+    --shadow-lg: 0 15px 35px rgba(44, 93, 99, 0.2);
+
+    /* Transitions */
+    --transition-fast: all 0.2s ease-in-out;
+}
+
+/* ============================================
+   GENERAL & LAYOUT
+   ============================================ */
+body {
+    font-family: var(--font-primary);
+    background: linear-gradient(180deg, var(--background-gradient-start), var(--background-gradient-end));
+    color: var(--text-medium);
+    margin: 0;
+}
+
+.recommendation-page-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+/* ============================================
+   HEADERS & TITLES
+   ============================================ */
+.page-header h2 {
+    font-size: 2em;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: var(--spacing-xl);
+    background: linear-gradient(45deg, var(--primary-color), #5ab3b9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-title {
+    font-size: 1.5em;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin: 0 0 var(--spacing-md) 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid #eee;
+}
+
+.page-subtitle {
+    color: var(--text-medium);
+    font-size: 1.05em;
+    margin: -8px 0 var(--spacing-lg) 0;
+}
+
+/* ============================================
+   CARD & COMPONENTS
+   ============================================ */
+.card {
+    background: var(--text-light);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-fast);
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   FORM ELEMENTS & BUTTONS
+   ============================================ */
+.symptoms-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: var(--spacing-lg);
+}
+
+.symptom-tag {
+    background: var(--primary-light);
+    color: var(--primary-color);
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+.symptom-tag:hover { transform: translateY(-2px); border-color: var(--primary-color); }
+.symptom-tag:focus { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+.symptom-tag.selected { background: var(--primary-color); color: var(--text-light); border-color: var(--primary-color); transform: scale(1.05); }
+
+.additional-details-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--spacing-md);
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius-sm);
+    font-size: 1em;
+    font-family: var(--font-primary);
+    resize: vertical;
+    transition: var(--transition-fast);
+    min-height: 120px;
+}
+.additional-details-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(44,93,99,0.2);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 15px var(--spacing-lg);
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    text-align: center;
+}
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.arrow-btn {
+    background: var(--primary-color);
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3em;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+.arrow-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(44,93,99,0.3);
+}
+
+/* ============================================
+   THERAPY & DOCTOR LISTS
+   ============================================ */
+.therapy-list { margin-top: var(--spacing-lg); }
+
+.therapy-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-md);
+    background: var(--secondary-color);
+    transition: var(--transition-fast);
+    cursor: pointer;
+}
+.therapy-item:hover { background: var(--primary-light); transform: translateX(5px); }
+
+.therapy-details h4 { margin: 0 0 4px 0; font-size: 1.1em; font-weight: 600; color: var(--text-dark); }
+.therapy-details p { margin: 0; color: var(--text-medium); font-size: 0.9em; }
+.duration { color: var(--primary-color); font-weight: 500; }
+
+.doctor-list { display: flex; flex-direction: column; gap: var(--spacing-md); margin-top: var(--spacing-lg); }
+.doctor-card {
+    display: flex;
+    align-items: center;
+    background: var(--secondary-color);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    gap: var(--spacing-md);
+    transition: var(--transition-fast);
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+.doctor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--primary-color); }
+.doctor-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color); }
+.doctor-info { flex: 1; }
+.doctor-info h4 { color: var(--text-dark); margin: 0 0 2px 0; }
+.doc-spec { font-size: 0.9em; margin: 0; color: var(--text-medium); }
+.doc-actions { text-align: right; }
+.doc-fee { font-weight: 600; color: var(--text-dark); margin: 4px 0; }
+.doc-status {
+    padding: 5px 12px;
+    border-radius: var(--border-radius-pill);
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+    display: inline-block;
+}
+.doc-status.available { background: var(--accent-success); color: var(--text-light); }
+.doc-status.busy { background: var(--accent-error); color: var(--text-light); }
+.consult-btn { padding: 8px 16px; font-size: 0.9em; }
+
+/* ============================================
+   MODALS
+   ============================================ */
+.modal-overlay {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background: var(--text-light);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    width: 90%; max-width: 500px;
+    box-shadow: var(--shadow-lg);
+    animation: fadeInScale 0.3s ease-out;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+.close-btn {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 1.8em;
+    color: var(--text-medium);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+.close-btn:hover { color: var(--primary-color); transform: rotate(90deg); }
+
+/* Therapy Detail Modal */
+.therapy-detail-modal { text-align: center; }
+.therapy-main-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-md);
+}
+.therapy-description-text {
+    color: var(--text-dark); /* make sure it’s readable */
+}
+
+.therapy-detail-title { color: var(--primary-color); margin: 0 0 var(--spacing-sm) 0; }
+.therapy-key-details {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    background: var(--secondary-color);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin: var(--spacing-md) 0;
+      color: var(--text-dark);
+}
+.therapy-key-details span { font-size: 0.9em; }
+.therapy-description-text { text-align: left; line-height: 1.6; margin-bottom: var(--spacing-lg); }

@@ -6,14 +6,15 @@ import IntroPage from "./pages/IntroPage";
 import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/dashboard"; // Patient ka naya dashboard
 import PppractitionerDashboard from "./pages/PppractitionerDashboard";
-
 import TherapyScheduling from "./pages/therapyscheduling";
-
 import FeedbackPage from "./pages/FeedbackPage";
 import SessionScheduling from "./pages/SessionScheduling";
 import YourProfile from "./pages/YourProfile";
 import PractitionerDashboard from "./pages/PractitionerDashboard";
-import FeedbackDashboard from "./pages/FeedbackDashboard"; // Ek import hata sakte hain, duplicate hai
+import FeedbackDashboard from "./pages/FeedbackDashboard";
+
+// ✅ 1. RecommendationPage को यहाँ इम्पोर्ट करें
+import RecommendationPage from "./pages/RecommendationPage";
 
 // Navbars
 import PatientNavbar from "./pages/PatientNavbar";
@@ -58,6 +59,12 @@ function App() {
             <Route
               path="/patient/profile"
               element={<><PatientNavbar /><YourProfile /></>}
+            />
+            
+            {/* ✅ 2. 'Get Consultation' के लिए यहाँ नया रूट जोड़ें */}
+            <Route
+              path="/patient/consultation"
+              element={<><PatientNavbar /><RecommendationPage /></>}
             />
           </>
         )}

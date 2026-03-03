@@ -1,168 +1,322 @@
+/* ================================================= */
+/* ==== THERAPY SCHEDULING - ENHANCED AYURVEDIC RETREAT LAYOUT ==== */
+/* ================================================= */
 
 .therapy-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    font-family: "Segoe UI", "Roboto", sans-serif;
-    background-color: #f9fafb;
-    color: #1e293b;
-    line-height: 1.6;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 20px 30px 80px;
+  background-color: #E8EDE1 !important;
 }
 
-.page-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #2C5D63; 
-    margin-bottom: 8px;
-    text-align: center;
+/* --- SECTION WRAPPERS (Transparent to maintain global theme) --- */
+.section-container {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-bottom: 50px;
+  border: none !important;
 }
 
-.page-subtitle {
-    font-size: 16px;
-    color: #1f2937; 
-    margin-bottom: 40px;
-    text-align: center;
+.section-heading {
+  color: #1C3026 !important;
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 20px !important;
+  border-bottom: 2px solid #D5DEC4 !important;
+  padding-bottom: 10px !important;
 }
 
-.section-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #ffffff; 
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #4a7c80; 
+/* --- HERO BANNER (Top Photo Section) --- */
+.hero-banner {
+  background-image: linear-gradient(rgba(28, 48, 38, 0.4), rgba(28, 48, 38, 0.4)), 
+                   url('C:\Users\Jeeya\ayursutra\src\assets\hero.jpg'); /* Replace with a soothing Ayurvedic retreat photo */
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  padding: 100px 30px;
+  margin-bottom: 50px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(28, 48, 38, 0.2);
 }
 
+.hero-title {
+  color: #FFFFFF !important;
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  margin: 0 0 15px 0 !important;
+  letter-spacing: -1px !important;
+}
 
+.hero-subtitle {
+  color: #EAEFDA !important;
+  font-size: 1.25rem !important;
+  font-weight: 400 !important;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Upcoming Appointments Grid --- */
+.appointment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 25px;
+}
+
+/* SLEEKER APPOINTMENT CARD */
+.appointment-card {
+  background-color: #fefffe !important; /* Deep Forest Green */
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 24px rgba(28, 48, 38, 0.15);
+  display: flex;
+  flex-direction: column;
+  color:#1C3026;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.appointment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(28, 48, 38, 0.25);
+}
+
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+.card-title {
+  margin: 0;
+  color: #1C3026 !important;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.card-details p {
+  margin: 8px 0;
+  color:#1C3026!important;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.card-details strong {
+  color: #1C3026 !important;
+  font-weight: 500;
+}
+
+/* --- Status Badges (More prominent) --- */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.status-badge.confirmed {
+  background-color: #D5DEC4;
+  color: #1C3026;
+}
+.status-badge.pending {
+  background-color: #F4A261;
+  color: #1C3026;
+}
+
+/* --- Explore Header with Inline Search --- */
+.explore-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #D5DEC4;
+  padding-bottom: 15px;
+}
+.explore-header .section-heading {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}.appointment-grid {
+  display: flex;
+  justify-content: flex;
+}
+
+/* Sleeker Search Bar */
+.compact-search input {
+  padding: 14px 24px;
+  width: 320px;
+  border-radius: 30px; /* Modern round shape */
+  border: 1px solid #D5DEC4;
+  background-color: #243B30; /* Keep it consistent with cards */
+  color: #FFFFFF;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(28, 48, 38, 0.1);
+}
+.compact-search input::placeholder {
+  color: #A0B3A6;
+}
+.compact-search input:focus {
+  background-color: #2B4A3A;
+  border-color: #D5DEC4;
+  box-shadow: 0 6px 16px rgba(28, 48, 38, 0.2);
+}
+
+/* --- THE GAME CHANGER: THERAPY MENU GRID --- */
 .therapy-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
 }
 
-
-.appointments-card,
-.therapies-card {
-    background: #2C5D63; 
-    border-radius: 14px;
-    padding: 28px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
-    display: flex;
-    flex-direction: column;
+/* THE PREMIUM WHITE CARDS with Photo top */
+.therapy-card {
+  background-color: #FFFFFF !important; /* Stand out against background */
+  border: 1px solid #E8EDE1;
+  border-radius: 20px; /* Rounder corners */
+  overflow: hidden; /* Important for image rounding */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 16px rgba(28, 48, 38, 0.08);
+}
+.therapy-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(28, 48, 38, 0.15);
+  border-color: #D5DEC4;
 }
 
-
-.no-items-message {
-    color: #cdd5d6;
+.therapy-thumbnail {
+  width: 100%;
+  height: 180px; /* fixed thumbnail height */
+  object-fit: cover; /* crop to fill */
+  border-bottom: 3px solid #E8EDE1;
 }
 
-.appointment-item,
-.therapy-item {
-    background-color: #f9fafb; 
-    padding: 16px 18px;
-    margin-bottom: 16px;
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
-    transition: all 0.2s ease-in-out;
+.card-body {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.appointment-item:hover,
-.therapy-item:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-    transform: translateY(-2px);
+/* Overriding global card colors for white cards */
+.therapy-card .card-title {
+  color: #1C3026 !important;
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.therapy-card .card-desc {
+  color: #5A6D62 !important;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
 }
 
-.appointment-item h4,
-.therapy-item h4 {
-    margin: 0 0 6px;
-    font-size: 17px;
-    font-weight: 600;
-    color: #1f2937; 
+.card-meta {
+  margin-bottom: 20px;
+}
+.card-duration {
+  display: inline-block;
+  background-color: #EAEFDA; /* Light sage highlight */
+  color: #1C3026;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.recommended {
+  font-size: 0.85em;
+  color: #C19A6B !important; /* Ayurvedic Amber/Gold Accent */
+  font-weight: 600;
 }
 
-.therapy-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
+/* --- Buttons --- */
+.card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
 }
-
-.therapy-item p,
-.therapy-item .duration {
-    color: #475569;
-    font-size: 14px;
-}
-
-.status {
-    display: inline-block;
-    padding: 4px 12px;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 12px;
-    margin-bottom: 10px;
-}
-
-.status.confirmed {
-    background-color: #E0F2E9;
-    color: #256d34;
-}
-
-.status.pending {
-    background-color: #f1f5f9;
-    color: #475569;
-}
-
-
-.btn-row {
-    margin-top: 14px;
-    display: flex;
-    gap: 12px;
+.mt-auto {
+  margin-top: auto; /* Pushes button to bottom of card */
 }
 
 .btn {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  flex: 1; /* Makes buttons equal width */
 }
 
-.btn:hover {
-    transform: translateY(-2px);
+/* Button solid - Sage matching Navbar/Logo fallback */
+.btn.solid {
+  background-color: #D5DEC4; 
+  color: #1C3026;
+}
+.btn.solid:hover {
+  background-color: #E8EDE1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(28, 48, 38, 0.1);
 }
 
-.btn.primary {
-    background: #478e96; 
-    color: white;
+.btn.outline {
+  background-color: transparent;
+  color: #1C3026;
+  border: 1px solid #D5DEC4;
 }
-.btn.primary:hover {
-    background: #59a6af;
-}
-
-
-.btn.secondary {
-    background: #f1f5f9; 
-    color: #475569; 
-    border: 1px solid #e2e8f0;
-}
-.btn.secondary:hover {
-    background: #e2e8f0;
+.btn.outline:hover {
+  background-color: rgba(213, 222, 196, 0.1);
 }
 
 .btn.danger {
-    background: #DC2626;
-    color: white;
+  background-color: #E63946;
+  color: #FFFFFF;
 }
 .btn.danger:hover {
-    background: #b91c1c;
+  background-color: #D62828;
 }
 
+.btn.full-width {
+  width: 100%;
+}
 
+.empty-state {
+  color: #5A6D62;
+  font-style: italic;
+  text-align: center;
+}
+
+/* --- Responsive Layout --- */
 @media (max-width: 900px) {
-    .therapy-grid {
-        grid-template-columns: 1fr;
-    }
+  .hero-banner {
+    padding: 70px 20px;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+  }
+}
+@media (max-width: 768px) {
+  .explore-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .compact-search input {
+    width: 100%;
+  }
+  .appointment-grid, .therapy-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+  .card-actions {
+    flex-direction: column;
+  }
+  .card-actions button {
+    width: 100%;
+  }
 }

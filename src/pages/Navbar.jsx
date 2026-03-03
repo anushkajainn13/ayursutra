@@ -2,30 +2,29 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { FaThLarge, FaCalendarAlt, FaUsers, FaCommentDots } from 'react-icons/fa'; // FaLeaf removed
 import './Stylesheet/PppractitionerDashboard.css'; // CSS file
-
 const navbarStyles = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: '15px 30px',
-  backgroundColor: '#2C5D63',
-  color: '#E0F2E9',
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+  backgroundColor: '#1C3026', /* Deep Forest Green - Make sure no CSS file is overriding this! */
+  color: '#F4F6F0', 
+  boxShadow: '0 4px 12px rgba(28, 48, 38, 0.15)', 
   position: 'sticky',
   top: 0,
   zIndex: 1000,
 };
 
 const logoContainerStyles = { display: 'flex', alignItems: 'center', textDecoration: 'none' };
-// logoIconStyles is no longer needed
 const brandNameStyles = { fontSize: '24px', fontWeight: 'bold', color: '#FFFFFF' };
-const brandTaglineStyles = { fontSize: '12px', color: '#E0F2E9', opacity: 0.8 };
+const brandTaglineStyles = { fontSize: '12px', color: '#D5DEC4', opacity: 0.8 };
 
 const navLinksContainerStyles = { display: 'flex', listStyle: 'none', margin: 0, padding: 0, gap: '10px' };
+
 const navLinkStyles = {
   background: 'none',
   border: 'none',
-  color: '#E0F2E9',
+  color: '#D5DEC4', /* Soft sage instead of bright white */
   fontSize: '16px',
   fontWeight: 500,
   cursor: 'pointer',
@@ -35,12 +34,46 @@ const navLinkStyles = {
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
+  transition: 'all 0.2s ease',
 };
-const activeNavLinkStyles = { backgroundColor: '#C2F970', color: '#2C5D63', fontWeight: 'bold' };
 
-const navbarRightStyles = { display: 'flex', alignItems: 'center' };
-const userAvatarStyles = { width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#C2F970', color: '#2C5D63', display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: 'bold', fontSize: '18px' };
+/* THE FIX: No more neon lime green! */
+const activeNavLinkStyles = { 
+  backgroundColor: '#3A4D43', /* Muted dark green */
+  color: '#FFFFFF', 
+  fontWeight: 'bold' 
+};
 
+const navbarRightStyles = { display: 'flex', alignItems: 'center', gap: '20px' };
+
+/* THE FIX: Avatar matches the earthy theme */
+const userAvatarStyles = { 
+  width: '40px', 
+  height: '40px', 
+  borderRadius: '50%', 
+  backgroundColor: '#D5DEC4', /* Soft sage */
+  color: '#1C3026', /* Deep forest text */
+  display: 'flex', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  fontWeight: 'bold', 
+  fontSize: '18px' 
+};
+
+/* Added this just in case you are using inline styles for the button too */
+const consultationBtnStyles = {
+  backgroundColor: '#D5DEC4', /* Soft sage background */
+  color: '#1C3026', /* Dark text */
+  padding: '10px 20px',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+  transition: 'background-color 0.2s ease'
+};
 export default function PractitionerNavbar() {
   return (
     <nav style={navbarStyles}>
