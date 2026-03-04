@@ -5,18 +5,16 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-
-  background: linear-gradient(135deg, #F9FAF9, #F0F4F0);
-
+  background: #1C3026;
   font-family: 'Poppins', sans-serif;
   padding: 2rem;
 }
 
 .auth-box {
-  background-color: #2C5D63;
+  background-color: #1C3026; /* Dark background */
   border-radius: 20px;
-  padding: 3rem; 
-  max-width: 480px; 
+  padding: 1.9rem; 
+  max-width: 450px; 
   width: 100%;
   box-shadow: 0 15px 40px rgba(0,0,0,0.15);
   text-align: center;
@@ -30,7 +28,7 @@
 
 .auth-title {
   font-size: 2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   color: #FFFFFF; /* White text */
   font-weight: 700;
 }
@@ -56,8 +54,8 @@
 
 .auth-tabs button.active,
 .auth-tabs button:hover {
-  background-color: #C2F970; /* Lime Glow active/hover */
-  color: #2C5D63; /* Emerald Pine text */
+  background-color: #d4ff90; /* Lime Glow active/hover */
+  color: #1C3026; /* Emerald Pine text */
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
@@ -89,7 +87,7 @@
 .btn-primary {
   padding: 0.8rem 1rem;
   border-radius: 10px;
-  border: none;
+  border: 2px solid #d4ff90;
 
   background-color: rgb(190, 242, 2) !important ;/* flat color */
   color: #2d6a4f !important;

@@ -117,17 +117,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 4rem 2rem;
   min-height: 90vh;
   background: #1C3026 ;
   color: #fff;
-
   padding: 8rem 2rem 4rem 2rem;
   min-height: 100vh;
-  background-color: #1C3026;
-  color: #FFFFFF;
-
   gap: 2rem;
 }
 

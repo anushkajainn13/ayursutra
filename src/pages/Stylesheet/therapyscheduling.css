@@ -5,7 +5,7 @@
 .therapy-container {
   max-width: 2000px;
   margin: 0 auto;
-  padding: 20px 30px 80px;
+  padding: 50px;
   background-color: #E8EDE1 !important;
 }
 
@@ -38,6 +38,7 @@
   margin-bottom: 50px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(28, 48, 38, 0.2);
+  height: 400px;
 }
 
 .hero-title {

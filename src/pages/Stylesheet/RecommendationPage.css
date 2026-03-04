@@ -107,7 +107,7 @@ body {
 
 .section-title {
     font-size: 1.5em;
-    color: #1C3026 !important;
+    color: #fff !important;
     font-weight: 700;
     margin: 0 0 var(--spacing-md) 0;
     display: flex;
@@ -148,6 +148,7 @@ body {
     flex-wrap: wrap;
     gap: 12px;
     margin-bottom: var(--spacing-lg);
+    background-color: #1C3026 !important;
 }
 
 .symptom-tag {
@@ -202,8 +203,8 @@ body {
 }
 
 .arrow-btn {
-    background: var(--primary-color);
-    color: #fff;
+    background: #fff !important;
+    color: #1C3026 !important;
     width: 45px;
     height: 45px;
     font-size: 1.3em;
@@ -220,7 +221,8 @@ body {
 /* ============================================
    THERAPY & DOCTOR LISTS
    ============================================ */
-.therapy-list { margin-top: var(--spacing-lg); }
+.therapy-list { margin-top: var(--spacing-lg);
+background-color: #1C3026 !important; }
 
 .therapy-item {
     display: flex;
@@ -229,14 +231,17 @@ body {
     gap: var(--spacing-md);
     padding: var(--spacing-md);
     border-radius: var(--border-radius-sm);
+    border: 1px solid #fff !important;
     margin-bottom: var(--spacing-md);
-    background: var(--secondary-color);
+    background: #1C3026 !important;
     transition: var(--transition-fast);
     cursor: pointer;
+    color: #fff !important;
+
 }
 .therapy-item:hover { background: var(--primary-light); transform: translateX(5px); }
 
-.therapy-details h4 { margin: 0 0 4px 0; font-size: 1.1em; font-weight: 600; color: var(--text-dark); }
+.therapy-details h4 { margin: 0 0 4px 0; font-size: 1.1em; font-weight: 600; color: #fff !important; }
 .therapy-details p { margin: 0; color: var(--text-medium); font-size: 0.9em; }
 .duration { color: var(--primary-color); font-weight: 500; }
 

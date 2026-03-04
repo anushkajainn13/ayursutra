@@ -1,9 +1,8 @@
-// patient
-import React, { useState, useEffect } from 'react';
-import StarRating from './StarRating';
-import ReviewCard from './ReviewCard';
-import './Stylesheet/FeedbackPage.css';
-import { FaComments, FaThumbsUp } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import StarRating from "./StarRating";
+import ReviewCard from "./ReviewCard";
+import "./Stylesheet/FeedbackPage.css";
+import { FaComments, FaThumbsUp } from "react-icons/fa";
 import {
   BarChart,
   Bar,
@@ -15,41 +14,41 @@ import {
   Pie,
   Cell,
   Legend,
-} from 'recharts';
+} from "recharts";
 
 const FeedbackPage = () => {
   const [reviews, setReviews] = useState(() => {
-    const saved = localStorage.getItem('reviews');
+    const saved = localStorage.getItem("reviews");
     return saved
       ? JSON.parse(saved)
       : [
           {
-            therapy: 'Abhyanga Therapy',
-            practitioner: 'Dr. Priya Sharma',
+            therapy: "Abhyanga Therapy",
+            practitioner: "Dr. Priya Sharma",
             rating: 4.5,
             comment:
-              'Excellent session with Dr. Sharma. Feeling very relaxed and rejuvenated.',
+              "Excellent session with Dr. Sharma. Feeling relaxed and rejuvenated.",
           },
           {
-            therapy: 'Panchakarma Consultation',
-            practitioner: 'Dr. Rajesh Kumar',
+            therapy: "Panchakarma Consultation",
+            practitioner: "Dr. Rajesh Kumar",
             rating: 5,
             comment:
-              'Very thorough assessment. The treatment plan looks comprehensive.',
+              "Very thorough assessment. The treatment plan looks comprehensive.",
           },
         ];
   });
 
   useEffect(() => {
-    localStorage.setItem('reviews', JSON.stringify(reviews));
+    localStorage.setItem("reviews", JSON.stringify(reviews));
   }, [reviews]);
 
-  const [therapy, setTherapy] = useState('');
-  const [practitioner, setPractitioner] = useState('');
+  const [therapy, setTherapy] = useState("");
+  const [practitioner, setPractitioner] = useState("");
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
-  const [suggestion, setSuggestion] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [comment, setComment] = useState("");
+  const [suggestion, setSuggestion] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleDelete = (index) => {
     const updatedReviews = reviews.filter((_, i) => i !== index);
@@ -59,13 +58,8 @@ const FeedbackPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      !therapy.trim() ||
-      !practitioner.trim() ||
-      !comment.trim() ||
-      rating === 0
-    ) {
-      alert('Please fill all fields and give a rating.');
+    if (!therapy.trim() || !practitioner.trim() || !comment.trim() || rating === 0) {
+      alert("Please fill all fields and give a rating.");
       return;
     }
 
@@ -75,22 +69,22 @@ const FeedbackPage = () => {
       rating,
       comment:
         comment.trim() +
-        (suggestion.trim() ? ` (Suggestion: ${suggestion.trim()})` : ''),
+        (suggestion.trim() ? ` (Suggestion: ${suggestion.trim()})` : ""),
     };
 
     setReviews([newReview, ...reviews]);
 
-    setSuccessMessage('✅ Feedback submitted successfully!');
-    setTherapy('');
-    setPractitioner('');
-    setRating(0);
-    setComment('');
-    setSuggestion('');
+    setSuccessMessage("✅ Feedback submitted successfully!");
 
-    setTimeout(() => setSuccessMessage(''), 3000);
+    setTherapy("");
+    setPractitioner("");
+    setRating(0);
+    setComment("");
+    setSuggestion("");
+
+    setTimeout(() => setSuccessMessage(""), 3000);
   };
 
-  // Insights Data
   const avgRating =
     reviews.length > 0
       ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
@@ -102,167 +96,130 @@ const FeedbackPage = () => {
   }));
 
   const pieData = [
-    { name: 'Improved', value: avgRating * 20 },
-    { name: 'Stable', value: (5 - avgRating) * 10 },
+    { name: "Improved", value: avgRating * 20 },
+    { name: "Stable", value: (5 - avgRating) * 10 },
     {
-      name: 'Remaining',
+      name: "Remaining",
       value: Math.max(0, 100 - avgRating * 20 - (5 - avgRating) * 10),
     },
   ];
 
-  const COLORS = ['#4caf50', '#ffc107', '#e57373'];
+  const COLORS = ["#4caf50", "#ffc107", "#e57373"];
 
   return (
     <div className="feedback-container">
-      {/* Header */}
+
+      {/* HEADER */}
       <div className="feedback-header">
-        <h1
-          style={{
-            fontSize: '2.5rem',
-            fontWeight: '700',
-            borderBottom: '3px solid #2e7d32',
-            display: 'inline-block',
-            paddingBottom: '6px',
-            marginBottom: '15px',
-          }}
-        >
-          Feedback & Reviews
-        </h1>
-        
+        <h1>Feedback & Reviews</h1>
+        <p>Your healing journey insights and feedback history.</p>
       </div>
 
-      {/* Insights Section */}
-      <div className="insights-section">
-        <h3>🌱 Motivation & Recovery Insights</h3>
-        <p>
-          Your healing journey is on track! Average Rating:{' '}
-          <strong>{avgRating.toFixed(2)}/5</strong>
-        </p>
+      {/* INSIGHTS */}
+      <div className="insights-grid">
 
-        <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
-          {/* Bar Chart */}
-          <div style={{ flex: 1, minWidth: '350px' }}>
-            <h4>Therapy Wise Average Ratings</h4>
-            <BarChart
-              width={420}
-              height={280}
-              data={chartData}
-              margin={{ top: 20, right: 20, left: -10, bottom: 70 }}
+        <div className="insight-card">
+          <h3>Therapy Wise Ratings</h3>
+
+          <BarChart
+            width={420}
+            height={260}
+            data={chartData}
+            margin={{ top: 20, right: 20, left: 0, bottom: 60 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="therapy"
+              angle={-20}
+              textAnchor="end"
+              interval={0}
+              height={80}
+              tick={{ fill: "#444", fontSize: 12 }}
+            />
+            <YAxis tick={{ fill: "#444" }} />
+            <Tooltip />
+            <Bar dataKey="rating" fill="#69b578" />
+          </BarChart>
+        </div>
+
+        <div className="insight-card">
+          <h3>Wellness Progress</h3>
+
+          <PieChart width={320} height={260}>
+            <Pie
+              data={pieData}
+              cx="50%"
+              cy="50%"
+              outerRadius={95}
+              dataKey="value"
             >
-              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-              <XAxis
-                dataKey="therapy"
-                angle={-25}
-                textAnchor="end"
-                interval={0}
-                height={80}
-                tick={{ fill: '#ffffff', fontSize: 12 }} 
-              />
-              <YAxis tick={{ fill: '#ffffff' }} /> 
-              <Tooltip />
-              <Bar dataKey="rating" fill="#a5d6a7" /> 
-            </BarChart>
-          </div>
+              {pieData.map((entry, index) => (
+                <Cell key={index} fill={COLORS[index]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
 
-          {/* Pie Chart */}
-          <div style={{ flex: 1, minWidth: '300px' }}>
-            <h4>Wellness Progress</h4>
-            <PieChart width={340} height={300}>
-              <Pie
-                data={pieData}
-                cx="50%"
-                cy="50%"
-                outerRadius={100}
-                dataKey="value"
-                label={false}
-              >
-                {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend
-                verticalAlign="bottom"
-                height={36}
-                wrapperStyle={{ color: '#ffffff' }} 
-              />
-            </PieChart>
-          </div>
+          <p className="avg-rating">
+            Average Rating: <strong>{avgRating.toFixed(2)}/5</strong>
+          </p>
         </div>
       </div>
 
- 
+      {/* FORM + REVIEWS */}
       <div className="feedback-content">
+
+        {/* FORM */}
         <div className="feedback-form">
           <h3>
-            <FaComments style={{ marginRight: '8px', color: '#a5d6a7' }} />
-            Share Your Experience
+            <FaComments /> Share Your Experience
           </h3>
-          <p>Help us improve our services with your feedback.</p>
 
           {successMessage && (
-            <div className="success-message">
-              {successMessage}
-            </div>
+            <div className="success-message">{successMessage}</div>
           )}
 
           <form onSubmit={handleSubmit}>
-            <div className="form-section">
-              <h4>Therapy Name</h4>
-              <input
-                type="text"
-                placeholder="e.g. Shirodhara Therapy"
-                value={therapy}
-                onChange={(e) => setTherapy(e.target.value)}
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Therapy Name"
+              value={therapy}
+              onChange={(e) => setTherapy(e.target.value)}
+            />
 
-            <div className="form-section">
-              <h4>Practitioner Name</h4>
-              <input
-                type="text"
-                placeholder="e.g. Dr. Meera Gupta"
-                value={practitioner}
-                onChange={(e) => setPractitioner(e.target.value)}
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Practitioner Name"
+              value={practitioner}
+              onChange={(e) => setPractitioner(e.target.value)}
+            />
 
-            <div className="form-section">
-              <h4>Rate your recent session</h4>
+            <div className="rating-section">
               <StarRating rating={rating} setRating={setRating} />
             </div>
 
-            <div className="form-section">
-              <h4>Your Feedback</h4>
-              <textarea
-                placeholder="Share your experience..."
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-            </div>
+            <textarea
+              placeholder="Share your experience..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
 
-            <div className="form-section">
-              <h4>Suggestions for Improvement</h4>
-              <textarea
-                placeholder="Any suggestions?"
-                value={suggestion}
-                onChange={(e) => setSuggestion(e.target.value)}
-              />
-            </div>
+            <textarea
+              placeholder="Suggestions (optional)"
+              value={suggestion}
+              onChange={(e) => setSuggestion(e.target.value)}
+            />
 
-            <button type="submit" className="submit-button">
-              Submit Feedback
-            </button>
+            <button type="submit">Submit Feedback</button>
           </form>
         </div>
 
-        {/* Right Section */}
+        {/* REVIEWS */}
         <div className="previous-reviews">
           <h3>
-            <FaThumbsUp style={{ marginRight: '8px', color: '#FFC107' }} />
-            Your Previous Reviews
+            <FaThumbsUp /> Your Previous Reviews
           </h3>
-          <p>Track your feedback history</p>
 
           {reviews.map((review, index) => (
             <ReviewCard
@@ -274,8 +231,6 @@ const FeedbackPage = () => {
               onDelete={() => handleDelete(index)}
             />
           ))}
-
-          <button className="view-all-button">View All Feedback History</button>
         </div>
       </div>
     </div>
