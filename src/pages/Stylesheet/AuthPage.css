@@ -1,135 +1,119 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-.auth-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: #1C3026;
-  font-family: 'Poppins', sans-serif;
-  padding: 2rem;
+.auth-wrapper{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#f5f5f5;
+  font-family: "Inter", sans-serif;
 }
 
-.auth-box {
-  background-color: #1C3026; /* Dark background */
-  border-radius: 20px;
-  padding: 1.9rem; 
-  max-width: 450px; 
-  width: 100%;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.auth-container{
+  width:900px;
+  height:600px;
+  display:flex;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,0.1);
 }
 
-.auth-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+/* LEFT PANEL */
+
+.auth-left{
+  flex:1;
+  padding:60px 40px;
+  background:linear-gradient(140deg,#1C3026,#2e4a3a);
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 
-.auth-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #FFFFFF; /* White text */
-  font-weight: 700;
+.auth-left h2{
+  font-size:30px;
+  margin-bottom:20px;
 }
 
-.auth-tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  gap: 1rem;
+.auth-left p{
+  font-size:18px;
+  line-height:1.5;
+  opacity:0.9;
 }
 
-.auth-tabs button {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  border-radius: 30px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.1); 
-  color: #FFFFFF;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* RIGHT PANEL */
+
+.auth-box{
+  flex:1;
+  padding:50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 
-.auth-tabs button.active,
-.auth-tabs button:hover {
-  background-color: #d4ff90; /* Lime Glow active/hover */
-  color: #1C3026; /* Emerald Pine text */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+.auth-title{
+  font-size:26px;
+  margin-bottom:20px;
 }
 
-/* 5. Form Inputs = */
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+/* TABS */
+
+.auth-tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:25px;
+}
+
+.auth-tabs button{
+  flex:1;
+  padding:10px;
+  border-radius:20px;
+  border:none;
+  background:#eee;
+  cursor:pointer;
+}
+
+.auth-tabs .active{
+  background:#1C3026;
+  color:white;
+}
+
+/* FORM */
+
+.auth-form{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
 }
 
 .auth-form input,
-.auth-form select {
-  padding: 0.8rem 1rem;
-  border-radius: 10px;
-  border: 1px solid #E0E0E0;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  background-color: #FFFFFF;
-  color: #2C5D63;
+.auth-form select{
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-size:14px;
 }
 
-.auth-form input:focus,
-.auth-form select:focus {
-  border-color: #2C5D63;
-  box-shadow: 0 0 8px rgba(44, 93, 99, 0.3);
-  outline: none;
+/* BUTTON */
+
+.btn-primary{
+  margin-top:10px;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#0d1321;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
 }
 
-.btn-primary {
-  padding: 0.8rem 1rem;
-  border-radius: 10px;
-  border: 2px solid #d4ff90;
-
-  background-color: rgb(190, 242, 2) !important ;/* flat color */
-  color: #2d6a4f !important;
-  font-weight: 600;
-  cursor: pointer;
-
-  background-color: #C2F970; 
-  color: #2C5D63; 
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.btn-primary:hover{
+  background:#1c2541;
 }
 
-.btn-primary:hover {
-  background-color: #b8ec60; 
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-
-.btn-secondary {
-  margin-top: 1rem;
-  padding: 0.6rem 1rem;
-  border-radius: 10px;
-  border: 2px solid #C2F970; 
-  background-color: transparent;
-  color: #C2F970; 
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background-color: #C2F970;
-  color: #2C5D63;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 500px) {
-  .auth-box {
-    padding: 2rem 1rem;
-  }
-  .auth-title {
-    font-size: 1.5rem;
-  }
+.btn-secondary{
+  margin-top:20px;
+  background:none;
+  border:none;
+  color:#666;
+  cursor:pointer;
 }
