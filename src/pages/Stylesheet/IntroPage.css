@@ -19,7 +19,7 @@ body {
   left: 0;
   z-index: 100;
   backdrop-filter: blur(12px);
-  background-color: rgba(44, 93, 99, 0.9);
+  background-color:#1C3026 ;
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
   padding: 0.8rem 2rem;
@@ -48,7 +48,7 @@ body {
 .logo-icon svg {
   width: 36px;
   height: 36px;
-  color: #C2F970;
+  color: #FFF;
   transition: transform 0.3s;
 }
 
@@ -83,7 +83,7 @@ body {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #C2F970;
+  background-color:#FFF;
   transition: width 0.3s ease;
 }
 
@@ -120,12 +120,12 @@ body {
 
   padding: 4rem 2rem;
   min-height: 90vh;
-  background: #2C5D63;
-  color: #CEF17B;
+  background: #1C3026 ;
+  color: #fff;
 
   padding: 8rem 2rem 4rem 2rem;
   min-height: 100vh;
-  background-color: #2C5D63;
+  background-color: #1C3026;
   color: #FFFFFF;
 
   gap: 2rem;
@@ -156,8 +156,8 @@ body {
   justify-content: space-between;
   padding: 4rem 2rem;
   min-height: 100vh;
-  background: #2C5D63;
-  color: #CEF17B;
+  background: #1C3026 ;
+  color: #fff;
   gap: 2rem;
 }
 
@@ -180,11 +180,11 @@ body {
   border-radius: 5px;
   border: none;
 
-  background-color: #CEF17B;
-  color: rgb(9, 77, 0);
+  background-color: #fff;
+  color: #1C3026;
 
-  background-color: #C2F970;
-  color: #2C5D63;
+  background-color: #fff;
+  color: #1C3026 ;
 
   cursor: pointer;
   font-size: 1rem;
@@ -232,7 +232,7 @@ body {
   border-radius: 18px;
   padding: 2rem;
   color: #fff;
-  background: linear-gradient(180deg, #265a3f 0%, #2C5D63 100%); /* forest tones */
+  background-color: #1C3026 !important; /* forest tones */
   box-shadow:
     0 8px 24px rgba(18, 40, 30, 0.25),
     inset 0 1px 0 rgba(255,255,255,0.02);
@@ -285,7 +285,8 @@ body {
 
 .card p {
   margin: 0;
-  color: rgba(255,255,255,0.9);
+  color: #fff !important;
+  background-color: #1C3026 !important;
   font-size: 0.95rem;
   line-height: 1.45;
 }
@@ -322,8 +323,7 @@ body {
   .card h3 { font-size: 1.05rem; }
 }
 /* Section header above cards */
-=======
->>>>>>> eef7c52cf8781682ad5b762bbdf4c2d941c6afb8
+
 .section-header {
   text-align: center;
   max-width: 750px;
@@ -334,7 +334,7 @@ body {
 .section-header h2 {
   font-size: 2rem;
   font-weight: 700;
-  color: #2C5D63;
+  color: #1C3026 ;
   margin-bottom: 0.75rem;
 }
 
@@ -358,7 +358,7 @@ body {
   border-radius: 18px;
   padding: 2rem;
   color: #FFFFFF;
-  background-color: #2C5D63;
+  background-color: #1C3026 ;
   box-shadow: 0 8px 24px rgba(18, 40, 30, 0.25);
   transition: transform 0.35s, box-shadow 0.35s;
   display: flex;
@@ -404,7 +404,7 @@ body {
   align-self: start;
   padding: 0.5rem 0.9rem;
   border-radius: 12px;
-  background: #3A7C81;
+  background: #1C3026 1;
   color: #FFFFFF;
   border: none;
   font-weight: 600;
@@ -419,7 +419,7 @@ body {
 
 .how-it-works h2 {
   font-size: 2.8rem;
-  color: #2C5D63;
+  color: #1C3026;
   margin-bottom: 10px;
   font-weight: 700;
 }
@@ -429,7 +429,7 @@ body {
   display: block;
   width: 80px;
   height: 4px;
-  background: #C2F970;
+  background: #1C3026 ;
   margin: 10px auto 0;
   border-radius: 2px;
 }
@@ -444,12 +444,12 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .step-card {
-  background: #ffffff;
+  background: #1C3026;
   border-radius: 20px;
   padding: 40px 25px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
@@ -466,18 +466,18 @@ body {
 .step-icon {
   font-size: 3rem;
   margin-bottom: 20px;
-  color: #2C5D63;
+  color: #fff;
 }
 
 .step-card h3 {
   font-size: 1.4rem;
   margin-bottom: 15px;
-  color: #333;
+  color: #fff;
 }
 
 .step-card p {
   font-size: 1rem;
-  color: #666;
+  color: #fff;
 }
 
 /* In IntroPage.css */
@@ -508,14 +508,14 @@ body {
 }
 .about-text b {
   font-size: 26px;
-  color: #2C5D63;
+  color:#1C3026 ;
   display: block;
   margin-bottom: 1rem;
 }
 .footer {
   text-align: center;
   padding: 2rem;
-  background-color: #2C5D63;
+  background-color: #1C3026 ;
   color: #FFFFFF;
 }
 
