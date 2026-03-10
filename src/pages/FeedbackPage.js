@@ -1,237 +1,176 @@
-import React, { useState, useEffect } from "react";
-import StarRating from "./StarRating";
-import ReviewCard from "./ReviewCard";
+import React, { useState } from "react";
 import "./Stylesheet/FeedbackPage.css";
-import { FaComments, FaThumbsUp } from "react-icons/fa";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-} from "recharts";
+import { FaChevronDown, FaChevronUp, FaStar, FaRegStar } from "react-icons/fa";
+import { IoPaperPlaneOutline } from "react-icons/io5";
+
+// Mock Data for past sessions (matches your screenshot)
+const pastSessions = [
+  {
+    id: 1,
+    therapy: "Abhyanga Massage",
+    date: "Feb 28, 2026",
+    clinic: "Vedic Wellness Center",
+    doctor: "Dr. Ananya Sharma",
+  },
+  {
+    id: 2,
+    therapy: "Shirodhara",
+    date: "Mar 5, 2026",
+    clinic: "Prakruti Ayurveda Clinic",
+    doctor: "Dr. Meera Iyer",
+  },
+  {
+    id: 3,
+    therapy: "Panchakarma Detox",
+    date: "Mar 8, 2026",
+    clinic: "AyurVida Spa & Resort",
+    doctor: "Dr. Lakshmi Menon",
+  },
+];
+
+// Interactive Star Rating Component
+const CustomStarRating = ({ rating, setRating }) => {
+  return (
+    <div className="star-rating">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span key={star} onClick={() => setRating(star)} className="star">
+          {star <= rating ? <FaStar className="star-filled" /> : <FaRegStar className="star-outline" />}
+        </span>
+      ))}
+    </div>
+  );
+};
 
 const FeedbackPage = () => {
-  const [reviews, setReviews] = useState(() => {
-    const saved = localStorage.getItem("reviews");
-    return saved
-      ? JSON.parse(saved)
-      : [
-          {
-            therapy: "Abhyanga Therapy",
-            practitioner: "Dr. Priya Sharma",
-            rating: 4.5,
-            comment:
-              "Excellent session with Dr. Sharma. Feeling relaxed and rejuvenated.",
-          },
-          {
-            therapy: "Panchakarma Consultation",
-            practitioner: "Dr. Rajesh Kumar",
-            rating: 5,
-            comment:
-              "Very thorough assessment. The treatment plan looks comprehensive.",
-          },
-        ];
-  });
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedSession, setSelectedSession] = useState(null);
 
-  useEffect(() => {
-    localStorage.setItem("reviews", JSON.stringify(reviews));
-  }, [reviews]);
+  // Form State
+  const [centerRating, setCenterRating] = useState(0);
+  const [centerReview, setCenterReview] = useState("");
+  const [practitionerRating, setPractitionerRating] = useState(0);
+  const [practitionerReview, setPractitionerReview] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [therapy, setTherapy] = useState("");
-  const [practitioner, setPractitioner] = useState("");
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
-  const [suggestion, setSuggestion] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-
-  const handleDelete = (index) => {
-    const updatedReviews = reviews.filter((_, i) => i !== index);
-    setReviews(updatedReviews);
+  const handleSelectSession = (session) => {
+    setSelectedSession(session);
+    setIsDropdownOpen(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!therapy.trim() || !practitioner.trim() || !comment.trim() || rating === 0) {
-      alert("Please fill all fields and give a rating.");
+    if (!selectedSession) {
+      alert("Please select a session first.");
       return;
     }
-
-    const newReview = {
-      therapy: therapy.trim(),
-      practitioner: practitioner.trim(),
-      rating,
-      comment:
-        comment.trim() +
-        (suggestion.trim() ? ` (Suggestion: ${suggestion.trim()})` : ""),
-    };
-
-    setReviews([newReview, ...reviews]);
-
-    setSuccessMessage("✅ Feedback submitted successfully!");
-
-    setTherapy("");
-    setPractitioner("");
-    setRating(0);
-    setComment("");
-    setSuggestion("");
-
-    setTimeout(() => setSuccessMessage(""), 3000);
+    
+    // UI Feedback state
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setSelectedSession(null);
+      setCenterRating(0);
+      setCenterReview("");
+      setPractitionerRating(0);
+      setPractitionerReview("");
+    }, 3000);
   };
 
-  const avgRating =
-    reviews.length > 0
-      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-      : 0;
-
-  const chartData = reviews.map((r) => ({
-    therapy: r.therapy,
-    rating: r.rating,
-  }));
-
-  const pieData = [
-    { name: "Improved", value: avgRating * 20 },
-    { name: "Stable", value: (5 - avgRating) * 10 },
-    {
-      name: "Remaining",
-      value: Math.max(0, 100 - avgRating * 20 - (5 - avgRating) * 10),
-    },
-  ];
-
-  const COLORS = ["#4caf50", "#ffc107", "#e57373"];
-
   return (
-    <div className="feedback-container">
-
-      {/* HEADER */}
-      <div className="feedback-header">
-        <h1>Feedback & Reviews</h1>
-        <p>Your healing journey insights and feedback history.</p>
-      </div>
-
-      {/* INSIGHTS */}
-      <div className="insights-grid">
-
-        <div className="insight-card">
-          <h3>Therapy Wise Ratings</h3>
-
-          <BarChart
-            width={420}
-            height={260}
-            data={chartData}
-            margin={{ top: 20, right: 20, left: 0, bottom: 60 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="therapy"
-              angle={-20}
-              textAnchor="end"
-              interval={0}
-              height={80}
-              tick={{ fill: "#444", fontSize: 12 }}
-            />
-            <YAxis tick={{ fill: "#444" }} />
-            <Tooltip />
-            <Bar dataKey="rating" fill="#69b578" />
-          </BarChart>
+    /* ✨ This wrapper fixes the white background issue forever ✨ */
+    <div className="feedback-page-wrapper">
+      <div className="premium-feedback-container">
+        
+        {/* Header */}
+        <div className="feedback-header">
+          <h1>Your Feedback</h1>
+          <p>Share your experience to help others on their healing journey</p>
         </div>
 
-        <div className="insight-card">
-          <h3>Wellness Progress</h3>
+        <form onSubmit={handleSubmit} className="feedback-form-wrapper">
+          
+          {/* Session Selector */}
+          <div className="feedback-card">
+            <h2 className="card-title">Select Your Therapy Session</h2>
+            
+            <div className="custom-dropdown">
+              <div 
+                className="dropdown-trigger" 
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                {selectedSession ? (
+                  <div className="selected-session-text">
+                    <strong>{selectedSession.therapy}</strong>
+                    <span>{selectedSession.date} · {selectedSession.clinic}</span>
+                  </div>
+                ) : (
+                  <span className="placeholder">Choose a completed therapy...</span>
+                )}
+                {isDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
+              </div>
 
-          <PieChart width={320} height={260}>
-            <Pie
-              data={pieData}
-              cx="50%"
-              cy="50%"
-              outerRadius={95}
-              dataKey="value"
-            >
-              {pieData.map((entry, index) => (
-                <Cell key={index} fill={COLORS[index]} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-
-          <p className="avg-rating">
-            Average Rating: <strong>{avgRating.toFixed(2)}/5</strong>
-          </p>
-        </div>
-      </div>
-
-      {/* FORM + REVIEWS */}
-      <div className="feedback-content">
-
-        {/* FORM */}
-        <div className="feedback-form">
-          <h3>
-            <FaComments /> Share Your Experience
-          </h3>
-
-          {successMessage && (
-            <div className="success-message">{successMessage}</div>
-          )}
-
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Therapy Name"
-              value={therapy}
-              onChange={(e) => setTherapy(e.target.value)}
-            />
-
-            <input
-              type="text"
-              placeholder="Practitioner Name"
-              value={practitioner}
-              onChange={(e) => setPractitioner(e.target.value)}
-            />
-
-            <div className="rating-section">
-              <StarRating rating={rating} setRating={setRating} />
+              {isDropdownOpen && (
+                <div className="dropdown-menu">
+                  {pastSessions.map((session) => (
+                    <div 
+                      key={session.id} 
+                      className="dropdown-item"
+                      onClick={() => handleSelectSession(session)}
+                    >
+                      <h4>{session.therapy}</h4>
+                      <p>{session.date} · {session.clinic} · {session.doctor}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
+          </div>
 
-            <textarea
-              placeholder="Share your experience..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
+          {/* Render Reviews only if a session is selected */}
+          {selectedSession && (
+            <div className="animate-fade-in">
+              
+              {/* Center Review */}
+              <div className="feedback-card">
+                <div className="review-card-header">
+                  <div>
+                    <h2 className="card-title">Center Review</h2>
+                    <p className="card-subtitle">{selectedSession.clinic}</p>
+                  </div>
+                  <CustomStarRating rating={centerRating} setRating={setCenterRating} />
+                </div>
+                <textarea 
+                  className="premium-textarea"
+                  placeholder="How was the ambiance, cleanliness, and overall experience at the center?"
+                  value={centerReview}
+                  onChange={(e) => setCenterReview(e.target.value)}
+                />
+              </div>
 
-            <textarea
-              placeholder="Suggestions (optional)"
-              value={suggestion}
-              onChange={(e) => setSuggestion(e.target.value)}
-            />
+              {/* Practitioner Review */}
+              <div className="feedback-card">
+                <div className="review-card-header">
+                  <div>
+                    <h2 className="card-title">Practitioner Review</h2>
+                    <p className="card-subtitle">{selectedSession.doctor}</p>
+                  </div>
+                  <CustomStarRating rating={practitionerRating} setRating={setPractitionerRating} />
+                </div>
+                <textarea 
+                  className="premium-textarea"
+                  placeholder="How was your practitioner's expertise, communication, and care?"
+                  value={practitionerReview}
+                  onChange={(e) => setPractitionerReview(e.target.value)}
+                />
+              </div>
 
-            <button type="submit">Submit Feedback</button>
-          </form>
-        </div>
-
-        {/* REVIEWS */}
-        <div className="previous-reviews">
-          <h3>
-            <FaThumbsUp /> Your Previous Reviews
-          </h3>
-
-          {reviews.map((review, index) => (
-            <ReviewCard
-              key={index}
-              therapy={review.therapy}
-              practitioner={review.practitioner}
-              rating={review.rating}
-              comment={review.comment}
-              onDelete={() => handleDelete(index)}
-            />
-          ))}
-        </div>
+              {/* Submit Button */}
+              <button type="submit" className="submit-feedback-btn">
+                {isSubmitted ? "Feedback Submitted!" : <><IoPaperPlaneOutline className="send-icon" /> Submit Feedback</>}
+              </button>
+            </div>
+          )}
+        </form>
       </div>
     </div>
   );

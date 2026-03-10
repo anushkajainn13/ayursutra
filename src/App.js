@@ -12,16 +12,11 @@ import SessionScheduling from "./pages/SessionScheduling";
 import YourProfile from "./pages/YourProfile";
 import PractitionerDashboard from "./pages/PractitionerDashboard";
 import FeedbackDashboard from "./pages/FeedbackDashboard";
-import PrakritiQuiz from "./pages/PrakritiQuiz";
-
-// ✅ 1. RecommendationPage को यहाँ इम्पोर्ट करें
 import RecommendationPage from "./pages/RecommendationPage";
-
-// Navbars
 import PatientNavbar from "./pages/PatientNavbar";
 import PractitionerNavbar from "./pages/Navbar"; // PractitionerNavbar
 import NavbarApp from "./pages/NavbarApp"; // Landing page navbar
-
+import PatientProfile from "./pages/PatientProfile";
 function App() {
   const [role, setRole] = useState(localStorage.getItem("role") || null);
 
@@ -41,33 +36,17 @@ function App() {
 
         {/* Auth Page */}
         <Route path="/auth" element={<AuthPage setRole={setRole} />} />
-
-        {/* Patient Flow */}
+{/* Patient Flow */}
         {role === "patient" && (
           <>
-            <Route
-              path="/patient/dashboard"
-              element={<><PatientNavbar /><Dashboard /></>} 
-            />
-            <Route
-              path="/patient/scheduling"
-              element={<><PatientNavbar /><TherapyScheduling /></>}
-            />
-            <Route
-              path="/patient/feedback"
-              element={<><PatientNavbar /><FeedbackPage /></>}
-            />
-            <Route
-              path="/patient/profile"
-              element={<><PatientNavbar /><YourProfile /></>}
-            />
-            <Route path="/patient/consultation" element={<><PatientNavbar /><PrakritiQuiz /> </>}/>
+            <Route path="/patient/dashboard" element={<><PatientNavbar /><Dashboard /></>} />
+            <Route path="/patient/scheduling" element={<><PatientNavbar /><TherapyScheduling /></>} />
+            <Route path="/patient/feedback" element={<><PatientNavbar /><FeedbackPage /></>} />
+            <Route path="/patient/profile" element={<><PatientNavbar /><PatientProfile /></>} />
+
             
-            {/* ✅ 2. 'Get Consultation' के लिए यहाँ नया रूट जोड़ें */}
-            <Route
-              path="/patient/recommendations"
-              element={<><PatientNavbar /><RecommendationPage /></>}
-            />
+            {/* The Chatbot/Recommendations Page */}
+            <Route path="/patient/recommendations" element={<><PatientNavbar /><RecommendationPage /></>} />
           </>
         )}
 

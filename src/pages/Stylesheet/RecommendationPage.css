@@ -1,338 +1,333 @@
-/* ============================================
-   STYLE GUIDE & VARIABLES
-   ============================================ */
+/* --- Premium AI Chatbot CSS --- */
+
 :root {
-    /* Colors */
-    --primary-color: #2C5D63;
-    --primary-dark: #1f4347;
-    --primary-light: #e8f6f3;
-    --secondary-color: #f0f8f8;
-    --text-dark: #1b3a3d;
-    --text-medium: #555;
-    --text-light: #fff;
-    --accent-success: #1C3026;
-    --accent-error: #ef4444;
-    --background-gradient-start: #fdf6f0;
-    --background-gradient-end: #f7f9fc;
-
-    /* Typography */
-    --font-primary: 'Poppins', sans-serif;
-
-    /* Spacing */
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-
-    /* Border radius */
-    --border-radius-sm: 12px;
-    --border-radius-md: 20px;
-    --border-radius-pill: 50px;
-
-    /* Shadows */
-    --shadow-sm: 0 4px 12px rgba(44, 93, 99, 0.06);
-    --shadow-md: 0 10px 25px rgba(44, 93, 99, 0.1);
-    --shadow-lg: 0 15px 35px rgba(44, 93, 99, 0.2);
-
-    /* Transitions */
-    --transition-fast: all 0.2s ease-in-out;
+  --bg-main: #090b09; /* Deep dark background */
+  --bg-ai-bubble: #171a17; /* Slightly lighter for AI box */
+  --bg-input-area: #121412;
+  --gold: #e2ba5a;
+  --gold-hover: #f0c96c;
+  --text-main: #f5f5f5;
+  --text-muted: #a0a0a0;
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-/* ============================================
-   GENERAL & LAYOUT
-   ============================================ */
-body {
-    font-family: var(--font-primary);
-    background: linear-gradient(180deg, var(--background-gradient-start), var(--background-gradient-end));
-    color: var(--text-medium);
-    margin: 0;
+.ai-chat-container {
+  background-color: var(--bg-main);
+  min-height: calc(100vh - 80px); /* Assuming navbar is 80px */
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
 }
 
-.recommendation-page-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: var(--spacing-xl) var(--spacing-lg);
-}
-/* --- Page Header Container --- */
-.page-header {
-    text-align: center;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* This centers the badge perfectly */
-    gap: 16px; /* Adds perfect spacing between badge and title */
+/* --- Chat History Area --- */
+.chat-history {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 40px 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 200px; /* Space for input box */
 }
 
-/* --- The Prakriti Badge --- */
-.prakriti-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #E8EDE1; /* Light sage green */
-    color: #1C3026; /* Deep forest green text */
-    border: 1px solid #C1D1A9; /* Subtle earthy border */
-    padding: 6px 20px;
-    border-radius: 50px; 
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    box-shadow: 0 4px 10px rgba(28, 48, 38, 0.05);
+.message-wrapper {
+  display: flex;
+  gap: 15px;
+  max-width: 800px;
 }
 
-/* --- The Main Heading Below the Badge --- */
-.page-header h2 {
-    color: #2D3748; /* Dark slate text for readability */
-    font-size: 1.8rem;
-    line-height: 1.4;
-    max-width: 800px; /* Prevents the text from stretching too wide on big screens */
-    margin: 0 auto;
-    font-weight: 600;
+.message-wrapper.ai {
+  align-self: flex-start;
 }
 
-/* ============================================
-   HEADERS & TITLES
-   ============================================ */
-.page-header h2 {
-    font-size: 2em;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.4;
-    margin-bottom: var(--spacing-xl);
-    background: linear-gradient(45deg, var(--primary-color), #5ab3b9);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.message-wrapper.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
 }
 
-.section-title {
-    font-size: 1.5em;
-    color: #fff !important;
-    font-weight: 700;
-    margin: 0 0 var(--spacing-md) 0;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid #eee;
+/* --- Avatars --- */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
-.page-subtitle {
-    color: var(--text-medium);
-    font-size: 1.05em;
-    margin: -8px 0 var(--spacing-lg) 0;
+.avatar.ai {
+  background-color: rgba(226, 186, 90, 0.1);
+  color: var(--gold);
+  border: 1px solid rgba(226, 186, 90, 0.3);
 }
 
-/* ============================================
-   CARD & COMPONENTS
-   ============================================ */
-.card {
-    background: var(--text-light);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-xl);
-    margin-bottom: var(--spacing-lg);
-    box-shadow: var(--shadow-md);
-    transition: var(--transition-fast);
-    cursor: pointer;
-}
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+.avatar.user {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  border: 1px solid var(--glass-border);
 }
 
-/* ============================================
-   FORM ELEMENTS & BUTTONS
-   ============================================ */
-.symptoms-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: var(--spacing-lg);
-    background-color: #1C3026 !important;
+/* --- Message Bubbles --- */
+.message-bubble {
+  padding: 20px 25px;
+  border-radius: 16px;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-.symptom-tag {
-    background: var(--primary-light);
-    color: var(--primary-color);
-    border: 1px solid transparent;
-    padding: 10px 20px;
-    border-radius: var(--border-radius-pill);
-    cursor: pointer;
-    font-size: 0.95em;
-    font-weight: 500;
-    transition: var(--transition-fast);
-}
-.symptom-tag:hover { transform: translateY(-2px); border-color: var(--primary-color); }
-.symptom-tag:focus { outline: 2px solid var(--primary-color); outline-offset: 2px; }
-.symptom-tag.selected { background: #1C3026 !important; color: #fff !important; border-color: var(--primary-color); transform: scale(1.05); }
-
-.additional-details-textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: var(--spacing-md);
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius-sm);
-    font-size: 1em;
-    font-family: var(--font-primary);
-    resize: vertical;
-    transition: var(--transition-fast);
-    min-height: 120px;
-}
-.additional-details-textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(44,93,99,0.2);
+.message-bubble.ai {
+  background-color: var(--bg-ai-bubble);
+  border: 1px solid var(--glass-border);
+  border-top-left-radius: 4px; /* Gives that chat bubble feel */
 }
 
-.btn-primary {
-    background: #1C3026 !important;
-    color: #fff     !important;
-    border: none;
-    border-radius: var(--border-radius-sm);
-    padding: 15px var(--spacing-lg);
-    font-size: 1.05em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-fast);
-    text-align: center;
-}
-.btn-primary:hover {
-    background: var(--primary-dark);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+.message-bubble.user {
+  background-color: var(--gold);
+  color: #000;
+  border-top-right-radius: 4px;
+  font-weight: 500;
+  padding: 15px 25px;
 }
 
-.arrow-btn {
-    background: #fff !important;
-    color: #1C3026 !important;
-    width: 45px;
-    height: 45px;
-    font-size: 1.3em;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition-fast);
-}
-.arrow-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(44,93,99,0.3);
+/* --- Rich Text Formatting inside AI Bubble --- */
+.rich-text p {
+  margin: 0 0 10px 0;
 }
 
-/* ============================================
-   THERAPY & DOCTOR LISTS
-   ============================================ */
-.therapy-list { margin-top: var(--spacing-lg);
-background-color: #1C3026 !important; }
-
-.therapy-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    border: 1px solid #fff !important;
-    margin-bottom: var(--spacing-md);
-    background: #1C3026 !important;
-    transition: var(--transition-fast);
-    cursor: pointer;
-    color: #fff !important;
-
-}
-.therapy-item:hover { background: var(--primary-light); transform: translateX(5px); }
-
-.therapy-details h4 { margin: 0 0 4px 0; font-size: 1.1em; font-weight: 600; color: #fff !important; }
-.therapy-details p { margin: 0; color: var(--text-medium); font-size: 0.9em; }
-.duration { color: var(--primary-color); font-weight: 500; }
-
-.doctor-list { display: flex; flex-direction: column; gap: var(--spacing-md); margin-top: var(--spacing-lg); }
-.doctor-card {
-    display: flex;
-    align-items: center;
-    background: var(--secondary-color);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    gap: var(--spacing-md);
-    transition: var(--transition-fast);
-    border: 1px solid transparent;
-    cursor: pointer;
-}
-.doctor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--primary-color); }
-.doctor-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color); }
-.doctor-info { flex: 1; }
-.doctor-info h4 { color: var(--text-dark); margin: 0 0 2px 0; }
-.doc-spec { font-size: 0.9em; margin: 0; color: var(--text-medium); }
-.doc-actions { text-align: right; }
-.doc-fee { font-weight: 600; color: var(--text-dark); margin: 4px 0; }
-.doc-status {
-    padding: 5px 12px;
-    border-radius: var(--border-radius-pill);
-    font-size: 0.75em;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: var(--spacing-sm);
-    display: inline-block;
-}
-.doc-status.available { background: var(--accent-success); color: var(--text-light); }
-.doc-status.busy { background: var(--accent-error); color: var(--text-light); }
-.consult-btn { padding: 8px 16px; font-size: 0.9em; }
-
-/* ============================================
-   MODALS
-   ============================================ */
-.modal-overlay {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: flex; justify-content: center; align-items: center;
-    z-index: 2000;
-    backdrop-filter: blur(5px);
-}
-.modal-content {
-    background: var(--text-light);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-xl);
-    width: 90%; max-width: 500px;
-    box-shadow: var(--shadow-lg);
-    animation: fadeInScale 0.3s ease-out;
-    position: relative;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-@keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-.close-btn {
-    position: absolute; top: 15px; right: 20px;
-    font-size: 1.8em;
-    color: var(--text-medium);
-    cursor: pointer;
-    transition: var(--transition-fast);
-}
-.close-btn:hover { color: var(--primary-color); transform: rotate(90deg); }
-
-/* Therapy Detail Modal */
-.therapy-detail-modal { text-align: center; }
-.therapy-main-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: var(--border-radius-sm);
-    margin-bottom: var(--spacing-md);
-}
-.therapy-description-text {
-    color: var(--text-dark); /* make sure it’s readable */
+.rich-text p:last-child {
+  margin-bottom: 0;
 }
 
-.therapy-detail-title { color: var(--primary-color); margin: 0 0 var(--spacing-sm) 0; }
-.therapy-key-details {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-lg);
-    background: var(--secondary-color);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    margin: var(--spacing-md) 0;
-      color: var(--text-dark);
+.gold-text {
+  color: var(--gold);
 }
-.therapy-key-details span { font-size: 0.9em; }
-.therapy-description-text { text-align: left; line-height: 1.6; margin-bottom: var(--spacing-lg); }
+
+.font-bold {
+  font-weight: 600;
+}
+
+.italic-muted {
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 15px !important;
+}
+
+.rich-text ul {
+  margin: 10px 0 15px 0;
+  padding-left: 20px;
+}
+
+.rich-text li {
+  margin-bottom: 8px;
+}
+
+/* AI Recommendation specific styles */
+.ai-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  margin: 20px 0 10px 0;
+  font-weight: 500;
+}
+
+.mt-15 { margin-top: 15px !important; }
+.mt-20 { margin-top: 20px !important; }
+
+.therapy-rec {
+  margin-bottom: 15px;
+}
+
+.ai-meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 4px 0 !important;
+}
+
+.tips-list li {
+  color: #d0d0d0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.cursor-pointer:hover {
+  color: var(--gold-hover);
+}
+
+/* --- Bottom Input Area --- */
+.chat-input-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-input-area);
+  border-top: 1px solid var(--glass-border);
+  padding: 20px 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+/* Quick Select Tags */
+.quick-tags-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tags-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 10px 0;
+}
+
+.tags-scroll {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ai-tag-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-tag-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(226, 186, 90, 0.05);
+}
+
+/* Text Input Box */
+.input-box-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #1a1d1a;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 10px 15px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  transition: border-color 0.2s;
+}
+
+.input-box-wrapper:focus-within {
+  border-color: var(--gold);
+}
+
+.sparkle-icon {
+  color: var(--gold);
+  font-size: 1.2rem;
+  margin-right: 15px;
+}
+
+.ai-chat-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+}
+
+.ai-chat-input::placeholder {
+  color: #666;
+}
+
+.send-btn {
+  background: rgba(226, 186, 90, 0.1);
+  color: var(--gold);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.send-btn:hover {
+  background: var(--gold);
+  color: #000;
+}
+/* --- Dynamic Markdown Styling --- */
+.markdown-body p {
+  margin: 0 0 12px 0;
+  line-height: 1.6;
+}
+
+.markdown-body p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--text-main);
+  margin: 22px 0 12px 0;
+  font-weight: 500;
+}
+
+.markdown-body strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.markdown-body em {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin: 12px 0 18px 0;
+  padding-left: 22px;
+}
+
+.markdown-body li {
+  margin-bottom: 8px;
+  color: #d0d0d0;
+  line-height: 1.5;
+}
+
+/* Typing Indicator Animation */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 20px 25px !important;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background-color: var(--gold);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}

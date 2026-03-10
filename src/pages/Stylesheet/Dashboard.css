@@ -1,439 +1,705 @@
-/* ================================================= */
-/* ============== AYURSUTRA DASHBOARD FINAL CSS ==== */
-/* ================================================= */
+/* --- Dashboard.css --- */
 
-body, html {
-  background-color: #E8EDE1 !important; /* Soft earthy sage green */
+:root {
+  --bg-dark: #090b09; 
+  --bg-card: #121512;
+  --gold: #e2ba5a; 
+  --gold-glow: rgba(226, 186, 90, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f5f5f5;
+  --text-muted: #8b908b;
+  --nav-bg: #090b09; 
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
   margin: 0;
-  padding: 0;
 }
-/* --- First Step Onboarding --- */
-.first-step-guide {
-  margin: 40px 0;
+
+.dashboard {
+  min-height: 100vh;
+  padding-bottom: 80px;
+  position: relative;
+}
+
+/* ================================================= */
+/* ============== PREMIUM NAVBAR CSS =============== */
+/* ================================================= */
+
+.premium-navbar {
   display: flex;
-  justify-content: center;
-  animation: fadeIn 0.8s ease-in-out;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 80px;
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Inter', sans-serif;
 }
 
-.guide-card {
-  background: #ffffff;
-  border: 2px dashed #D5DEC4; /* Your muted sage color */
-  padding: 40px;
-  border-radius: 24px;
-  text-align: center;
-  max-width: 900px;
-  width: 100%;
-  box-shadow: 0 10px 30px rgba(28, 48, 38, 0.05);
-}
+.nav-logo-link { text-decoration: none; }
 
-.guide-card h3 {
-  color: #1C3026; /* Deep Forest Green */
+.nav-logo {
+  font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
-  margin-bottom: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -0.5px;
 }
 
-.guide-card p {
-  color: #5A6D62;
+.nav-center {
+  display: flex;
+  gap: 35px;
+  height: 100%;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  height: 100%;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-icon { font-size: 1.2rem; }
+.nav-link:hover { color: var(--text-main); }
+.nav-link.active { color: var(--gold); }
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--gold);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.notification-wrapper {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: 0.3s;
+}
+
+.notification-wrapper:hover { color: var(--text-main); }
+.bell-icon { font-size: 1.3rem; }
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: #e53935;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: bold;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--nav-bg);
+}
+
+.nav-consult-btn {
+  background-color: var(--gold);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(226, 186, 90, 0.2);
+}
+
+.nav-consult-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(226, 186, 90, 0.4);
+}
+
+.btn-icon { font-size: 1.1rem; }
+.avatar-link { text-decoration: none; }
+
+.nav-avatar {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.nav-avatar:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ================================================= */
+/* ================= HERO SECTION ================== */
+/* ================================================= */
+
+.healing-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 400px;
+  background: url('C:\\Users\\Jeeya\\ayursutra\\src\\assets\\ayu.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.healing-overlay {
+  background: radial-gradient(circle, rgba(9, 11, 9, 0.5) 0%, rgba(9, 11, 9, 0.95) 100%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-pill {
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.healing-hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  margin: 0 0 15px 0;
+  color: var(--text-main);
+}
+
+.healing-hero p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 650px;
   margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.prakriti-btn {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.prakriti-btn span { color: var(--gold); }
+
+.prakriti-btn:hover {
+  border-color: var(--gold);
+  background: rgba(226, 186, 90, 0.05);
+}
+
+.floating-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--gold);
+  color: #000;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 4px 20px var(--gold-glow);
+  transition: transform 0.3s ease;
+}
+
+.floating-fab:hover { transform: translateY(-5px); }
+
+/* ================================================= */
+/* ========= PREMIUM ONBOARDING TRACKER ============ */
+/* ================================================= */
+
+.first-step-guide {
+  padding: 0 2%;
+  max-width: 1300px; /* Kept tight to prevent text squishing */
+  margin: 60px auto 50px auto; 
+  position: relative;
+  z-index: 10;
+}
+
+.guide-card-premium {
+  background: rgba(18, 21, 18, 0.85); 
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 186, 90, 0.25); 
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px; 
+  height: 300px;
+}
+
+.guide-text {
+  min-width: 350px; /* Prevents the leaf emoji from dropping down */
+}
+
+.guide-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: #e2ba5a; 
+  margin: 0 0 10px 0;
+  display: flex; 
+  align-items: center;
+  gap: 8px;
+}
+
+.guide-text p {
+  color: #8b908b; 
+  margin: 0;
+  font-size: 1.1rem;
+  max-width: 400px;
+  line-height: 1.5;
 }
 
 .journey-steps {
   display: flex;
-  justify-content: space-around;
+  align-items: center; 
   gap: 15px;
-  flex-wrap: wrap;
 }
 
 .step {
-  flex: 1;
-  min-width: 150px;
-  background: #FAFCF7;
-  padding: 20px;
-  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  border: 1px solid #E8EDE1;
+  gap: 12px;
+  color: #5a6a5a; 
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 120px; 
+  text-align: center;
 }
 
 .step-number {
-  background: #1C3026;
-  color: #FFFFFF;
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-}
-
-.step span {
-  font-weight: 600;
-  color: #1C3026;
-  font-size: 0.9rem;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.dashboard {
-  padding: 50px !important;
-  font-family: 'Inter', sans-serif;
-  background-color: #E8EDE1 !important; /* Earthy background */
-  min-height: 100vh;
-  
-}
-.healing-hero {
-  margin: 0px 0 20px;
-  height: 400px;
-  border-radius: 20px;
-  background-image: linear-gradient(
-      rgba(28, 48, 38, 0.65),
-      rgba(28, 48, 38, 0.65)
-    ),
-    url("../../assets/therapies_7.png");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  padding: 40px;
-  color: #fff;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-.healing-overlay h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
   font-weight: 700;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
 }
 
-.healing-overlay p {
-  max-width: 500px;
-  font-size: 1rem;
-  opacity: 0.9;
+.step-divider {
+  height: 2px;
+  width: 60px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px; 
+}
+
+.step.active { color: #e2ba5a; }
+
+.step.active .step-number {
+  border-color: #e2ba5a;
+  background: rgba(226, 186, 90, 0.1);
+  color: #e2ba5a;
+  box-shadow: 0 0 20px rgba(226, 186, 90, 0.3); 
+}
+
+/* ================================================= */
+/* ================ CLINICS SECTION ================ */
+/* ================================================= */
+
+.clinics-section {
+  padding: 60px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header-centered {
+  text-align: center;
   margin-bottom: 50px;
 }
 
-.healing-btn {
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease; /* मैंने 'all' और 'ease' जोड़ दिया है ताकि एनीमेशन स्मूथ हो */
+.near-you-text {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.healing-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.8);
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* होवर पर एक हल्का सा शैडो बटन को प्रीमियम लुक देगा */
+.section-header-centered h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin: 10px 0;
 }
-/* --- Welcome Section --- */
-.welcome {
-  margin: 20px 0 30px;
-  text-align: center;
-}
-.welcome h2 {
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: #1C3026; /* Deep Forest Green */
-  margin-bottom: 8px;
-}
-.welcome p {
-  color: #3A4D43; /* Muted Dark Green */
+
+.section-subtitle {
+  color: var(--text-muted);
   font-size: 1.1rem;
 }
 
-/* --- Stats Section --- */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.stat-card {
-  background-color: #243B30 !important; /* Deep Forest Green */
-  border: none !important; 
-  padding: 25px !important;
-  border-radius: 16px !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: all 0.3s ease-in-out;
-}
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25) !important;
-}
-.stat-card .icon {
-  font-size: 2.5rem;
-  color: #E8EDE1 !important; /* Light off-white for icons */
-}
-.stat-card h3 {
-  margin: 0;
-  font-size: 1.8rem;
-  color: #FFFFFF !important; /* Pure white text for numbers */
-}
-.stat-card p {
-  margin: 4px 0 0;
-  color: #A0B3A6 !important; /* Soft sage green for descriptions */
-}
-
-/* --- Clinics & Doctors Section --- */
-.clinics-section {
-  background-color: transparent !important; 
-  box-shadow: none !important; 
-  padding: 1rem 0 !important;
-  margin-top: 2rem;
-  border: none !important;
-}
-.clinics-section h2 {
-  text-align: center;
-  font-size: 2rem;
-  color: #1C3026;
-  margin-bottom: 2rem;
-  font-weight: 700;
-}
-
-/* --- Detailed Clinic Card --- */
 .clinics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 30px;
 }
-.clinics-section {
-  position: relative;
-  padding: 80px 0;
-  background: linear-gradient(
-      rgba(232, 237, 225, 0.95),
-      rgba(232, 237, 225, 0.95)
-    ),
-    url("../../assets/therapies_3.png");
-  background-size: cover;
-  background-position: center;
-  border-radius: 30px 30px 0 0;
-}
-.section-subtitle {
-  text-align: center;
-  color: #5A6D62;
-  font-size: 1.05rem;
-  margin-bottom: 40px;
-}
-.clinic-card {
-  position: relative;
-  overflow: hidden;
-  background: #ffffff;
+
+.clinic-card-new {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 10px 25px rgba(28, 48, 38, 0.08);
-  transition: all 0.35s ease;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.clinic-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 5px;
+.clinic-card-new:hover {
+  border-color: rgba(226, 186, 90, 0.3);
+  transform: translateY(-5px);
+}
+
+.clinic-image-container {
+  position: relative;
+  height: 200px;
   width: 100%;
-  background: linear-gradient(to right, #7B9960, #1C3026);
 }
 
-.clinic-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 35px rgba(28, 48, 38, 0.15);
+.clinic-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.clinic-header {
+
+.distance-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.clinic-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.clinic-title-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
-}
-.clinic-header h3 {
-  color: #1C3026;
-  margin: 0;
-  font-size: 1.3rem;
-}
-.clinic-logo {
-  width: 45px;
-  height: 45px;
-  border-radius: 8px;
-  background-color: #E8EDE1;
-  color: #1C3026;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-.clinic-details p {
-  margin: 4px 0;
-  color: #5A6D62;
-  font-size: 0.95rem;
-}
-.clinic-rating {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-  margin-top: 1rem;
-  color: #1C3026;
-}
-.clinic-card button {
-  margin-top: auto; 
-  background-color: #1C3026; /* Deep Forest Green */
-  color: #FFFFFF;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.clinic-card button:hover {
-  background-color: #2B4A3A; /* Slightly lighter forest green on hover */
+  margin-bottom: 15px;
 }
 
-/* --- Doctor Details View --- */
-.back-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: transparent;
-  border: 1px solid #D5DEC4;
-  color: #1C3026;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  transition: all 0.2s;
-}
-.back-button:hover {
-  background: #E8EDE1;
-  border-color: #C1D1A9;
-}
-.doctors-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-.doctor-card {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  background-color: #FFFFFF;
-  border: none;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(28, 48, 38, 0.06);
-}
-.doctor-photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #E8EDE1;
-}
-.doctor-details {
-  width: 100%;
-}
-.doctor-details h3 {
-  margin: 0 0 5px 0;
-  color: #1C3026;
+.clinic-title-row h3 {
+  margin: 0;
   font-size: 1.4rem;
-}
-.doctor-details .specialty {
-  color: #4A6B53;
   font-weight: 600;
-  margin: 0 0 10px 0;
-  font-size: 1.1rem;
 }
-.doctor-rating {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 10px 0;
+
+.clinic-rating {
+  font-size: 1rem;
+  font-weight: 600;
 }
-.doctor-rating .stars {
-  color: #D4A373; /* Warmer, earthy gold instead of neon yellow */
-}
-.doctor-rating .reviews-count {
-  color: #5A6D62;
+
+.gold-star { color: var(--gold); }
+
+.reviews-count {
+  color: var(--text-muted);
+  font-weight: 400;
   font-size: 0.9rem;
 }
-.feedback-section {
-  margin-top: 1rem;
-  border-top: 1px solid #E8EDE1;
-  padding-top: 1rem;
-}
-.feedback-quote {
-  background-color: #FAFCF7;
-  border-left: 3px solid #7B9960; /* Earthy green accent */
-  padding: 12px;
-  border-radius: 4px;
-  margin-top: 10px;
-}
-.feedback-quote p { 
-  margin: 0; 
-  font-style: italic; 
-  color: #3A4D43; 
-}
-.feedback-quote span {
-  display: block;
-  text-align: right;
-  font-style: normal;
-  font-weight: bold;
-  margin-top: 5px;
-  color: #1C3026;
+
+.clinic-info-rows p {
+  margin: 5px 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* ======================================= */
-/* ====== CSS FOR AVATAR FALLBACK ====== */
-/* ======================================= */
-.doctor-photo-container {
-  width: 120px;
-  height: 120px;
-  min-width: 120px;
+.clinic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
 }
-.doctor-photo {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #E8EDE1;
+
+.tag {
+  border: 1px solid rgba(226, 186, 90, 0.4);
+  color: var(--gold);
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 15px;
 }
-.doctor-initials-avatar {
+
+.practitioners-list {
+  margin-bottom: 25px;
+  flex-grow: 1;
+}
+
+.list-title {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 5px 0;
+}
+
+.doc-name {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.view-clinic-btn {
   width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #1C3026;
-  color: #F4F6F0;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 15px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-clinic-btn:hover {
+  border-color: var(--gold);
+  background: rgba(226, 186, 90, 0.05);
+}
+
+/* ================================================= */
+/* ============= RESPONSIVE ADJUSTMENTS ============ */
+/* ================================================= */
+
+@media (max-width: 950px) {
+  .guide-card-premium {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  
+  .guide-text p {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .healing-hero h2 { font-size: 2.8rem; }
+  .clinics-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .journey-steps {
+    flex-direction: column; 
+    gap: 10px;
+  }
+  
+  .step {
+    flex-direction: row; 
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  
+  .step-divider {
+    width: 2px;
+    height: 30px;
+    margin: 0;
+    margin-left: 24px; 
+  }
+}
+/* ================================================= */
+/* ============= SESSIONS MODAL CSS ================ */
+/* ================================================= */
+
+/* The dark blurred background behind the modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
-  font-weight: bold;
+  animation: fadeIn 0.3s ease-out;
 }
-.journey-steps {
+
+/* The Modal Box */
+.premium-modal {
+  background: #111411; /* Very dark green/black */
+  border: 1px solid rgba(226, 186, 90, 0.2); /* Gold subtle border */
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  padding: 35px 40px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(0);
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #8b908b;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+  color: #fff;
+}
+
+.modal-header {
+  margin-bottom: 30px;
+}
+
+.modal-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #f5f5f5;
+  margin: 0 0 5px 0;
+}
+
+.modal-header p {
+  color: #8b908b;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.sessions-list {
   display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 40px;
-  color: #1C3026;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.session-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.2s;
+}
+
+.session-item:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.session-info h4 {
+  margin: 0 0 6px 0;
+  color: #f5f5f5;
+  font-size: 1rem;
   font-weight: 600;
 }
 
-.step {
-  background: #ffffff;
-  padding: 15px 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(28,48,38,0.08);
+.session-info p {
+  margin: 0;
+  color: #8b908b;
+  font-size: 0.85rem;
+}
+
+/* --- Status Badges --- */
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge-icon {
+  font-size: 0.9rem;
+}
+
+/* Confirmed: Dark Green background, Light Green text */
+.status-badge.confirmed {
+  background: rgba(46, 125, 50, 0.15);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Pending: Dark Gold/Orange background, Gold text */
+.status-badge.pending {
+  background: rgba(226, 186, 90, 0.1);
+  color: #e2ba5a;
+  border: 1px solid rgba(226, 186, 90, 0.3);
+}
+
+/* Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

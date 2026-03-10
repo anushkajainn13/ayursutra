@@ -1,6 +1,6 @@
 
 .dashboard {
-  padding: 2rem 4rem; 
+
   font-family: 'Inter', sans-serif;
   background-color: #F9FAF9; 
   min-height: 100vh;
@@ -118,4 +118,141 @@
 .add-patient-form button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(151, 188, 98, 0.3);
+}
+/* --- Practitioner/Patients Dashboard CSS --- */
+
+.dashboard {
+  font-family: 'Inter', sans-serif;
+  background-color: #090b09; /* Fixed: Back to Midnight Dark */
+  color: #f5f5f5;
+  min-height: 100vh;
+  padding: 40px 5%;
+}
+
+.heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #e2ba5a; /* Fixed: Gold */
+  text-align: center; 
+}
+
+.sub-heading {
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  color: #8b908b; /* Fixed: Muted grey */
+  text-align: center; 
+}
+
+.search-bar {
+  width: 100%;
+  padding: 1.2rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.03); /* Dark glass */
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  font-weight: 500;
+  color: #f5f5f5; 
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.search-bar::placeholder {
+  color: #8b908b; 
+}
+
+.search-bar:focus {
+  border-color: #e2ba5a; 
+  box-shadow: 0 0 15px rgba(226, 186, 90, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.patients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* --- Add Patient Form --- */
+.add-patient-form {
+  margin-top: 3rem;
+  background: rgba(18, 21, 18, 0.85); /* Dark Glass Card */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-patient-form h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #e2ba5a; /* Gold */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.add-patient-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.add-patient-form input {
+  padding: 1rem;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  background-color: rgba(0, 0, 0, 0.4); /* Deep inset background */
+  color: #f5f5f5;
+}
+
+.add-patient-form input::placeholder {
+  color: #8b908b;
+}
+
+.add-patient-form input:focus {
+  border-color: #e2ba5a;
+  box-shadow: 0 0 10px rgba(226, 186, 90, 0.2);
+}
+
+.add-patient-form button {
+  grid-column: 1 / -1; 
+  padding: 1rem;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  background: #e2ba5a; /* Solid Gold */
+  color: #000; /* Black text for contrast */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(226, 186, 90, 0.2);
+}
+
+.add-patient-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(226, 186, 90, 0.4);
+}
+
+/* Make it responsive for mobile */
+@media (max-width: 768px) {
+  .add-patient-form form {
+    grid-template-columns: 1fr; /* Stacks inputs on small screens */
+  }
 }

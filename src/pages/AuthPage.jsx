@@ -11,24 +11,29 @@ function AuthPage({ setRole }) {
   const handleLoginChange = (e) =>
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
-    const role = loginData.email.includes("practitioner")
-      ? "practitioner"
-      : "patient";
+    const response= await fetch("http://127.0.0.1:8000/api/login/",{
+      method:'POST',
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify(loginData),  
+      });
+      console.log("Login response:", response);
+      const data=await response.json();
+      if(response.ok){
+        alert("Login successful!");
+      setRole(data.user.role);
+      localStorage.setItem("role", data.user.role);
+      localStorage.setItem("userLocation", data.user.location);
+       navigate(`/${data.user.role}/dashboard`);
 
-    setRole(role);
-    localStorage.setItem("role", role);
-
-    localStorage.removeItem("userLocation");
-
-    if (role === "patient") {
-      localStorage.setItem("userLocation", "Jaipur");
+    } else {
+      alert(data.error);
     }
-
-    navigate(`/${role}/dashboard`);
-  };
+};
 
   const [signupData, setSignupData] = useState({
     fullName: "",
@@ -37,23 +42,39 @@ function AuthPage({ setRole }) {
     role: "patient",
     location: "Jaipur",
   });
-
-  const handleSignupChange = (e) =>
+ const handleSignupChange = (e) =>
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
 
-  const handleSignupSubmit = (e) => {
-    e.preventDefault();
 
-    setRole(signupData.role);
-    localStorage.setItem("role", signupData.role);
+  const handleSignupSubmit =async (e) => {
+      console.log("Signup button clicked");
 
-    if (signupData.role === "patient") {
-      localStorage.setItem("userLocation", signupData.location);
+    e.preventDefault() 
+      try {
+        const response= await fetch("http://127.0.0.1:8000/api/signup/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(signupData),
+        });
+        const data= await response.json();
+        if (response.ok) {        
+          alert("Signup successful!");
+          setRole(signupData.role);
+          localStorage.setItem("role", data.role);
+      localStorage.setItem("userLocation", data.location);
+
+      navigate(`/${data.role}/dashboard`);
+
+    } else {
+      alert(data.error);
     }
 
-    navigate(`/${signupData.role}/dashboard`);
-  };
-
+  } catch (error) {
+    console.error("Login error:", error);
+  }
+};
   return (
     <div className="auth-wrapper">
       <div className="auth-container">

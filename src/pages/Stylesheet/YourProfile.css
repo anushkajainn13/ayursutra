@@ -1,112 +1,206 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-.profile-page-wrapper {
-  background-color: #f8f9fc; 
+/* --- Premium YourProfile.css (The "Best" Version) --- */
+
+:root {
+  --bg-dark: #090b09;
+  --bg-card: rgba(18, 21, 18, 0.6); /* Transparent Glass */
+  --bg-input: rgba(255, 255, 255, 0.03);
+  --gold: #e2ba5a;
+  --gold-gradient: linear-gradient(135deg, #e2ba5a 0%, #d4a339 100%);
+  --text-main: #f5f5f5;
+  --text-muted: #8b908b;
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Fixed the cut-off issue by using min-height and padding */
+.profile-container {
+  background-color: var(--bg-dark);
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 80px 20px; /* Extra bottom padding so nothing cuts off */
   font-family: 'Inter', sans-serif;
-  color: #1e293b;
-  min-height: 100vh;
-  padding: 40px 20px; 
+  color: var(--text-main);
   box-sizing: border-box;
 }
 
-.profile-container {
-  width: 100%;
-  max-width: 700px;
+/* --- Header --- */
+.profile-header {
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 30px;
 }
 
-.profile-container h1 {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 25px;
-  color: #2C5D63;
+.profile-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--text-main);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
 }
 
+.profile-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* --- Premium Glass Card --- */
 .profile-card {
-  background:#ffffff ; 
-  color: #1C3026; 
-  border-radius: 16px;
-  padding: 40px;
-  margin-top: 40px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  text-align: left;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 580px;
+  padding: 40px 50px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: slideUp 0.4s ease-out;
+}
+
+/* --- Avatar & Glow --- */
+.avatar-wrapper {
+  position: relative;
+  align-self: center;
+  margin-bottom: 35px;
 }
 
 .profile-img {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #1C3026;
-  display: block;
-  margin: 0 auto 30px auto;
+  border: 3px solid var(--bg-dark); /* Creates a cutout effect */
+  outline: 2px solid var(--gold);
+  background-color: var(--bg-dark);
+  position: relative;
+  z-index: 2;
 }
 
-.profile-info p {
-  font-size: 16px;
-  line-height: 1.8;
-  border-bottom: 1px solid rgba(224, 242, 241, 0.2);
-  padding: 10px 0;
+.avatar-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px;
+  height: 110px;
+  background: var(--gold);
+  border-radius: 50%;
+  filter: blur(25px);
+  opacity: 0.3;
+  z-index: 1;
 }
 
-.profile-info p:last-of-type {
+/* --- VIEW MODE: Elegant Rows instead of Boxes --- */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-row:last-of-type {
   border-bottom: none;
 }
 
-.profile-info strong {
-  color: #1C3026;
+.info-label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   font-weight: 600;
-  min-width: 150px;
-  display: inline-block;
 }
 
+.info-value {
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/* --- EDIT MODE --- */
 .edit-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
-.edit-form label {
-  font-size: 14px;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   font-weight: 600;
-  color: #ffffff;
 }
 
-.edit-form input {
-  padding: 12px;
-  border: 1px solid #1C3026;
-  background-color: #f9f9f9;
-  color: #1C3026;
-  border-radius: 8px;
+.input-group input {
+  background: var(--bg-input);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--text-main);
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
   outline: none;
-  font-size: 15px;
-  width: 100%;
+  transition: all 0.3s ease;
 }
 
-.edit-form input:focus {
-  border-color: #1C3026;
-  box-shadow: 0 0 0 3px rgba(194, 249, 112, 0.2);
+.input-group input:focus {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.05);
 }
 
+/* --- Gradient Button --- */
 .profile-btn {
-  margin-top: 30px;
-  background:#1C3026; 
-  color: #ffffff; 
-  padding: 14px 25px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  display: block;
   width: 100%;
-  transition: all 0.2s ease;
+  background: var(--gold-gradient);
+  color: #000;
+  border: none;
+  border-radius: 30px;
+  padding: 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(226, 186, 90, 0.25);
 }
 
 .profile-btn:hover {
-  background: #1C3026;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(194, 249, 112, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(226, 186, 90, 0.4);
 }
 
+/* --- Animations --- */
+.animate-fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 35px 25px;
+  }
+}

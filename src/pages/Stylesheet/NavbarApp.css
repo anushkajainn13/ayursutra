@@ -1,86 +1,139 @@
-/* ================================================= */
-/* ============== NAVBAR FIXED CSS ================= */
-/* ================================================= */
+/* --- Premium Landing Page Navbar (NavbarApp.css) --- */
+
+:root {
+  --nav-bg: rgba(9, 11, 9, 0.85); /* Dark Glass */
+  --gold: #e2ba5a;
+  --text-main: #f5f5f5;
+  --text-muted: #8b908b;
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
 
 .app-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #1C3026; /* Deep Forest Green */
-  color: #F4F6F0; /* Warm Off-White */
-  position: fixed;
-  width: 100%;
+  padding: 0 8%;
+  height: 80px;
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(28, 48, 38, 0.15); /* Softer, themed shadow */
-  box-sizing: border-box; /* Prevents horizontal scrolling issues */
+  border-bottom: 1px solid var(--glass-border);
+  font-family: 'Inter', sans-serif;
 }
 
-.app-navbar .logo {
-  font-size: 1.5rem;
+/* --- Logo --- */
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
   font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -0.5px;
   cursor: pointer;
-  color: #FFFFFF; /* Pure white to make the logo pop */
+  transition: transform 0.2s ease;
 }
 
-.app-navbar .nav-links {
+.nav-logo:hover {
+  transform: scale(1.02);
+}
+
+/* --- Center Navigation Links --- */
+.nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 35px;
 }
 
-.app-navbar .nav-links button {
+.nav-links button {
   background: transparent;
   border: none;
-  color: #D5DEC4; /* Soft Sage instead of dark green */
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  transition: color 0.3s ease;
+  padding: 5px 0;
+  position: relative;
 }
 
-/* Add a subtle highlight when hovering over nav links */
-.app-navbar .nav-links button:hover {
-  background-color: #3A4D43; /* Muted dark green */
-  color: #FFFFFF;
+.nav-links button:hover {
+  color: var(--text-main);
 }
 
-.app-navbar .nav-buttons {
+/* Add a tiny gold dot under links on hover */
+.nav-links button::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: var(--gold);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-links button:hover::after {
+  width: 15px;
+}
+
+/* --- Right Side Action Buttons --- */
+.nav-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 15px;
+  align-items: center;
 }
 
-.app-navbar .nav-buttons button {
-  padding: 0.5rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
+.nav-login-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 10px 15px;
+}
+
+.nav-login-btn:hover {
+  color: var(--gold);
+}
+
+.nav-signup-btn {
+  background: var(--gold);
+  color: #000;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
   transition: all 0.3s ease;
+  border-radius: 30px;
+  padding: 10px 24px;
+  box-shadow: 0 4px 15px rgba(226, 186, 90, 0.2);
 }
 
-/* Outline Button (e.g., Secondary Action / Login) */
-.app-navbar .nav-buttons button:first-child {
-  background-color: transparent;
-  color: #D5DEC4; /* Soft Sage */
-  border: 2px solid #D5DEC4;
+.nav-signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(226, 186, 90, 0.4);
 }
 
-.app-navbar .nav-buttons button:first-child:hover {
-  background-color: #3A4D43; /* Muted Dark Green */
-  color: #FFFFFF;
-  border-color: #3A4D43;
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none; /* Hides text links on small screens to keep it clean */
+  }
+  .app-navbar {
+    padding: 0 5%;
+  }
 }
 
-/* Solid Button (e.g., Primary Action / Get Consultation) */
-.app-navbar .nav-buttons button:last-child {
-  background-color: #D5DEC4; /* Soft Sage Background */
-  color: #1C3026; /* Deep Forest Green Text */
-  border: 2px solid #D5DEC4;
-}
-
-.app-navbar .nav-buttons button:last-child:hover {
-  background-color: #C1D1A9; /* Slightly darker sage on hover */
-  border-color: #C1D1A9;
-  color: #1C3026;
+@media (max-width: 450px) {
+  .nav-login-btn {
+    display: none; /* Hides login text on very small phones, keeps only sign up */
+  }
 }

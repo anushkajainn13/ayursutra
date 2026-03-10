@@ -1,74 +1,57 @@
 import React, { useState, useEffect } from "react";
 import "./Stylesheet/Dashboard.css";
-import { FaHeartbeat, FaUserMd, FaStar } from "react-icons/fa";
-import { IoCalendarOutline } from "react-icons/io5";
-import { AiOutlineBarChart } from "react-icons/ai";
 import { BsArrowLeftShort } from "react-icons/bs";
+import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { IoClose } from "react-icons/io5";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 // --- Mock Data ---
 const clinicsData = [
-  { id: 1, name: 'Jiva Ayurveda', location: 'Jaipur', rating: 4.8, primaryDoctor: 'Dr. Rajesh Kumar', specialty: 'Panchakarma', price: 800 },
-  { id: 2, name: 'Patanjali Wellness', location: 'Jaipur', rating: 4.6, primaryDoctor: 'Dr. Priya Mehta', specialty: 'Women\'s Health', price: 600 },
-  { id: 3, name: 'Jaipur Ayurveda', location: 'Jaipur', rating: 4.7, primaryDoctor: 'Dr. Sanjay Gupta', specialty: 'General Wellness', price: 700 },
-  { id: 4, name: 'Arya Vaidya Sala', location: 'Delhi', rating: 4.9, primaryDoctor: 'Dr. Suresh Nair', specialty: 'Arthritis', price: 1200 },
-  { id: 5, name: 'Delhi Ayurvedic', location: 'Delhi', rating: 4.5, primaryDoctor: 'Dr. Anika Sharma', specialty: 'Skin & Hair', price: 900 },
-  { id: 6, name: 'Vaidya Healthcare', location: 'Mumbai', rating: 4.8, primaryDoctor: 'Dr. Rohan Joshi', specialty: 'Stress Management', price: 1000 },
-];
+  { 
+    id: 1, name: 'Vedic Wellness Center', location: 'Jaipur', distance: '1.2 km',
+    rating: 4.8, reviews: 124, address: '42 Lotus Lane, Koramangala', time: '8:00 AM - 8:00 PM',
+    tags: ['Panchakarma', 'Abhyanga', 'Shirodhara'], practitioners: ['Dr. Ananya Sharma', 'Dr. Vikram Patel'],
+    image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=600',
+    primaryDoctor: 'Dr. Ananya Sharma', specialty: 'Panchakarma'
+  },
+  { 
+    id: 2, name: 'Prakruti Ayurveda Clinic', location: 'Jaipur', distance: '2.8 km',
+    rating: 4.6, reviews: 89, address: '15 Heritage Road, Indiranagar', time: '9:00 AM - 7:00 PM',
+    tags: ['Nasya', 'Herbal Therapy', 'Diet Consultation'], practitioners: ['Dr. Meera Iyer', 'Dr. Rajan Nair'],
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecee?q=80&w=600',
+    primaryDoctor: 'Dr. Meera Iyer', specialty: 'Herbal Therapy'
+  },
+  { 
+    id: 3, name: 'AyurVida Spa & Resort', location: 'Jaipur', distance: '5.4 km',
+    rating: 4.9, reviews: 203, address: '8 Serenity Blvd, Whitefield', time: '7:00 AM - 9:00 PM',
+    tags: ['Full Detox', 'Yoga Therapy', 'Rejuvenation'], practitioners: ['Dr. Lakshmi Menon', 'Dr. Arjun Kapoor'],
+    image: 'https://images.unsplash.com/photo-1620608554763-8a3597d3a042?q=80&w=600',
+    primaryDoctor: 'Dr. Lakshmi Menon', specialty: 'Rejuvenation'
+  }
 
+];
+const upcomingSessions = [
+  { id: 1, therapy: "Abhyanga Massage", date: "Mar 15, 2026 · 10:00 AM", status: "Confirmed" },
+  { id: 2, therapy: "Shirodhara", date: "Mar 18, 2026 · 2:00 PM", status: "Pending" },
+  { id: 3, therapy: "Panchakarma Detox", date: "Mar 22, 2026 · 9:00 AM", status: "Confirmed" },
+];
 const doctorsData = [
-  { id: 101, clinicId: 1, name: 'Dr. Rajesh Kumar', photo: 'https://www.jiva.com/wp-content/uploads/2021/04/dr-partap-chauhan-1.jpg', specialty: 'Panchakarma & Detoxification', rating: 4.9, reviewsCount: 182, testimonials: [{ patient: 'Sunita S.', quote: '"Dr. Kumar\'s treatment gave me immense relief from my chronic pain."' }, { patient: 'Manish G.', quote: '"The panchakarma therapy was excellent."' }] },
-  { id: 102, clinicId: 1, name: 'Dr. Meena Singh', photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-LAO8a8a9m1F-Bsf-i621aR0x3Co50L4sAw&s', specialty: 'Ayurvedic Nutrition', rating: 4.7, reviewsCount: 112, testimonials: [{ patient: 'Ravi P.', quote: '"Perfect diet plan!"' }] },
-  { id: 201, clinicId: 2, name: 'Dr. Priya Mehta', photo: 'https://www.pristyncare.com/blog/wp-content/uploads/2021/07/How-to-Become-a-Gynecologist.jpg', specialty: 'Women\'s Health', rating: 4.8, reviewsCount: 230, testimonials: [{ patient: 'Anjali K.', quote: '"Very understanding."' }] },
-  { id: 301, clinicId: 3, name: 'Dr. Sanjay Gupta', photo: 'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg', specialty: 'General Wellness', rating: 4.7, reviewsCount: 150, testimonials: [] },
-  { id: 302, clinicId: 3, name: 'Dr. Swati Agarwal', photo: 'https://link.to.a.broken/image.jpg', specialty: 'Digestive Health', rating: 4.8, reviewsCount: 98, testimonials: [] },
+  { id: 101, clinicId: 1, name: 'Dr. Ananya Sharma', photo: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=150', specialty: 'Panchakarma & Detoxification', rating: 4.9, reviewsCount: 182, testimonials: [{ patient: 'Sunita S.', quote: '"Immense relief from chronic pain."' }] },
+  { id: 102, clinicId: 1, name: 'Dr. Vikram Patel', photo: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150', specialty: 'Ayurvedic Nutrition', rating: 4.7, reviewsCount: 112, testimonials: [{ patient: 'Ravi P.', quote: '"Perfect diet plan!"' }] }
 ];
 
 // --- Helper Components ---
 const StarRating = ({ rating }) => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
-    stars.push(<FaStar key={i} color={i <= rating ? '#f5b942' : '#e4e5e9'} />);
+    stars.push(<FaStar key={i} color={i <= rating ? '#e2ba5a' : 'rgba(255,255,255,0.2)'} />);
   }
-  return <div className="stars">{stars}</div>;
-};
-
-const DoctorAvatar = ({ photo, name }) => {
-  const [imgError, setImgError] = useState(false);
-
-  const getInitials = (name) => {
-    const nameParts = name.replace("Dr. ", "").split(" ");
-    if (nameParts.length > 1) {
-      return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase();
-    }
-    return nameParts[0].substring(0, 2).toUpperCase();
-  };
-
-  if (imgError || !photo) {
-    return (
-      <div className="doctor-photo-container">
-        <div className="doctor-initials-avatar">
-          <span>{getInitials(name)}</span>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="doctor-photo-container">
-      <img 
-        src={photo} 
-        alt={name} 
-        className="doctor-photo" 
-        onError={() => setImgError(true)} 
-      />
-    </div>
-  );
+  return <div className="stars" style={{ display: 'flex', gap: '2px' }}>{stars}</div>;
 };
 
 // --- Main Dashboard Component ---
 const Dashboard = () => {
-  const [isFirstLogin, setIsFirstLogin] = useState(false);
   const [hasTakenQuiz, setHasTakenQuiz] = useState(false);
   const [location, setLocation] = useState('');
   const [nearbyClinics, setNearbyClinics] = useState([]);
@@ -76,40 +59,21 @@ const Dashboard = () => {
   const [selectedClinic, setSelectedClinic] = useState(null);
   const [availableDoctors, setAvailableDoctors] = useState([]);
   const navigate = useNavigate();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
-    // 1. Check if they have fully unlocked the dashboard stats
-    const hasCompletedConsultation = localStorage.getItem("hasConsulted");
-    setIsFirstLogin(!hasCompletedConsultation);
 
-    // 2. Check if they have already taken the Prakriti Quiz
-    const userPrakriti = localStorage.getItem("userPrakriti");
-    setHasTakenQuiz(!!userPrakriti);
-
-    // 3. Load user location
     const userLocation = localStorage.getItem('userLocation') || 'Jaipur';
     setLocation(userLocation);
     const filteredClinics = clinicsData.filter(c => c.location === userLocation);
     setNearbyClinics(filteredClinics);
   }, []);
 
-  // --- THE FIXED ROUTING LOGIC ---
   const handleConsultationClick = () => {
-    const userPrakriti = localStorage.getItem("userPrakriti");
-    
-    if (userPrakriti) {
-      // If they already took the quiz, skip it and go straight to the Chatbot/Recommendations
+    if (hasTakenQuiz) {
       navigate("/patient/recommendations");
     } else {
-      // First time user goes to the quiz
       navigate("/patient/consultation");
     }
-  };
-
-  const handleRetakeQuiz = () => {
-    // Clear their old Prakriti data and send them to the quiz
-    localStorage.removeItem("userPrakriti");
-    navigate("/patient/consultation");
   };
 
   const handleViewClinicDetails = (clinic) => {
@@ -124,136 +88,123 @@ const Dashboard = () => {
     setSelectedClinic(null);
   };
 
-  const handleResetJourney = () => {
-    localStorage.removeItem("hasConsulted");
-    localStorage.removeItem("userPrakriti");
-    window.location.reload();
-  };
-
   return (
     <div className="dashboard">
+      
+      {/* ✨ UPDATED: Floating Action Button now opens the modal */}
+      <button className="floating-fab" onClick={() => setIsModalOpen(true)}>
+        📅 My Sessions
+      </button>
+
+      {/* ✨ NEW: The Sessions Modal Overlay ✨ */}
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          {/* Stop click propagation so clicking inside the modal doesn't close it */}
+          <div className="premium-modal" onClick={(e) => e.stopPropagation()}>
+            
+            <button className="close-modal-btn" onClick={() => setIsModalOpen(false)}>
+              <IoClose />
+            </button>
+
+            <div className="modal-header">
+              <h2>Scheduled Healing Sessions</h2>
+              <p>Your upcoming appointments</p>
+            </div>
+
+            <div className="sessions-list">
+              {upcomingSessions.map((session) => (
+                <div key={session.id} className="session-item">
+                  <div className="session-info">
+                    <h4>{session.therapy}</h4>
+                    <p>{session.date}</p>
+                  </div>
+                  
+                  {/* Dynamic Status Badge */}
+                  <div className={`status-badge ${session.status.toLowerCase()}`}>
+                    {session.status === "Confirmed" && <FaRegCheckCircle className="badge-icon" />}
+                    {session.status}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="healing-hero">
         <div className="healing-overlay">
-          {!hasTakenQuiz ? (
-            <>
-              <h2>Welcome to AyurSutra 🌿</h2>
-              <p>Your journey to holistic health starts here. Let our AI analyze your Prakriti to suggest the best path.</p>
-              <button className="healing-btn" onClick={handleConsultationClick}>
-                Start AI Consultation
-              </button>
-            </>
-          ) : (
-            <>
-              <h2>Welcome Back, {localStorage.getItem("userPrakriti")?.toUpperCase()} Type</h2>
-              <p>Continue your healing journey and chat with your AI guide.</p>
-              
-              <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '15px', flexWrap: 'wrap' }}>
-                <button className="healing-btn" onClick={handleConsultationClick}>
-                  Open AI Chatbot
-                </button>
-                
-                <button 
-                  onClick={handleRetakeQuiz}
-                  style={{
-                    background: 'transparent',
-                    border: '2px solid rgba(255,255,255,0.6)',
-                    color: 'white',
-                    padding: '12px 25px',
-                    borderRadius: '25px',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    transition: '0.3s'
-                  }}
-                  onMouseOver={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
-                  onMouseOut={(e) => e.target.style.background = 'transparent'}
-                >
-                  Retake Quiz
-                </button>
-              </div>
-            </>
-          )}
+          <div className="hero-pill">✦ ANCIENT WISDOM, MODERN HEALING ✦</div>
+          <h2>Your Healing Journey</h2>
+          <p>Discover personalized Ayurvedic therapies rooted in 5,000 years of tradition, crafted for your unique constitution.</p>
         </div>
       </section>
-
-      {/* Conditional Stats or Onboarding Steps */}
-      {!isFirstLogin ? (
-        <section className="stats animate-fade">
-          <div className="stat-card">
-            <FaHeartbeat className="icon" />
-            <div><h3>3</h3><p>Active Treatments</p></div>
-          </div>
-          <div className="stat-card">
-            <IoCalendarOutline className="icon" />
-            <div><h3>Tomorrow</h3><p>Abhyanga therapy</p></div>
-          </div>
-          <div className="stat-card">
-            <AiOutlineBarChart className="icon" />
-            <div><h3>85%</h3><p>Wellness Score</p></div>
-          </div>
-          <div className="stat-card">
-            <FaUserMd className="icon" />
-            <div><h3>12</h3><p>Completed Sessions</p></div>
-          </div>
-        </section>
-      ) : (
-        <section className="first-step-guide animate-fade">
-          <div className="guide-card">
-            <h3>Your Healing Path Starts Here 🌿</h3>
-            <p>Complete these steps to unlock your personalized Wellness Dashboard and track your progress.</p>
-            <div className="journey-steps">
-              <div className={`step ${hasTakenQuiz ? 'completed' : ''}`}>
-                <div className="step-number">{hasTakenQuiz ? '✓' : '1'}</div>
-                <span>Prakriti Analysis</span>
-              </div>
-              <div className="step">
-                <div className="step-number">2</div>
-                <span>AI Recommendations</span>
-              </div>
-              <div className="step">
-                <div className="step-number">3</div>
-                <span>Unlock Dashboard</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Clinics/Doctors Section */}
+      {/* Clinics & Doctors Section */}
       <section className="clinics-section">
         {viewMode === 'clinics' ? (
           <>
-            <h2>Ayurveda Clinics near {location || 'your area'}</h2>
-            <p className="section-subtitle">Trusted Ayurvedic experts curated for your healing journey.</p>
+            <div className="section-header-centered">
+              <span className="near-you-text">NEAR YOU</span>
+              <h2>Ayurveda Clinics in Your Area</h2>
+              <p className="section-subtitle">Discover trusted Ayurvedic practitioners and wellness centers nearby</p>
+            </div>
+
             <div className="clinics-grid">
               {nearbyClinics.map(clinic => (
-                <div key={clinic.id} className="clinic-card">
-                  <div className="clinic-header">
-                    <h3>{clinic.name}</h3>
-                    <div className="clinic-logo">{clinic.name.charAt(0)}</div>
+                <div key={clinic.id} className="clinic-card-new">
+                  <div className="clinic-image-container">
+                    <img src={clinic.image} alt={clinic.name} />
+                    <span className="distance-badge">📍 {clinic.distance}</span>
                   </div>
-                  <div className="clinic-details">
-                    <p>Feat. {clinic.primaryDoctor} - {clinic.specialty}</p>
-                    <p><strong>~ ₹{clinic.price}</strong> / consultation</p>
+
+                  <div className="clinic-content">
+                    <div className="clinic-title-row">
+                      <h3>{clinic.name}</h3>
+                      <span className="clinic-rating">
+                        <span className="gold-star">★</span> {clinic.rating} <span className="reviews-count">({clinic.reviews})</span>
+                      </span>
+                    </div>
+
+                    <div className="clinic-info-rows">
+                      <p>📍 {clinic.address}</p>
+                      <p>🕒 {clinic.time}</p>
+                    </div>
+
+                    <div className="clinic-tags">
+                      {clinic.tags.map((tag, i) => (
+                        <span key={i} className="tag">{tag}</span>
+                      ))}
+                    </div>
+
+                    <div className="practitioners-list">
+                      <p className="list-title">Practitioners</p>
+                      {clinic.practitioners.map((doc, i) => (
+                        <strong key={i} className="doc-name">{doc}</strong>
+                      ))}
+                    </div>
+
+                    <button className="view-clinic-btn" onClick={() => handleViewClinicDetails(clinic)}>
+                      View Clinic →
+                    </button>
                   </div>
-                  <div className="clinic-rating">
-                    <StarRating rating={clinic.rating} /> <strong>{clinic.rating}</strong>
-                  </div>
-                  <button onClick={() => handleViewClinicDetails(clinic)}>View Practitioners</button>
                 </div>
               ))}
             </div>
           </>
         ) : (
-          <>
+          <div className="doctors-view">
             <button onClick={handleBackToClinics} className="back-button">
               <BsArrowLeftShort /> Back to All Clinics
             </button>
-            <h2>Practitioners at {selectedClinic?.name}</h2>
+            <h2 style={{fontFamily: 'Playfair Display', color: 'var(--gold)', marginBottom: '30px'}}>
+              Practitioners at {selectedClinic?.name}
+            </h2>
+            
             <div className="doctors-grid">
-              {availableDoctors.map(doctor => (
+              {availableDoctors.length > 0 ? availableDoctors.map(doctor => (
                 <div key={doctor.id} className="doctor-card">
-                  <DoctorAvatar photo={doctor.photo} name={doctor.name} />
+                  <img src={doctor.photo} alt={doctor.name} className="doctor-photo-new" />
                   <div className="doctor-details">
                     <h3>{doctor.name}</h3>
                     <p className="specialty">{doctor.specialty}</p>
@@ -261,35 +212,13 @@ const Dashboard = () => {
                       <StarRating rating={doctor.rating} />
                       <span className="reviews-count">({doctor.reviewsCount} reviews)</span>
                     </div>
-                    <div className="feedback-section">
-                      {doctor.testimonials && doctor.testimonials.length > 0 ? (
-                        doctor.testimonials.map((t, i) => (
-                          <div key={i} className="feedback-quote">
-                            <p>"{t.quote}"</p>
-                            <span>- {t.patient}</span>
-                          </div>
-                        ))
-                      ) : (
-                        <p>No feedback available yet.</p>
-                      )}
-                    </div>
                   </div>
                 </div>
-              ))}
+              )) : <p>No doctors listed for this clinic yet.</p>}
             </div>
-          </>
+          </div>
         )}
       </section>
-
-      {/* Optional Reset Button for Testing */}
-      <div style={{ textAlign: "center", marginTop: "40px", marginBottom: "20px" }}>
-        <button 
-          onClick={handleResetJourney} 
-          style={{ background: 'transparent', border: '1px solid #ccc', padding: '8px 16px', borderRadius: '5px', cursor: 'pointer', color: '#666' }}>
-          Reset Journey (Test Mode)
-        </button>
-      </div>
-
     </div>
   );
 };

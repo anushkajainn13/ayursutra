@@ -1,193 +1,289 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import './Stylesheet/RecommendationPage.css'; 
+import { TbRobot } from "react-icons/tb";
+import { FiUser } from "react-icons/fi";
+import { BsStars } from "react-icons/bs";
+import { LuSend } from "react-icons/lu";
 
-// --- Therapy Detail Modal Component ---
-const TherapyDetailModal = ({ therapy, onClose }) => {
-    const images = {
-        "Panchakarma Detox": "https://vediherbals.com/cdn/shop/articles/Ayurvedic_Panchakarma_Therapy_The_Ultimate_Detox_Solution_520x500_520x500_520x500_520x500_520x500_520x500_520x500_520x500_520x500_520x500_520x500_fda0ddc7-2dfd-4b3d-9c84-de22f4935e31.jpg?v=1736933715",
-        "Abhyanga Massage": "https://i.imgur.com/xH5V6aT.jpeg",
-        "Shirodhara": "https://i.imgur.com/gK9pI0i.jpeg",
-        "Vasti Karma": "https://i.imgur.com/vH5tXmJ.jpeg",
-        "Virechana": "https://i.imgur.com/L7r0Yg3.jpeg",
-        "Swedana": "https://i.imgur.com/qR8v2k2.jpeg",
-    };
+// --- Dynamic AI Data ---
+const symptomTags = [
+  "Digestive Issues", "Stress & Anxiety", "Joint Pain", 
+  "Insomnia", "Skin problems", "Fatigue", 
+  "Weight management", "Headaches"
+];
 
-    return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content therapy-detail-modal" onClick={e => e.stopPropagation()}>
-                <span className="close-btn" onClick={onClose}>×</span>
-                <img src={images[therapy.name] || 'https://i.imgur.com/default.jpeg'} alt={therapy.name} className="therapy-main-image" />
-                <h2 className="therapy-detail-title">{therapy.name}</h2>
-                <div className="therapy-key-details">
-                    <span><strong>Duration:</strong> {therapy.duration}</span>
-                    <span><strong>Focus:</strong> {therapy.tags.join(', ')}</span>
-                </div>
-                <p className="therapy-description-text">
-                    {therapy.details}. This is a comprehensive Ayurvedic treatment designed to flush out toxins, promoting revitalization and well-being. It is highly effective for managing {therapy.tags[0]} and {therapy.tags[1]}.
-                </p>
-                <button className="btn-primary" style={{width: '100%'}} onClick={onClose}>Schedule this Therapy</button>
-            </div>
-        </div>
-    );
+const therapyResponses = {
+  "digestive issues": `Based on your concern about **digestive issues**, here are my recommendations:
+
+### 🌿 Recommended Therapies
+1. **Panchakarma Detox** — A comprehensive five-action detox program that cleanses the digestive tract and restores *Agni* (digestive fire).
+   - *Available at:* Vedic Wellness Center (₹5,800) · AyurVida Spa (₹7,200)
+2. **Udvartana** — Herbal powder massage that stimulates metabolism and aids digestion.
+   - *Available at:* Prakruti Ayurveda Clinic (₹2,800)
+
+### 🍵 Lifestyle Tips
+- Start your day with warm water and lemon
+- Avoid cold drinks during meals
+- Practice mindful eating — chew each bite 20-30 times
+
+Would you like to **book an appointment** for any of these therapies?`,
+
+  "stress & anxiety": `For **stress & anxiety**, Ayurveda offers deeply calming therapies:
+
+### 🧘 Recommended Therapies
+1. **Shirodhara** — A continuous stream of warm herbal oil on the forehead that profoundly calms the nervous system.
+   - *Available at:* Vedic Wellness Center (₹3,200) · AyurVida Spa (₹3,500)
+   - *Practitioners:* Dr. Ananya Sharma, Dr. Suresh Pillai
+2. **Abhyanga Massage** — Full-body warm oil massage to balance Vata dosha and release tension.
+   - *Available at:* Vedic Wellness Center (₹2,500) · Prakruti Clinic (₹2,200)
+
+### 🌙 Wellness Tips
+- Practice *Pranayama* (breathing exercises) for 10 mins daily
+- Use Brahmi or Ashwagandha supplements (consult your practitioner)
+- Maintain a consistent sleep schedule
+
+Shall I help you **schedule a Shirodhara session**?`,
+
+  "joint pain": `For **joint pain**, here are the best Ayurvedic treatments:
+
+### 💪 Recommended Therapies
+1. **Pizhichil** — A royal oil bath combining warm medicated oil massage with heat therapy, excellent for joint stiffness.
+   - *Available at:* AyurVida Spa & Resort (₹4,500)
+   - *Practitioner:* Dr. Lakshmi Menon
+2. **Abhyanga Massage** — Targeted oil massage that improves circulation and reduces inflammation in joints.
+   - *Available at:* All clinics (₹2,200–₹2,500)
+
+### 🏃 Lifestyle Recommendations
+- Apply warm sesame oil to affected joints before bed
+- Include turmeric and ginger in your diet
+- Gentle yoga poses like *Trikonasana* and *Virabhadrasana*
+
+Want me to help you **book a Pizhichil session**?`,
+
+  "insomnia": `For **insomnia and sleep issues**, Ayurveda offers natural solutions:
+
+### 😴 Recommended Therapies
+1. **Shirodhara** — The warm oil stream on the forehead induces deep relaxation and resets your sleep cycle.
+   - *Available at:* Vedic Wellness Center (₹3,200) · AyurVida Spa (₹3,500)
+2. **Abhyanga Massage** — Evening oil massage calms Vata dosha, the primary cause of sleeplessness.
+   - *Available at:* All clinics
+
+### 🌿 Sleep Hygiene Tips
+- Drink warm milk with nutmeg and ashwagandha before bed
+- Massage your feet with warm sesame oil
+- Avoid screens 1 hour before sleep
+- Practice *Yoga Nidra* guided meditation
+
+Would you like to **schedule a Shirodhara session** for better sleep?`,
+
+  "skin problems": `For **skin problems**, here are Ayurvedic approaches:
+
+### ✨ Recommended Therapies
+1. **Udvartana** — Herbal powder massage that exfoliates, detoxifies, and rejuvenates the skin.
+   - *Available at:* Prakruti Ayurveda Clinic (₹2,800)
+2. **Panchakarma Detox** — Internal purification that addresses root causes of skin issues.
+   - *Available at:* Vedic Wellness Center (₹5,800) · AyurVida Spa (₹7,200)
+
+### 🌸 Skin Care Tips
+- Apply neem and turmeric paste as a weekly face mask
+- Drink aloe vera juice daily
+- Identify your *Prakriti* (constitution) for personalized skincare
+
+Shall I book a **skin consultation** with one of our practitioners?`,
+
+  "fatigue": `For **chronic fatigue**, Ayurveda focuses on restoring vital energy:
+
+### ⚡ Recommended Therapies
+1. **Abhyanga Massage** — Nourishing oil massage that revitalizes tissues and boosts energy.
+   - *Available at:* All clinics (₹2,200–₹2,500)
+2. **Panchakarma Detox** — Removes accumulated toxins (*Ama*) that cause fatigue.
+   - *Available at:* Vedic Wellness Center (₹5,800) · AyurVida Spa (₹7,200)
+
+### 🔋 Energy-Boosting Tips
+- Take Ashwagandha and Shatavari supplements
+- Practice *Surya Namaskar* (Sun Salutation) every morning
+- Eat warm, freshly cooked meals — avoid processed foods
+
+Want to **schedule a rejuvenation therapy**?`,
+
+  "weight management": `For **weight management**, Ayurveda offers holistic solutions:
+
+### ⚖️ Recommended Therapies
+1. **Udvartana** — Herbal powder massage that breaks down subcutaneous fat and improves metabolism.
+   - *Available at:* Prakruti Ayurveda Clinic (₹2,800)
+   - *Practitioner:* Dr. Meera Iyer
+2. **Panchakarma Detox** — Eliminates toxins and resets metabolic function.
+   - *Available at:* Vedic Wellness Center · AyurVida Spa
+
+### 🥗 Diet & Lifestyle
+- Follow a Kapha-pacifying diet (light, warm, spicy foods)
+- Drink warm water with honey and lemon each morning
+- Exercise during *Kapha time* (6–10 AM) for best results
+
+Shall I help you **book an Udvartana session**?`,
+
+  "headaches": `For **chronic headaches**, Ayurveda addresses the root cause:
+
+### 🧠 Recommended Therapies
+1. **Nasya Therapy** — Medicated nasal drops that clear sinuses and relieve head tension.
+   - *Available at:* Prakruti Ayurveda Clinic (₹1,800)
+   - *Practitioner:* Dr. Meera Iyer
+2. **Shirodhara** — Calms the nervous system and relieves tension headaches and migraines.
+   - *Available at:* Vedic Wellness Center (₹3,200) · AyurVida Spa (₹3,500)
+
+### 💆 Quick Relief Tips
+- Apply sandalwood paste on forehead and temples
+- Practice *Anulom Vilom* (alternate nostril breathing)
+- Stay hydrated — drink warm water throughout the day
+
+Want to **book a Nasya therapy session**?`,
 };
 
-// --- Doctor Consultation Modal Component ---
-const DoctorConsultationModal = ({ onClose }) => {
-    const doctors = [
-        { name: "Dr. Priya Sharma", spec: "Ayurveda Specialist", exp: "12 yrs", fee: "₹500", status: "Available Now", avatar: "https://i.imgur.com/doc-avatar-1.jpeg" },
-        { name: "Dr. Rajesh Kumar", spec: "Panchakarma Expert", exp: "8 yrs", fee: "₹450", status: "Busy", avatar: "https://i.imgur.com/doc-avatar-2.jpeg" },
-        { name: "Dr. Sunita Rao", spec: "Stress Management", exp: "15 yrs", fee: "₹600", status: "Available Now", avatar: "https://i.imgur.com/doc-avatar-3.jpeg" },
-    ];
+const defaultResponse = `Thank you for sharing your health concerns. Based on what you've described, I'd recommend starting with a **consultation** at one of our wellness centers for a personalized assessment.
 
-    return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <span className="close-btn" onClick={onClose}>×</span>
-                <h3 className="section-title">Consultation with Experts</h3>
-                <p>Book an instant slot with one of our specialized Ayurvedic practitioners.</p>
-                <div className="doctor-list">
-                    {doctors.map((doc, index) => (
-                        <div key={index} className="doctor-card">
-                            <img src={doc.avatar} alt={doc.name} className="doctor-avatar" />
-                            <div className="doctor-info">
-                                <h4>{doc.name}</h4>
-                                <p className="doc-spec">{doc.spec} • {doc.exp}</p>
-                            </div>
-                            <div className="doc-actions">
-                                <span className={`doc-status ${doc.status.includes('Available') ? 'available' : 'busy'}`}>{doc.status}</span>
-                                <p className="doc-fee">{doc.fee}</p>
-                                <button className="btn-primary consult-btn">Book Slot</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
-};
+### 🌿 General Recommendations
+1. **Abhyanga Massage** — A great starting point for overall wellness and balance.
+2. **Panchakarma Detox** — For deep cleansing and rejuvenation.
 
-// --- Main Page Component ---
+You can browse our therapies on the **Therapy Scheduling** page, or tell me more specific symptoms and I'll tailor my recommendations.`;
+
+const welcomeMessage = `Welcome to **AyurSutra AI Consultation** 🙏\n\nI'm your Ayurvedic wellness assistant. I can help you find the right therapy based on your symptoms and health goals.\n\n**How can I help you today?** You can:\n- Describe your symptoms in your own words\n- Click on a symptom tag below to get started\n- Ask about specific Ayurvedic therapies\n\n*Tell me what's bothering you, and I'll recommend personalized treatments.*`;
+
+function getResponse(input) {
+  const lower = input.toLowerCase();
+  for (const [key, response] of Object.entries(therapyResponses)) {
+    if (lower.includes(key)) return response;
+  }
+  if (lower.includes("digest") || lower.includes("stomach") || lower.includes("bloat")) return therapyResponses["digestive issues"];
+  if (lower.includes("stress") || lower.includes("anxiety") || lower.includes("nervous")) return therapyResponses["stress & anxiety"];
+  if (lower.includes("joint") || lower.includes("arthri") || lower.includes("knee") || lower.includes("back pain")) return therapyResponses["joint pain"];
+  if (lower.includes("sleep") || lower.includes("insomnia")) return therapyResponses["insomnia"];
+  if (lower.includes("skin") || lower.includes("acne") || lower.includes("eczema")) return therapyResponses["skin problems"];
+  if (lower.includes("tired") || lower.includes("fatigue") || lower.includes("energy")) return therapyResponses["fatigue"];
+  if (lower.includes("weight") || lower.includes("fat") || lower.includes("slim")) return therapyResponses["weight management"];
+  if (lower.includes("headache") || lower.includes("migraine") || lower.includes("head")) return therapyResponses["headaches"];
+  return defaultResponse;
+}
+
+// --- Main Component ---
 const RecommendationPage = () => {
-    const navigate = useNavigate();
-    const [userPrakriti, setUserPrakriti] = useState('Ayurvedic');
+  const navigate = useNavigate();
+  const messagesEndRef = useRef(null);
+  const [inputText, setInputText] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const [showTags, setShowTags] = useState(true);
+  
+  const [messages, setMessages] = useState([
+    { id: 1, sender: 'ai', text: welcomeMessage }
+  ]);
 
-    useEffect(() => {
-        const storedPrakriti = localStorage.getItem("userPrakriti");
-        if (storedPrakriti) {
-            setUserPrakriti(storedPrakriti);
-        }
-    }, []);
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
 
-    const commonSymptoms = [ "Digestive Issues", "Stress & Anxiety", "Joint Pain", "Insomnia", "Skin problems", "Fatigue", "Weight management", "Headaches" ];
-    
-    const allTherapies = [
-        { name: "Panchakarma Detox", details: "Complete body purification", duration: "21 days", tags: ["Digestive Issues", "Skin problems", "Fatigue", "Weight management"] },
-        { name: "Abhyanga Massage", details: "Full body oil massage therapy", duration: "60 min", tags: ["Stress & Anxiety", "Fatigue", "Joint Pain", "Headaches"] },
-        { name: "Shirodhara", details: "Medicated oil pouring for mental peace", duration: "45 min", tags: ["Stress & Anxiety", "Insomnia", "Headaches"] },
-        { name: "Vasti Karma", details: "Herbal enema for Vata regulation", duration: "8 days", tags: ["Digestive Issues", "Joint Pain", "Fatigue"] },
-        { name: "Swedana", details: "Herbal steam for detoxification", duration: "30 min", tags: ["Fatigue", "Joint Pain"] },
-        { name: "Virechana", details: "Purification therapy for Pitta", duration: "1 day", tags: ["Skin problems", "Digestive Issues"] },
-    ];
+  const handleSendMessage = (text) => {
+    if (!text.trim()) return;
 
-    const [selectedSymptoms, setSelectedSymptoms] = useState([]);
-    const [additionalDetails, setAdditionalDetails] = useState('');
-    const [showRecommendations, setShowRecommendations] = useState(false);
-    const [showDoctorConsultation, setShowDoctorConsultation] = useState(false);
-    const [selectedTherapy, setSelectedTherapy] = useState(null);
+    // 1. Add User Message
+    const newUserMsg = { id: Date.now(), sender: 'user', text: text };
+    setMessages(prev => [...prev, newUserMsg]);
+    setInputText("");
+    setShowTags(false);
+    setIsTyping(true);
 
-    const handleSymptomClick = (symptom) => {
-        setSelectedSymptoms(prev => prev.includes(symptom) ? prev.filter(s => s !== symptom) : [...prev, symptom]);
-        setShowRecommendations(false);
-    };
+    // 2. Fetch AI Response
+    setTimeout(() => {
+      const responseText = getResponse(text);
+      const aiResponse = { id: Date.now() + 1, sender: 'ai', text: responseText };
+      setMessages(prev => [...prev, aiResponse]);
+      setIsTyping(false);
+    }, 1200); // 1.2s delay for realism
+  };
 
-    const handleGetRecommendations = () => {
-        if (selectedSymptoms.length > 0 || additionalDetails.trim() !== '') {
-            setShowRecommendations(true);
-        } else {
-            alert("Please select at least one symptom or describe your health concerns.");
-        }
-    };
+  const handleTagClick = (symptom) => {
+    handleSendMessage(`I'm experiencing ${symptom}`);
+  };
 
-    const handleUnlockDashboard = () => {
-        // Marks the onboarding as complete
-        localStorage.setItem("hasConsulted", "true");
-        navigate("/patient/dashboard");
-    };
+  return (
+    <div className="ai-chat-container">
+      
+      {/* Chat Messages Area */}
+      <div className="chat-history">
+        {messages.map((msg) => (
+          <div key={msg.id} className={`message-wrapper ${msg.sender}`}>
+            
+            <div className={`avatar ${msg.sender}`}>
+              {msg.sender === 'ai' ? <TbRobot /> : <FiUser />}
+            </div>
 
-    const getRecommendedTherapies = () => {
-        if (!showRecommendations) return [];
-        if (selectedSymptoms.length === 0) return allTherapies.slice(0, 3);
+            <div className={`message-bubble ${msg.sender}`}>
+              {/* ReactMarkdown magically renders all the bolding, headers, and lists! */}
+              <div className="markdown-body">
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
+              </div>
+            </div>
+
+          </div>
+        ))}
         
-        const recommendations = new Set();
-        allTherapies.forEach(therapy => {
-            if (therapy.tags.some(tag => selectedSymptoms.includes(tag))) {
-                recommendations.add(therapy);
-            }
-        });
-        return Array.from(recommendations);
-    };
-
-    const currentRecommendations = getRecommendedTherapies();
-
-    return (
-        <div className="recommendation-page-container">
-            <div className="page-header">
-                <div className="prakriti-badge">Your Prakriti: {userPrakriti.toUpperCase()}</div>
+        {/* Typing Indicator */}
+        {isTyping && (
+          <div className="message-wrapper ai">
+            <div className="avatar ai"><TbRobot /></div>
+            <div className="message-bubble ai typing-indicator">
+              <span></span><span></span><span></span>
             </div>
+          </div>
+        )}
+        
+        <div ref={messagesEndRef} />
+      </div>
 
-            <div className="card">
-                <h3 className="section-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                    Describe Your Health Concerns
-                </h3>
-                <p className="page-subtitle">Share your symptoms or health goals to get personalized Ayurveda recommendations</p>
-                <div className="symptoms-list">
-                    {commonSymptoms.map(symptom => (
-                        <button key={symptom} className={`symptom-tag ${selectedSymptoms.includes(symptom) ? 'selected' : ''}`} onClick={() => handleSymptomClick(symptom)}>
-                            {symptom}
-                        </button>
-                    ))}
-                </div>
-                <textarea className="additional-details-textarea" placeholder="Describe your symptoms, lifestyle, diet habits, or specific health goals..." value={additionalDetails} onChange={(e) => setAdditionalDetails(e.target.value)} rows="4"></textarea>
-                <button className="btn-primary" style={{width: '100%', marginTop: '16px'}} onClick={handleGetRecommendations}>
-                    <span role="img" aria-label="sparkles">✨</span> Get Personalized Recommendations
+      {/* Bottom Input Area */}
+      <div className="chat-input-area">
+        {showTags && (
+          <div className="quick-tags-container">
+            <p className="tags-label">Quick select a concern:</p>
+            <div className="tags-scroll">
+              {symptomTags.map(symptom => (
+                <button 
+                  key={symptom} 
+                  className="ai-tag-btn"
+                  onClick={() => handleTagClick(symptom)}
+                >
+                  {symptom}
                 </button>
+              ))}
             </div>
+          </div>
+        )}
 
-            {showRecommendations && (
-                <div className="card">
-                    <h3 className="section-title"><span role="img" aria-label="star">🌟</span> Recommended Therapies</h3>
-                    <p>Based on your concerns, here are suitable Ayurveda treatments</p>
-                    <div className="therapy-list">
-                        {currentRecommendations.length > 0 ? (
-                            currentRecommendations.map((therapy, index) => (
-                                <div key={index} className="therapy-item">
-                                    <div className="therapy-details">
-                                        <h4>{therapy.name}</h4>
-                                        <p>{therapy.details} • <span className="duration">{therapy.duration}</span></p>
-                                    </div>
-                                    <button className="arrow-btn" onClick={() => setSelectedTherapy(therapy)}>→</button>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No specific recommendations found. Please try adding more detail or consult a doctor.</p>
-                        )}
-                    </div>
-                    <button className="btn-primary" style={{width: '100%', marginTop: '16px'}} onClick={() => setShowDoctorConsultation(true)}>
-                        Consult Doctor for Treatment Plan
-                    </button>
-                </div>
-            )}
-
-            {/* Modals */}
-            {showDoctorConsultation && <DoctorConsultationModal onClose={() => setShowDoctorConsultation(false)} />}
-            {selectedTherapy && <TherapyDetailModal therapy={selectedTherapy} onClose={() => setSelectedTherapy(null)} />}
+        <div className="input-box-wrapper">
+          <BsStars className="sparkle-icon" />
+          <input 
+            type="text" 
+            className="ai-chat-input"
+            placeholder="Describe your symptoms or ask about therapies..."
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(inputText)}
+            disabled={isTyping}
+          />
+          <button 
+            className="send-btn"
+            onClick={() => handleSendMessage(inputText)}
+            disabled={!inputText.trim() || isTyping}
+            style={{ opacity: (!inputText.trim() || isTyping) ? 0.5 : 1 }}
+          >
+            <LuSend />
+          </button>
         </div>
-    );
+      </div>
+
+    </div>
+  );
 };
 
 export default RecommendationPage;

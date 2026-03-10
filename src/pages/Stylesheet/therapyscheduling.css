@@ -1,325 +1,337 @@
-/* ================================================= */
-/* ==== THERAPY SCHEDULING - ENHANCED AYURVEDIC RETREAT LAYOUT ==== */
-/* ================================================= */
+/* --- Premium Therapy Scheduling Flow --- */
 
-.therapy-container {
-  max-width: 2000px;
-  margin: 0 auto;
-  padding: 50px;
-  background-color: #E8EDE1 !important;
+:root {
+  --bg-dark: #090b09;
+  --bg-card: #141714;
+  --bg-input: #1f231f;
+  --gold: #e2ba5a;
+  --text-main: #f5f5f5;
+  --text-muted: #8b908b;
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-/* --- SECTION WRAPPERS (Transparent to maintain global theme) --- */
-.section-container {
-  background-color: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin-bottom: 50px;
-  border: none !important;
+/* Force full dark background */
+.scheduling-page-wrapper {
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px 100px 20px;
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
 }
 
-.section-heading {
-  color: #1C3026 !important;
-  font-size: 1.6rem !important;
-  font-weight: 700 !important;
-  margin-bottom: 20px !important;
-  border-bottom: 2px solid #D5DEC4 !important;
-  padding-bottom: 10px !important;
+.scheduling-container {
+  width: 100%;
+  max-width: 800px;
 }
 
-/* --- HERO BANNER (Top Photo Section) --- */
-.hero-banner {
-  background-image: linear-gradient(rgba(28, 48, 38, 0.4), rgba(28, 48, 38, 0.4)), 
-                   url('C:\Users\Jeeya\ayursutra\src\assets\hero.jpg'); /* Replace with a soothing Ayurvedic retreat photo */
-  background-size: cover;
-  background-position: center;
-  border-radius: 20px;
-  padding: 100px 30px;
-  margin-bottom: 50px;
+/* --- Header --- */
+.scheduling-header {
   text-align: center;
-  box-shadow: 0 10px 30px rgba(28, 48, 38, 0.2);
-  height: 400px;
+  margin-bottom: 50px;
 }
 
-.hero-title {
-  color: #FFFFFF !important;
-  font-size: 3rem !important;
-  font-weight: 800 !important;
-  margin: 0 0 15px 0 !important;
-  letter-spacing: -1px !important;
+.schedule-pill {
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.hero-subtitle {
-  color: #EAEFDA !important;
-  font-size: 1.25rem !important;
-  font-weight: 400 !important;
-  max-width: 600px;
-  margin: 0 auto;
+.scheduling-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-style: italic; /* Matches screenshot styling */
+  color: var(--text-main);
+  margin: 10px 0;
+  letter-spacing: -0.5px;
 }
 
-/* --- Upcoming Appointments Grid --- */
-.appointment-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 25px;
+.scheduling-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin: 0;
 }
 
-/* SLEEKER APPOINTMENT CARD */
-.appointment-card {
-    width: 467px;
-    height:271px;
-  background-color: #fefffe !important; /* Deep Forest Green */
-  border-radius: 16px;
-  padding: 25px;
-  box-shadow: 0 8px 24px rgba(28, 48, 38, 0.15);
+/* --- Breadcrumbs --- */
+.breadcrumb-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin-bottom: 25px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.breadcrumb-btn:hover {
+  color: var(--text-main);
+}
+
+.breadcrumb-btn .dot {
+  margin: 0 5px;
+  opacity: 0.5;
+}
+
+/* --- Step Titles --- */
+.step-title-area {
+  margin-bottom: 25px;
+}
+
+.step-title-area h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin: 0 0 5px 0;
+}
+
+.step-title-area p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* --- Search Bar --- */
+.search-bar-wrapper {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+.search-bar-wrapper input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 18px 20px 18px 45px;
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.search-bar-wrapper input:focus {
+  border-color: var(--gold);
+}
+
+/* --- Cards List --- */
+.cards-list {
   display: flex;
   flex-direction: column;
-  color:#1C3026;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.appointment-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 28px rgba(28, 48, 38, 0.25);
+  gap: 15px;
 }
 
-.card-top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 15px;
+.selection-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.card-title {
-  margin: 0;
-  color: #1C3026 !important;
+
+.selection-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(226, 186, 90, 0.4);
+}
+
+.selection-card h4 {
+  font-family: 'Playfair Display', serif;
   font-size: 1.3rem;
-  font-weight: 600;
+  margin: 0 0 10px 0;
 }
-.card-details p {
-  margin: 8px 0;
-  color:#1C3026!important;
-  font-size: 0.95rem;
+
+.card-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 15px 0;
+}
+
+.gold-text {
+  color: var(--gold) !important;
+}
+
+.card-desc {
+  margin: 0;
+  color: var(--text-main);
   line-height: 1.5;
-}
-.card-details strong {
-  color: #1C3026 !important;
-  font-weight: 500;
+  font-size: 0.95rem;
 }
 
-/* --- Status Badges (More prominent) --- */
-.status-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.status-badge.confirmed {
-  background-color: #D5DEC4;
-  color: #1C3026;
-}
-.status-badge.pending {
-  background-color: #F4A261;
-  color: #1C3026;
-}
-
-/* --- Explore Header with Inline Search --- */
-.explore-header {
+/* Therapy specifics */
+.card-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
-  border-bottom: 2px solid #D5DEC4;
-  padding-bottom: 15px;
 }
-.explore-header .section-heading {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}.appointment-grid {
+
+.duration {
+  color: var(--text-muted);
+  font-size: 0.9rem;
   display: flex;
-  justify-content: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-/* Sleeker Search Bar */
-.compact-search input {
-  padding: 14px 24px;
-  width: 320px;
-  border-radius: 30px; /* Modern round shape */
-  border: 1px solid #D5DEC4;
-  background-color: #243B30; /* Keep it consistent with cards */
-  color: #FFFFFF;
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(28, 48, 38, 0.1);
-}
-.compact-search input::placeholder {
-  color: #A0B3A6;
-}
-.compact-search input:focus {
-  background-color: #2B4A3A;
-  border-color: #D5DEC4;
-  box-shadow: 0 6px 16px rgba(28, 48, 38, 0.2);
-}
-
-/* --- THE GAME CHANGER: THERAPY MENU GRID --- */
-.therapy-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 30px;
-}
-
-/* THE PREMIUM WHITE CARDS with Photo top */
-.therapy-card {
-  background-color: #FFFFFF !important; /* Stand out against background */
-  border: 1px solid #E8EDE1;
-  border-radius: 20px; /* Rounder corners */
-  overflow: hidden; /* Important for image rounding */
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 6px 16px rgba(28, 48, 38, 0.08);
-}
-.therapy-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 32px rgba(28, 48, 38, 0.15);
-  border-color: #D5DEC4;
-}
-
-.therapy-thumbnail {
-  width: 100%;
-  height: 180px; /* fixed thumbnail height */
-  object-fit: cover; /* crop to fill */
-  border-bottom: 3px solid #E8EDE1;
-}
-
-.card-body {
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-/* Overriding global card colors for white cards */
-.therapy-card .card-title {
-  color: #1C3026 !important;
-  margin: 0 0 10px 0;
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-.therapy-card .card-desc {
-  color: #5A6D62 !important;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.card-meta {
-  margin-bottom: 20px;
-}
-.card-duration {
-  display: inline-block;
-  background-color: #EAEFDA; /* Light sage highlight */
-  color: #1C3026;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 0.85rem;
+.price {
+  color: var(--gold);
   font-weight: 600;
-  margin-bottom: 10px;
-}
-.recommended {
-  font-size: 0.85em;
-  color: #C19A6B !important; /* Ayurvedic Amber/Gold Accent */
-  font-weight: 600;
+  margin: 15px 0 0 0;
+  font-size: 1.1rem;
 }
 
-/* --- Buttons --- */
-.card-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 15px;
-}
-.mt-auto {
-  margin-top: auto; /* Pushes button to bottom of card */
-}
-
-.btn {
-  padding: 14px 20px;
+/* --- Form Step 4 --- */
+.summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
-  font-weight: 700;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.summary-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.summary-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
   font-size: 0.95rem;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s ease-in-out;
+}
+
+.optional {
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.booking-form input, .booking-form textarea {
+  background: var(--bg-input);
   border: none;
-  flex: 1; /* Makes buttons equal width */
+  border-radius: 12px;
+  padding: 18px 20px;
+  color: var(--text-main);
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
 }
 
-/* Button solid - Sage matching Navbar/Logo fallback */
-.btn.solid {
-  background-color: #D5DEC4; 
-  color: #1C3026;
+.booking-form input:focus, .booking-form textarea:focus {
+  box-shadow: 0 0 0 1px var(--gold);
 }
-.btn.solid:hover {
-  background-color: #E8EDE1;
+
+.submit-booking-btn {
+  background: var(--gold);
+  color: #000;
+  border: none;
+  border-radius: 30px;
+  padding: 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.2s;
+}
+
+.submit-booking-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(28, 48, 38, 0.1);
+  box-shadow: 0 5px 20px rgba(226, 186, 90, 0.3);
 }
 
-.btn.outline {
-  background-color: transparent;
-  color: #1C3026;
-  border: 1px solid #D5DEC4;
-}
-.btn.outline:hover {
-  background-color: rgba(213, 222, 196, 0.1);
-}
-
-.btn.danger {
-  background-color: #E63946;
-  color: #FFFFFF;
-}
-.btn.danger:hover {
-  background-color: #D62828;
-}
-
-.btn.full-width {
-  width: 100%;
-}
-
-.empty-state {
-  color: #5A6D62;
-  font-style: italic;
+/* --- Success Screen --- */
+.success-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  min-height: 60vh;
 }
 
-/* --- Responsive Layout --- */
-@media (max-width: 900px) {
-  .hero-banner {
-    padding: 70px 20px;
-  }
-  .hero-title {
-    font-size: 2.2rem;
-  }
+.success-screen h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-bottom: 30px;
 }
-@media (max-width: 768px) {
-  .explore-header {
+
+.gold-line {
+  width: 150px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 40px;
+}
+
+.return-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 12px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.return-btn:hover {
+  background: rgba(226, 186, 90, 0.1);
+}
+
+/* --- Animations --- */
+.animate-fade-in { animation: fadeIn 0.4s ease-out; }
+.animate-slide-up { animation: slideUp 0.3s ease-out forwards; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .summary-card {
     flex-direction: column;
-    align-items: flex-start;
     gap: 15px;
-  }
-  .compact-search input {
-    width: 100%;
-  }
-  .appointment-grid, .therapy-grid {
-    grid-template-columns: 1fr; /* Single column on mobile */
-  }
-  .card-actions {
-    flex-direction: column;
-  }
-  .card-actions button {
-    width: 100%;
   }
 }
