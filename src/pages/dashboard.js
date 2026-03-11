@@ -29,13 +29,14 @@ const clinicsData = [
     image: 'https://images.unsplash.com/photo-1620608554763-8a3597d3a042?q=80&w=600',
     primaryDoctor: 'Dr. Lakshmi Menon', specialty: 'Rejuvenation'
   }
-
 ];
+
 const upcomingSessions = [
   { id: 1, therapy: "Abhyanga Massage", date: "Mar 15, 2026 · 10:00 AM", status: "Confirmed" },
   { id: 2, therapy: "Shirodhara", date: "Mar 18, 2026 · 2:00 PM", status: "Pending" },
   { id: 3, therapy: "Panchakarma Detox", date: "Mar 22, 2026 · 9:00 AM", status: "Confirmed" },
 ];
+
 const doctorsData = [
   { id: 101, clinicId: 1, name: 'Dr. Ananya Sharma', photo: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=150', specialty: 'Panchakarma & Detoxification', rating: 4.9, reviewsCount: 182, testimonials: [{ patient: 'Sunita S.', quote: '"Immense relief from chronic pain."' }] },
   { id: 102, clinicId: 1, name: 'Dr. Vikram Patel', photo: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=150', specialty: 'Ayurvedic Nutrition', rating: 4.7, reviewsCount: 112, testimonials: [{ patient: 'Ravi P.', quote: '"Perfect diet plan!"' }] }
@@ -52,7 +53,6 @@ const StarRating = ({ rating }) => {
 
 // --- Main Dashboard Component ---
 const Dashboard = () => {
-  const [hasTakenQuiz, setHasTakenQuiz] = useState(false);
   const [location, setLocation] = useState('');
   const [nearbyClinics, setNearbyClinics] = useState([]);
   const [viewMode, setViewMode] = useState('clinics');
@@ -60,20 +60,27 @@ const Dashboard = () => {
   const [availableDoctors, setAvailableDoctors] = useState([]);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  useEffect(() => {
 
+  useEffect(() => {
     const userLocation = localStorage.getItem('userLocation') || 'Jaipur';
     setLocation(userLocation);
-    const filteredClinics = clinicsData.filter(c => c.location === userLocation);
-    setNearbyClinics(filteredClinics);
+    
+    // Filter clinics (case-insensitive)
+    const filteredClinics = clinicsData.filter(
+      c => c.location.toLowerCase() === userLocation.toLowerCase()
+    );
+
+    // FIX: Agar location ke hisaab se koi clinic nahi mila, toh saare dikha do
+    if (filteredClinics.length > 0) {
+      setNearbyClinics(filteredClinics);
+    } else {
+      setNearbyClinics(clinicsData); 
+    }
   }, []);
 
   const handleConsultationClick = () => {
-    if (hasTakenQuiz) {
-      navigate("/patient/recommendations");
-    } else {
-      navigate("/patient/consultation");
-    }
+    // 🚀 DIRECT CHATBOT ROUTING (No Quiz)
+    navigate("/patient/recommendations");
   };
 
   const handleViewClinicDetails = (clinic) => {
@@ -91,15 +98,14 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       
-      {/* ✨ UPDATED: Floating Action Button now opens the modal */}
+      {/* Floating Action Button */}
       <button className="floating-fab" onClick={() => setIsModalOpen(true)}>
         📅 My Sessions
       </button>
 
-      {/* ✨ NEW: The Sessions Modal Overlay ✨ */}
+      {/* The Sessions Modal Overlay */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
-          {/* Stop click propagation so clicking inside the modal doesn't close it */}
           <div className="premium-modal" onClick={(e) => e.stopPropagation()}>
             
             <button className="close-modal-btn" onClick={() => setIsModalOpen(false)}>
@@ -119,7 +125,6 @@ const Dashboard = () => {
                     <p>{session.date}</p>
                   </div>
                   
-                  {/* Dynamic Status Badge */}
                   <div className={`status-badge ${session.status.toLowerCase()}`}>
                     {session.status === "Confirmed" && <FaRegCheckCircle className="badge-icon" />}
                     {session.status}
@@ -138,16 +143,22 @@ const Dashboard = () => {
           <div className="hero-pill">✦ ANCIENT WISDOM, MODERN HEALING ✦</div>
           <h2>Your Healing Journey</h2>
           <p>Discover personalized Ayurvedic therapies rooted in 5,000 years of tradition, crafted for your unique constitution.</p>
+          
+          {/* ✨ DIRECT AI BOT BUTTON */}
+          <button className="prakriti-btn" onClick={handleConsultationClick} style={{ marginTop: '20px' }}>
+            ✨ Start AI Consultation
+          </button>
         </div>
       </section>
+
       {/* Clinics & Doctors Section */}
       <section className="clinics-section">
         {viewMode === 'clinics' ? (
           <>
             <div className="section-header-centered">
               <span className="near-you-text">NEAR YOU</span>
-              <h2>Ayurveda Clinics in Your Area</h2>
-              <p className="section-subtitle">Discover trusted Ayurvedic practitioners and wellness centers nearby</p>
+              <h2>Ayurveda Clinics in {location}</h2>
+              <p className="section-subtitle">Discover trusted Ayurvedic practitioners and wellness centers</p>
             </div>
 
             <div className="clinics-grid">
