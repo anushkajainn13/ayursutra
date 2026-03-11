@@ -27,6 +27,7 @@ function AuthPage({ setRole }) {
         alert("Login successful!");
       setRole(data.user.role);
       localStorage.setItem("role", data.user.role);
+      localStorage.setItem("userEmail", data.user.email);
       localStorage.setItem("userLocation", data.user.location);
        navigate(`/${data.user.role}/dashboard`);
 

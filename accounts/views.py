@@ -41,4 +41,34 @@ def login(request):
             return JsonResponse({"error": "Invalid credentials"}, status=401)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
-                
+
+@csrf.csrf_exempt
+def patient_profile(request):
+    if request.method =='GET':
+        email= request.GET.get('email')
+        try:
+            user=User.objects.get(email=email)
+            return JsonResponse({
+                "full_name":user.full_name,
+                "email":user.email,
+                "role":user.role,
+                "location":user.location
+            })
+        except User.DoesNotExist:
+            return JsonResponse({"error": "User not found"}, status=404)    
+
+    if request.method =='POST': 
+        data=json.loads(request.body)  
+        email= data.get("email")  
+        try:
+            user=User.objects.get(email=email)
+            user.full_name=data["full_name"]
+            user.location=data["location"]
+            new_password = data.get("password")
+            if new_password: # Agar empty string "" nahi hai
+                user.password = hashers.make_password(new_password)
+            user.save()
+            return JsonResponse({"message": "Profile updated successfully"})
+        except User.DoesNotExist:
+            return JsonResponse({"error": "User not found"}, status=404)
+    return JsonResponse({"error": "Invalid request"}, status=400)   
